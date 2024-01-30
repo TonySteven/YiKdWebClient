@@ -97,7 +97,7 @@ https://www.nuget.org/packages/YiKdWebClient
 配置路如下  YiKdWebCfg/appsettings.xml 
 
 # 配置文件内容
-注意：(最新公有云可能强制要求走网关，走网关的方式需要自定义实现请求参数。)
+注意：(最新公有云可能强制要求走网关(https://api.kingdee.com/galaxyapi/)，走网关的方式需要使用API签名认证的模式。)
 
 ```
 <?xml version="1.0" encoding="utf-8" ?>
@@ -133,7 +133,7 @@ https://www.nuget.org/packages/YiKdWebClient
 
     <add key="X-KDApi-LCID" value="2052"/>
 
-    <!-- 组织编码，启用多组织时配置对应的组织编码才有效(该参数暂时不支持，可以不用填写)  -->
+    <!-- 组织编码，启用多组织时配置对应的组织编码才有效(使用签名模式认证有效，其他待测试，可以先不填写)  -->
 
     <!--<add key="X-KDApi-OrgNum" value="*****"/>-->
 
