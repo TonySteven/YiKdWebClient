@@ -14,21 +14,19 @@ namespace ConsoleTestNet80
     {
         static void Main(string[] args)
         {
-        
+
 
             #region 第三方授权验证
 
 
             //string Formid = "SEC_User";
             //string Json = @"{""IsUserModelInit"":""true"",""Number"":""Administrator"",""IsSortBySeq"":""false""}";
-
             //YiK3CloudClient yiK3CloudClient = new YiKdWebClient.YiK3CloudClient();
+            //var resultJson = yiK3CloudClient.View(Formid, Json);
+            //Console.WriteLine(resultJson);
 
             //// var resultJson = yiK3CloudClient.GetDataCenterList();
-            //// var res = yiK3CloudClient.ExecuteOperation("view",Formid, Json);
-            //var resultJson = yiK3CloudClient.View(Formid, Json);
-
-            //Console.WriteLine(resultJson);
+            /// //// var res = yiK3CloudClient.ExecuteOperation("view",Formid, Json);
 
             #endregion
 
@@ -47,7 +45,7 @@ namespace ConsoleTestNet80
             string Formid = "SEC_User";
             string Json = @"{""IsUserModelInit"":""true"",""Number"":""Administrator"",""IsSortBySeq"":""false""}";
             YiK3CloudClient yiK3CloudClient = new YiKdWebClient.YiK3CloudClient();
-            yiK3CloudClient.LoginType=LoginType.LoginByApiSignHeaders;
+            yiK3CloudClient.LoginType = LoginType.LoginByApiSignHeaders;
 
             // var resultJson = yiK3CloudClient.GetDataCenterList();
             // var res = yiK3CloudClient.ExecuteOperation("view",Formid, Json);

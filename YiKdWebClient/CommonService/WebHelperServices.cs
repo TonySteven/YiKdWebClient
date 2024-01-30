@@ -49,12 +49,15 @@ namespace YiKdWebClient.CommonService
             // 创建一个 HttpRequestMessage 实例
 
             HttpRequestMessage request = new HttpRequestMessage();
+           // request.Headers.Add("Accept-Charset", "utf-8");
             request.Method = HttpMethod; // 设置请求方法
             request.RequestUri = new Uri(url); // 设置请求的 URI  
-            
-            var requestContent = new StringContent(postData, Encoding.UTF8, "application/json"); ; // 示例请求内容  
+
+            StringContent requestContent = new StringContent(postData, Encoding.UTF8, "application/json"); ; // 示例请求内容  
             request.Content = requestContent; // 设置内容类型为 JSON
-            string cookiestring = string.Join(";", cookies);
+            
+
+            // string cookiestring = string.Join(";", cookies);
             //if (cookies.Count()>0)
             //{
 
@@ -72,7 +75,7 @@ namespace YiKdWebClient.CommonService
             {
                 foreach (KeyValuePair<string,string> RequestHeaderItem in RequestHeaders) 
                 {
-                    client.DefaultRequestHeaders.Add(RequestHeaderItem.Key, RequestHeaderItem.Value);
+                   // client.DefaultRequestHeaders.Add(RequestHeaderItem.Key, RequestHeaderItem.Value);
                     request.Headers.Add(RequestHeaderItem.Key, RequestHeaderItem.Value);
                 }
             }
