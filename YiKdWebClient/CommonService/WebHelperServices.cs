@@ -75,7 +75,7 @@ namespace YiKdWebClient.CommonService
             {
                 foreach (KeyValuePair<string,string> RequestHeaderItem in RequestHeaders) 
                 {
-                   // client.DefaultRequestHeaders.Add(RequestHeaderItem.Key, RequestHeaderItem.Value);
+                    client.DefaultRequestHeaders.Add(RequestHeaderItem.Key, RequestHeaderItem.Value);
                     request.Headers.Add(RequestHeaderItem.Key, RequestHeaderItem.Value);
                 }
             }
