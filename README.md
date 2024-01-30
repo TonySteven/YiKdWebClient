@@ -97,7 +97,7 @@ https://www.nuget.org/packages/YiKdWebClient
 配置路如下  YiKdWebCfg/appsettings.xml 
 
 # 配置文件内容
-注意：(最新公有云可能强制要求走网关，走网关的方式需要自定义实现请求参数。若想使用本框架，可以尝试将公有云的环境登录地址放到配置文件X-KDApi-ServerUrl 参数中进行测试)
+注意：(最新公有云可能强制要求走网关，走网关的方式需要自定义实现请求参数。)
 
 ```
 <?xml version="1.0" encoding="utf-8" ?>
