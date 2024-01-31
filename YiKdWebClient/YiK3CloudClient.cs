@@ -60,18 +60,25 @@ namespace YiKdWebClient
         private string ExecServicesStubByformid(string formid, string json, string ServicesStubpath, string opNumber = "")
         {
             string apiurl = this.AppSettingsModel.XKDApiServerUrl + ServicesStubpath;
-            if (this.LoginType.Equals(Model.LoginType.LoginByApiSignHeaders))
-            {
-                Dictionary<string, string> ApiHeaders = AuthService.LoginByApiSignHeaders.GetApiHeaders(this.AppSettingsModel, new Uri(apiurl));
-                this.RequestHeaders= ApiHeaders;
-                this.RequestHeadersString = AuthService.LoginByApiSignHeaders.GetApiHeadersStr(ApiHeaders);
-            }
+           
             
 
             string resjson = string.Empty;
+
+
             #region 执行操作
             CommonService.WebHelperServices webHelperServices = new CommonService.WebHelperServices();
-            webHelperServices.cookies = this.Cookie;
+
+
+            if (this.LoginType.Equals(Model.LoginType.LoginByApiSignHeaders))
+            {
+                Dictionary<string, string> ApiHeaders = AuthService.LoginByApiSignHeaders.GetApiHeaders(this.AppSettingsModel, new Uri(apiurl));
+                this.RequestHeaders = ApiHeaders;
+                this.RequestHeadersString = AuthService.LoginByApiSignHeaders.GetApiHeadersStr(ApiHeaders);
+            }
+            else { webHelperServices.cookies = this.Cookie; }
+
+            
             webHelperServices.Timeout = this.Timeout;
             webHelperServices.RequestHeaders = this.RequestHeaders;
           
