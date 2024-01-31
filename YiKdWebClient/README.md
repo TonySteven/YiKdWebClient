@@ -173,6 +173,6 @@ https://www.nuget.org/packages/YiKdWebClient
 |AttachmentUpload|上传附件|
 |AttachmentDownLoad|下载附件|
 
-# 项目地址(gitee)
+# 项目地址
 https://gitee.com/lnsyzjw/yi-kd-web-client
 
