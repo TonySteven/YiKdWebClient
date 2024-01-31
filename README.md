@@ -45,10 +45,7 @@ string Formid = "SEC_User";
 string Json = @"{""IsUserModelInit"":""true"",""Number"":""Administrator"",""IsSortBySeq"":""false""}";
 YiK3CloudClient yiK3CloudClient = new YiKdWebClient.YiK3CloudClient();
 yiK3CloudClient.LoginType=LoginType.LoginByApiSignHeaders;
-var resultJson = yiK3CloudClient.View(Formid, Json);
-
-
-           
+var resultJson = yiK3CloudClient.View(Formid, Json);         
 ~~~
 # 使用postman，Apipost 工具调试
 如下为使用postman，Apipost 工具的方法
