@@ -82,7 +82,7 @@ netcore 6.0;
 netcore 8.0;
 
 # 项目的依赖项
-System.Net.Http;  System.Text.Json;  System.Security.Cryptography.Cng;
+System.Net.Http;      System.Text.Json;      System.Security.Cryptography.Cng;
 
 # nuget地址:
 https://www.nuget.org/packages/YiKdWebClient
