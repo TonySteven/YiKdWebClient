@@ -94,7 +94,8 @@ https://www.nuget.org/packages/YiKdWebClient
 配置路如下  YiKdWebCfg/appsettings.xml 
 
 # 配置文件内容
-注意：(最新公有云可能强制要求走网关(https://api.kingdee.com/galaxyapi/)，走网关的方式需要使用API签名认证的模式。)
+注意：(最新公有云可能强制要求走网关(https://api.kingdee.com/galaxyapi/)
+走网关的方式需要使用API签名认证的模式。
 
 ```
 <?xml version="1.0" encoding="utf-8" ?>
