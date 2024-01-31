@@ -9,9 +9,9 @@
    <ImplicitUsings>enable</ImplicitUsings>
    <Nullable>enable</Nullable>
    <Authors>zoujiawei</Authors>
-   <AssemblyVersion>1.0.0.2</AssemblyVersion>
-   <FileVersion>1.0.0.2</FileVersion>
-   <VersionPrefix>1.0.0.2</VersionPrefix>
+   <AssemblyVersion>1.0.0.3</AssemblyVersion>
+   <FileVersion>1.0.0.3</FileVersion>
+   <VersionPrefix>1.0.0.3</VersionPrefix>
   <PackageLicenseExpression>MIT</PackageLicenseExpression>
   <PackageProjectUrl>https://gitee.com/lnsyzjw/yi-kd-web-client</PackageProjectUrl>
   <Description>用于WEBAPI集成,取消对SDK和Newtonsoft.Json依赖</Description>

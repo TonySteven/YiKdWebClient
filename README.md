@@ -141,7 +141,35 @@ https://www.nuget.org/packages/YiKdWebClient
   </appSettings>
 
 </configuration>
-
-
-
 ```
+# 功能列表(功能名称与官方功能名方式相同，以此类推)
+
+| 接口名称 | 接口含义 |
+|------|------|
+|Save|保存|
+|BatchSave|批量保存|
+|Audit|审核|
+|Delete|删除|
+|UnAudit|反审核|
+|Submit|提交|
+|View|查看|
+|ExecuteBillQuery|单据查询|
+|Draft|暂存|
+|Allocate|分配|
+|ExecuteOperation|操作接口|
+|FlexSave|弹性域保存|
+|SendMsg|发送消息|
+|Push|下推|
+|GroupSave|分组保存|
+|Disassembly|拆单|
+|QueryBusinessInfo|查询单据信息|
+|QueryGroupInfo|查询分组信息|
+|WorkflowAudit|工作流审批|
+|GroupDelete|分组删除|
+|CancelAllocate|取消分配|
+|SwitchOrg|切换组织接口|
+|CancelAssign|撤销服务接口|
+|GetSysReportData|获取报表数据|
+|AttachmentUpload|上传附件|
+|AttachmentDownLoad|下载附件|
+

@@ -410,6 +410,20 @@ namespace YiKdWebClient
 
         }
         /// <summary>
+        /// 分配表单数据接口
+        /// </summary>
+        /// <param name="formid"></param>
+        /// <param name="json"></param>
+        /// <param name="AutoLogin"></param>
+        /// <param name="AutoLogout"></param>
+        /// <returns></returns>
+        public string Allocate(string formid, string json, bool AutoLogin = true, bool AutoLogout = true)
+        {
+            return ExecApiDynamicFormService(formid, json, @"Kingdee.BOS.WebApi.ServicesStub.DynamicFormService.Allocate.common.kdsvc", AutoLogin, AutoLogout);
+
+        }
+
+        /// <summary>
         /// 下推接口
         /// </summary>
         /// <param name="formid"></param>
@@ -533,6 +547,85 @@ namespace YiKdWebClient
         {
             return ExecApiDynamicFormService("", json, @"Kingdee.BOS.WebApi.ServicesStub.DynamicFormService. UploadFile.common.kdsvc", AutoLogin, AutoLogout);
         }
+
+
+        /// <summary>
+        /// 分组删除
+        /// </summary>
+        /// <param name="json"></param>
+        /// <param name="AutoLogin"></param>
+        /// <param name="AutoLogout"></param>
+        /// <returns></returns>
+        public string GroupDelete(string json, bool AutoLogin = true, bool AutoLogout = true)
+        {
+            return ExecApiDynamicFormService("", json, @"Kingdee.BOS.WebApi.ServicesStub.DynamicFormService.GroupDelete", AutoLogin, AutoLogout);
+        }
+        /// <summary>
+        /// 取消分配
+        /// </summary>
+        /// <param name="formid"></param>
+        /// <param name="json"></param>
+        /// <param name="AutoLogin"></param>
+        /// <param name="AutoLogout"></param>
+        /// <returns></returns>
+        public string CancelAllocate(string formid, string json, bool AutoLogin = true, bool AutoLogout = true)
+        {
+            return ExecApiDynamicFormService(formid, json, @"Kingdee.BOS.WebApi.ServicesStub.DynamicFormService.CancelAllocate", AutoLogin, AutoLogout);
+
+        }
+        /// <summary>
+        /// 撤销服务接口
+        /// </summary>
+        /// <param name="formid"></param>
+        /// <param name="json"></param>
+        /// <param name="AutoLogin"></param>
+        /// <param name="AutoLogout"></param>
+        /// <returns></returns>
+        public string CancelAssign(string formid, string json, bool AutoLogin = true, bool AutoLogout = true)
+        {
+            return ExecApiDynamicFormService(formid, json, @"Kingdee.BOS.WebApi.ServicesStub.DynamicFormService.CancelAssign", AutoLogin, AutoLogout);
+
+        }
+
+        /// <summary>
+        /// 拆单
+        /// </summary>
+        /// <param name="formid"></param>
+        /// <param name="json"></param>
+        /// <param name="AutoLogin"></param>
+        /// <param name="AutoLogout"></param>
+        /// <returns></returns>
+        public string Disassembly(string formid, string json, bool AutoLogin = true, bool AutoLogout = true)
+        {
+            return ExecApiDynamicFormService(formid, json, @"Kingdee.BOS.WebApi.ServicesStub.DynamicFormService.Disassembly", AutoLogin, AutoLogout);
+
+        }
+        /// <summary>
+        /// 查询单据信息
+        /// </summary>
+        /// <param name="json"></param>
+        /// <param name="AutoLogin"></param>
+        /// <param name="AutoLogout"></param>
+        /// <returns></returns>
+
+        public string QueryBusinessInfo( string json, bool AutoLogin = true, bool AutoLogout = true)
+        {
+            return ExecApiDynamicFormService("", json, @"Kingdee.BOS.WebApi.ServicesStub.DynamicFormService.QueryBusinessInfo", AutoLogin, AutoLogout);
+
+        }
+        /// <summary>
+        /// 查询分组信息
+        /// </summary>
+        /// <param name="json"></param>
+        /// <param name="AutoLogin"></param>
+        /// <param name="AutoLogout"></param>
+        /// <returns></returns>
+        public string QueryGroupInfo(string json, bool AutoLogin = true, bool AutoLogout = true)
+        {
+            return ExecApiDynamicFormService("", json, @"Kingdee.BOS.WebApi.ServicesStub.DynamicFormService.QueryGroupInfo", AutoLogin, AutoLogout);
+
+        }
+
         /// <summary>
         /// 获取数据中心列表
         /// </summary>
