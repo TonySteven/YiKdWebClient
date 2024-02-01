@@ -59,9 +59,27 @@ namespace YiKdWebClient
 
         private string ExecServicesStubByformid(string formid, string json, string ServicesStubpath, string opNumber = "")
         {
-            string apiurl = this.AppSettingsModel.XKDApiServerUrl + ServicesStubpath;
-           
-            
+
+            string apiurl = string.Empty;
+            //string apiurl = this.AppSettingsModel.XKDApiServerUrl + ServicesStubpath;
+
+            if (this.LoginType.Equals(Model.LoginType.LoginByAppSecret))
+            {
+                apiurl = this.AppSettingsModel.XKDApiServerUrl + ServicesStubpath;
+            }
+            if (this.LoginType.Equals(Model.LoginType.LoginByApiSignHeaders))
+            {
+                apiurl = this.AppSettingsModel.XKDApiServerUrl + ServicesStubpath;
+            }
+            if (this.LoginType.Equals(Model.LoginType.ValidateLogin))
+            {
+                apiurl = this.validateLoginSettingsModel.Url + ServicesStubpath;
+            }
+            if (this.LoginType.Equals(Model.LoginType.LoginBySimplePassport))
+            {
+                apiurl = this.LoginBySimplePassportModel.Url + ServicesStubpath;
+            }
+
 
             string resjson = string.Empty;
 
@@ -171,13 +189,16 @@ namespace YiKdWebClient
                 {
                     throw new Exception("LoginType使用ValidateLogin方式的时候，validateLoginSettingsModel 需要实例化赋值");
                 }
-
+                if (string.IsNullOrWhiteSpace(validateLoginSettingsModel.Url))
+                {
+                    throw new Exception("validateLoginSettingsModel.Url需要赋值");
+                }
                 AuthService.ValidateLogin validateLogin=new AuthService.ValidateLogin();
                 validateLogin.Timeout = this.Timeout;
                 validateLogin.RequestHeaders = this.RequestHeaders;
                 string jsonString = validateLogin.GetLoginJson(validateLoginSettingsModel, UnsafeRelaxedJsonEscaping);
                 ReturnLoginWebModel.RealRequestBody = jsonString;
-                requestWebModel = validateLogin.Login(AppSettingsModel.XKDApiServerUrl, jsonString, true);
+                requestWebModel = validateLogin.Login(this.validateLoginSettingsModel.Url, jsonString, true);
 
             }
 
@@ -192,6 +213,17 @@ namespace YiKdWebClient
                 {
                     throw new Exception("LoginType使用LoginBySimplePassport方式的时候，LoginBySimplePassportModel需要实例化赋值");
                 }
+                if (string.IsNullOrWhiteSpace(LoginBySimplePassportModel.Url))
+                {
+                    throw new Exception("LoginBySimplePassportModel.Url需要赋值");
+                }
+                AuthService.LoginBySimplePassport loginBySimplePassport=new AuthService.LoginBySimplePassport();
+                loginBySimplePassport.Timeout = this.Timeout;
+                loginBySimplePassport.RequestHeaders = this.RequestHeaders;
+                string jsonString = loginBySimplePassport.GetLoginJson(this.LoginBySimplePassportModel, UnsafeRelaxedJsonEscaping);
+                ReturnLoginWebModel.RealRequestBody = jsonString;
+                requestWebModel = loginBySimplePassport.Login(this.LoginBySimplePassportModel.Url, jsonString, true);
+
             }
 
             Cookie = requestWebModel.Cookie;

@@ -10,23 +10,25 @@ namespace YiKdWebClient.Model
     {
         public ValidateLoginSettingsModel(string url="") { 
 
-            if (string.IsNullOrWhiteSpace(Url))
-            {
-                try
-                {
-                    AppSettingsModel appSettingsModel = new AppSettingsModel();
-                    Url = appSettingsModel.XKDApiServerUrl;
-                }
-                catch (Exception)
-                {
+            //if (string.IsNullOrWhiteSpace(url))
+            //{
+            //    try
+            //    {
+            //        AppSettingsModel appSettingsModel = new AppSettingsModel();
+            //        Url = appSettingsModel.XKDApiServerUrl;
+            //    }
+            //    catch (Exception)
+            //    {
 
-                    // throw;
-                }
-            }
+            //        // throw;
+            //    }
+            //}
 
-            else { Url = url; }
-          
-        
+            //else { Url = url; }
+
+            Url = GetServerUrl(url);
+
+
         }
 
 

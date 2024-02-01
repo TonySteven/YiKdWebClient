@@ -17,7 +17,7 @@ namespace YiKdWebClient.AuthService
         {
             Model.RequestWebModel requestWebModel = new Model.RequestWebModel();
 
-            url = Model.AppSettingsModel.GetServerUrl(url);
+            url = Model.ValidateLoginSettingsModel.GetServerUrl(url);
             string loginapiurl = url + @"Kingdee.BOS.WebApi.ServicesStub.AuthService.ValidateUser.common.kdsvc";
             requestWebModel.RequestUrl = loginapiurl;
             //requestWebModel.RealRequestBody = CommonService.JsonHelperServices.getRequestBodystring(json, UnsafeRelaxedJsonEscaping);
@@ -66,7 +66,7 @@ namespace YiKdWebClient.AuthService
             Parameters.Add(validateLoginSettingsModel.lcid);//账套语系
 
             string KdContent = System.Text.Json.JsonSerializer.Serialize(Parameters, options);
-            string RealContent = CommonService.JsonHelperServices.getRequestBodystring(KdContent, UnsafeRelaxedJsonEscaping);
+            string RealContent = CommonService.JsonHelperServices.getLoginRequestBodystring(KdContent, UnsafeRelaxedJsonEscaping,true);
 
             return RealContent;
         }

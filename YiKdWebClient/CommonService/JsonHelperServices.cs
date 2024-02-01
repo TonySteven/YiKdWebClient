@@ -71,11 +71,11 @@ namespace YiKdWebClient.CommonService
         /// <param name="strjson"></param>
         /// <param name="UnsafeRelaxedJsonEscaping">获取对编码内容不太严格的内置 JavaScript 编码器实例。--允许某些不安全的、不严格的转义 https://learn.microsoft.com/zh-cn/dotnet/api/system.text.encodings.web.javascriptencoder?view=net-8.0</param>
         /// <returns></returns>
-        public static string getRequestBodystring(string strjson, bool UnsafeRelaxedJsonEscaping)
+        public static string getLoginRequestBodystring(string strjson, bool UnsafeRelaxedJsonEscaping,bool WriteIndented=false)
 
         {
             var options = new JsonSerializerOptions();
-             options.WriteIndented = false; // 设置格式化为非缩进格式，即不保留换行符;
+             options.WriteIndented = WriteIndented; // 设置false格式化为非缩进格式，即不保留换行符;
 
             if (UnsafeRelaxedJsonEscaping)
             {

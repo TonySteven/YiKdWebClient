@@ -1,13 +1,107 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace YiKdWebClient.AuthService
 {
-    public static class LoginBySimplePassport
+    public  class LoginBySimplePassport
     {
+
+        public TimeSpan Timeout { get; set; } = TimeSpan.FromSeconds(30);
+        public Dictionary<string, string> RequestHeaders = new Dictionary<string, string>();
+
+
+        public Model.RequestWebModel Login(string url, string json, bool UnsafeRelaxedJsonEscaping = true)
+        {
+            Model.RequestWebModel requestWebModel = new Model.RequestWebModel();
+
+            url = Model.LoginBySimplePassportModel.GetServerUrl(url);
+            string loginapiurl = url + @"Kingdee.BOS.WebApi.ServicesStub.AuthService.LoginBySimplePassport.common.kdsvc";
+            requestWebModel.RequestUrl = loginapiurl;
+            //requestWebModel.RealRequestBody = CommonService.JsonHelperServices.getRequestBodystring(json, UnsafeRelaxedJsonEscaping);
+            requestWebModel.RealRequestBody = json;
+
+            try
+            {
+                CommonService.WebHelperServices webHelperServices = new CommonService.WebHelperServices();
+                webHelperServices.Timeout = this.Timeout;
+                webHelperServices.RequestHeaders = this.RequestHeaders;
+                Task<string> postTask = webHelperServices.SendHttpRequestAsync(loginapiurl, requestWebModel.RealRequestBody);
+                postTask.Wait(); // 阻塞直到任务完成 
+
+                requestWebModel.RealResponseBody = postTask.Result;
+                requestWebModel.Cookie = webHelperServices.cookies;
+
+
+
+            }
+            catch (Exception ex)
+            {
+                requestWebModel.RealResponseBody = ex.Message;
+                // throw;
+            }
+            return requestWebModel;
+
+
+        }
+
+        public string GetLoginJson(Model.LoginBySimplePassportModel loginBySimplePassportModel , bool UnsafeRelaxedJsonEscaping)
+        {
+
+            string passportForBase64 = string.Empty;
+
+            if (loginBySimplePassportModel.bySimplePassportType.Equals( Model.BySimplePassportType.CnfFile))
+            {
+                passportForBase64 = GetPassportForBase64(loginBySimplePassportModel.CnfFilePath);
+            }
+            if (loginBySimplePassportModel.bySimplePassportType.Equals(Model.BySimplePassportType.ForBase64))
+            {
+                passportForBase64 = loginBySimplePassportModel.SimplePassportForBase64;
+            }
+
+            JsonSerializerOptions options = new JsonSerializerOptions();
+            options.WriteIndented = false; // 设置false 为格式化为非缩进格式，即不保留换行符;
+            if (UnsafeRelaxedJsonEscaping)
+            {
+                options.Encoder = System.Text.Encodings.Web.JavaScriptEncoder.UnsafeRelaxedJsonEscaping;
+            }
+            else
+            {
+                options.Encoder = System.Text.Encodings.Web.JavaScriptEncoder.Default;
+            }
+            //List<object> Parameters = new List<object>();
+            //Parameters.Add(passportForBase64);//密钥base64   
+            //Parameters.Add(loginBySimplePassportModel);//账套语系
+
+            object[] Parameters = [passportForBase64, loginBySimplePassportModel.Lcid];
+
+            string KdContent = System.Text.Json.JsonSerializer.Serialize(Parameters, options);
+            string RealContent = CommonService.JsonHelperServices.getLoginRequestBodystring(KdContent, UnsafeRelaxedJsonEscaping,true);
+            
+            return RealContent;
+        }
+
+
+        public byte[] GetCnfBytes(string cnffilepath) 
+        {
+            byte[] passports = System.IO.File.ReadAllBytes(cnffilepath);
+
+            return passports;
+        }
+
+        public string GetPassportForBase64(string cnffilepath) 
+        {
+            byte[] passports = GetCnfBytes(cnffilepath);
+            string passportForBase64 = Convert.ToBase64String(passports);
+            return passportForBase64;
+        }
+
+
+
 
     }
 }

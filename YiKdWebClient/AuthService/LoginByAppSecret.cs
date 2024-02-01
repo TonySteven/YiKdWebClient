@@ -52,7 +52,7 @@ namespace YiKdWebClient.AuthService
         public string GetLoginJson(Model.AppSettingsModel AppSettingsModel, bool UnsafeRelaxedJsonEscaping)
         {
             JsonSerializerOptions options = new JsonSerializerOptions();
-            options.WriteIndented = true; // 设置格式化为非缩进格式，即不保留换行符;
+            options.WriteIndented = true; // 设置fales 为格式化为非缩进格式，即不保留换行符;
             if (UnsafeRelaxedJsonEscaping)
             {
                 options.Encoder = System.Text.Encodings.Web.JavaScriptEncoder.UnsafeRelaxedJsonEscaping;
@@ -69,7 +69,7 @@ namespace YiKdWebClient.AuthService
             Parameters.Add(AppSettingsModel.XKDApiLCID);//账套语系
 
             string KdContent = System.Text.Json.JsonSerializer.Serialize(Parameters, options);
-            string RealContent = CommonService.JsonHelperServices.getRequestBodystring(KdContent, UnsafeRelaxedJsonEscaping);
+            string RealContent = CommonService.JsonHelperServices.getLoginRequestBodystring(KdContent, UnsafeRelaxedJsonEscaping,true);
 
             return RealContent;
         }

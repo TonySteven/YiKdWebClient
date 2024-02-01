@@ -10,6 +10,8 @@ namespace YiKdWebClient.Model
 {
     public class LoginBySimplePassportModel
     {
+        public LoginBySimplePassportModel(string url="") { Url = url; }
+        public string Url { get; set; }=string.Empty;
         /// <summary>
         /// 集成密钥文件路径
         /// </summary>
@@ -21,12 +23,34 @@ namespace YiKdWebClient.Model
         /// <summary>
         /// 账套语言
         /// </summary>
-        public int Lcid { get; set; }
+        public int Lcid { get; set; } = 2052;
         /// <summary>
         /// 使用密钥方式(文件/Base64)
         /// </summary>
 
         public BySimplePassportType bySimplePassportType { get; set; } = BySimplePassportType.CnfFile;
+        public static string GetServerUrl(string url)
+        {
+            if (string.IsNullOrWhiteSpace(url))
+            {
+                return string.Empty;
+            }
+
+            try
+            {
+                if (!url.EndsWith("/"))
+                {
+                    return url + "/";
+                }
+            }
+            catch (Exception ex)
+            {
+
+                //throw;
+            }
+
+            return url;
+        }
     }
 
     public enum BySimplePassportType
