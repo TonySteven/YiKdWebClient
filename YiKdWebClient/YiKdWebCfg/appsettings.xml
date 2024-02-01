@@ -37,7 +37,7 @@
 
     <!-- 服务Url地址(私有云必须配置金蝶云星空产品地址，K3Cloud/结尾。若为公有云则必须置空)-->
 
-    <add key="X-KDApi-ServerUrl" value=""/>
+    <add key="X-KDApi-ServerUrl" value="http://127.0.0.1/K3Cloud/"/>
   </appSettings>
 
 </configuration>
