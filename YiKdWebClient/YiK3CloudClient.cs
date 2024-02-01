@@ -183,28 +183,30 @@ namespace YiKdWebClient
                 ReturnLoginWebModel.RealRequestBody = jsonString;
                 requestWebModel = loginByAppSecret.Login(AppSettingsModel.XKDApiServerUrl, jsonString, true);
             }
+       
+
+            if (LoginType.Equals(Model.LoginType.LoginByApiSignHeaders))
+            {
+                return requestWebModel;
+            }
+
             if (LoginType.Equals(Model.LoginType.ValidateLogin))
             {
-                if (validateLoginSettingsModel == null) 
+                if (validateLoginSettingsModel == null)
                 {
                     throw new Exception("LoginType使用ValidateLogin方式的时候，validateLoginSettingsModel 需要实例化赋值");
                 }
                 if (string.IsNullOrWhiteSpace(validateLoginSettingsModel.Url))
                 {
-                    throw new Exception("validateLoginSettingsModel.Url需要赋值");
+                    throw new Exception("LoginType使用ValidateLogin方式的时候，validateLoginSettingsModel.Url需要赋值");
                 }
-                AuthService.ValidateLogin validateLogin=new AuthService.ValidateLogin();
+                AuthService.ValidateLogin validateLogin = new AuthService.ValidateLogin();
                 validateLogin.Timeout = this.Timeout;
                 validateLogin.RequestHeaders = this.RequestHeaders;
                 string jsonString = validateLogin.GetLoginJson(validateLoginSettingsModel, UnsafeRelaxedJsonEscaping);
                 ReturnLoginWebModel.RealRequestBody = jsonString;
                 requestWebModel = validateLogin.Login(this.validateLoginSettingsModel.Url, jsonString, true);
 
-            }
-
-            if (LoginType.Equals(Model.LoginType.LoginByApiSignHeaders))
-            {
-                return requestWebModel;
             }
 
             if (LoginType.Equals(Model.LoginType.LoginBySimplePassport))
@@ -215,7 +217,7 @@ namespace YiKdWebClient
                 }
                 if (string.IsNullOrWhiteSpace(LoginBySimplePassportModel.Url))
                 {
-                    throw new Exception("LoginBySimplePassportModel.Url需要赋值");
+                    throw new Exception("LoginType使用LoginBySimplePassport方式的时候，LoginBySimplePassportModel.Url需要赋值");
                 }
                 AuthService.LoginBySimplePassport loginBySimplePassport=new AuthService.LoginBySimplePassport();
                 loginBySimplePassport.Timeout = this.Timeout;

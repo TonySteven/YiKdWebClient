@@ -50,7 +50,7 @@ namespace YiKdWebClient.AuthService
         public string GetLoginJson(Model.ValidateLoginSettingsModel validateLoginSettingsModel, bool UnsafeRelaxedJsonEscaping)
         {
             JsonSerializerOptions options = new JsonSerializerOptions();
-            options.WriteIndented = true; // 设置格式化为非缩进格式，即不保留换行符;
+            options.WriteIndented = false; // 设置false格式化为非缩进格式，即不保留换行符;
             if (UnsafeRelaxedJsonEscaping)
             {
                 options.Encoder = System.Text.Encodings.Web.JavaScriptEncoder.UnsafeRelaxedJsonEscaping;

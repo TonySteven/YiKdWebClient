@@ -57,6 +57,7 @@ namespace YiKdWebClient.AuthService
             if (loginBySimplePassportModel.bySimplePassportType.Equals( Model.BySimplePassportType.CnfFile))
             {
                 passportForBase64 = GetPassportForBase64(loginBySimplePassportModel.CnfFilePath);
+                loginBySimplePassportModel.SimplePassportForBase64= passportForBase64;
             }
             if (loginBySimplePassportModel.bySimplePassportType.Equals(Model.BySimplePassportType.ForBase64))
             {

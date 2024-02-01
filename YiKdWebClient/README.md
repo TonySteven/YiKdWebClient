@@ -34,18 +34,29 @@ var resultJson  = yiK3CloudClient.View(Formid, Json);
  string Json =@"{""IsUserModelInit"":""true"",""Number"":""Administrator"",""IsSortBySeq"":""false""}";
  YiK3CloudClient yiK3CloudClient = new YiKdWebClient.YiK3CloudClient();
  yiK3CloudClient.LoginType= LoginType.ValidateLogin;
- yiK3CloudClient.validateLoginSettingsModel=new ValidateLoginSettingsModel() { DbId= "629bd5285d655d", UserName="demo",Password="123456",lcid=2052};
+ yiK3CloudClient.validateLoginSettingsModel=new ValidateLoginSettingsModel() { Url = @"http://127.0.0.1/K3Cloud/", DbId= "629bd5285d655d", UserName="demo",Password="123456",lcid=2052};
  var resultJson = yiK3CloudClient.View(Formid, Json);
 ```
+# 3.集成密钥文件认证
+```
+string Formid = "SEC_User";
+string Json = @"{""IsUserModelInit"":""true"",""Number"":""Administrator"",""IsSortBySeq"":""false""}";
+YiK3CloudClient yiK3CloudClient = new YiKdWebClient.YiK3CloudClient();
+yiK3CloudClient.LoginType = LoginType.LoginBySimplePassport;
+string cnfFilePath = Path.Combine(System.AppDomain.CurrentDomain.BaseDirectory, "YiKdWebCfg", "API测试.cnf");
+yiK3CloudClient.LoginBySimplePassportModel = new LoginBySimplePassportModel() { Url = @"http://127.0.0.1/K3Cloud/", CnfFilePath = cnfFilePath };
+var resultJson = yiK3CloudClient.View(Formid, Json);
+```
 
-# 3.API签名认证
+# 4.API签名认证
 
 ~~~
 string Formid = "SEC_User";
 string Json = @"{""IsUserModelInit"":""true"",""Number"":""Administrator"",""IsSortBySeq"":""false""}";
 YiK3CloudClient yiK3CloudClient = new YiKdWebClient.YiK3CloudClient();
 yiK3CloudClient.LoginType=LoginType.LoginByApiSignHeaders;
-var resultJson = yiK3CloudClient.View(Formid, Json);         
+var resultJson = yiK3CloudClient.View(Formid, Json);
+Console.WriteLine(resultJson);
 ~~~
 # 使用postman，Apipost 工具调试
 如下为使用postman，Apipost 工具的方法
