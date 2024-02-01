@@ -34,7 +34,7 @@ var resultJson  = yiK3CloudClient.View(Formid, Json);
  string Json =@"{""IsUserModelInit"":""true"",""Number"":""Administrator"",""IsSortBySeq"":""false""}";
  YiK3CloudClient yiK3CloudClient = new YiKdWebClient.YiK3CloudClient();
  yiK3CloudClient.LoginType= LoginType.ValidateLogin;
- yiK3CloudClient.validateLoginSettingsModel=new ValidateLoginSettingsModel() { DbId= "629bd5285d655d", UserName="demo",Password="123456",lcid=2052};
+ yiK3CloudClient.validateLoginSettingsModel=new ValidateLoginSettingsModel() { Url = @"http://127.0.0.1/K3Cloud/", DbId= "629bd5285d655d", UserName="demo",Password="123456",lcid=2052};
  var resultJson = yiK3CloudClient.View(Formid, Json);
 ```
 
