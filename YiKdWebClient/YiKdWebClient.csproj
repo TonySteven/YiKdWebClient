@@ -2,19 +2,19 @@
 
   <PropertyGroup>
     <!--<TargetFramework>net8.0</TargetFramework>-->
-    <TargetFrameworks Condition="'$(LibraryFrameworks)'==''">net8.0;net6.0;net481;net48;netstandard2.1;netstandard2.0;</TargetFrameworks>
+    <TargetFrameworks Condition="'$(LibraryFrameworks)'==''">net8.0;net6.0;net481;net48;net472;net461;netstandard2.1;netstandard2.0;</TargetFrameworks>
     <TargetFrameworks Condition="'$(LibraryFrameworks)'!=''">$(LibraryFrameworks)</TargetFrameworks>
     <Title>YiKdWebClient</Title>
     <LangVersion>latest</LangVersion>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <Authors>zoujiawei</Authors>
-    <AssemblyVersion>1.0.0.3</AssemblyVersion>
-    <FileVersion>1.0.0.3</FileVersion>
-    <VersionPrefix>1.0.0.3</VersionPrefix>
+    <AssemblyVersion>1.0.0.4</AssemblyVersion>
+    <FileVersion>1.0.0.4</FileVersion>
+    <VersionPrefix>1.0.0.4</VersionPrefix>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageProjectUrl>https://gitee.com/lnsyzjw/yi-kd-web-client</PackageProjectUrl>
-    <Description>用于WEBAPI集成,取消对SDK和Newtonsoft.Json依赖</Description>
+    <Description>用于WEBAPI集成,取消对SDK和Newtonsoft.Json依赖,支持(第三方授权认证，API签名认证,集成密钥文件认证,旧版用户名密码认证)</Description>
     <Copyright>Copyright © zjw 2024</Copyright>
 
     <PackageReadmeFile>readme.md</PackageReadmeFile>
@@ -33,6 +33,9 @@
   <ItemGroup>
     <Reference Include="System.Web" Condition="'$(TargetFramework)' == 'net481'" />
     <Reference Include="System.Web" Condition="'$(TargetFramework)' == 'net48'" />
+    <Reference Include="System.Web" Condition="'$(TargetFramework)' == 'net472'" />
+    <Reference Include="System.Web" Condition="'$(TargetFramework)' == 'net461'" />
+   
   </ItemGroup>
 
 
