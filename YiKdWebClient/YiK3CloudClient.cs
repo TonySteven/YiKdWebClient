@@ -186,6 +186,14 @@ namespace YiKdWebClient
                 return requestWebModel;
             }
 
+            if (LoginType.Equals(Model.LoginType.LoginBySimplePassport))
+            {
+                if (LoginBySimplePassportModel==null)
+                {
+                    throw new Exception("LoginType使用LoginBySimplePassport方式的时候，LoginBySimplePassportModel需要实例化赋值");
+                }
+            }
+
             Cookie = requestWebModel.Cookie;
             this.ReturnLoginWebModel = requestWebModel;
 
@@ -673,9 +681,9 @@ namespace YiKdWebClient
         }
 
 
-        public Model.ValidateLoginSettingsModel  validateLoginSettingsModel{ get; set; }=null;
+        public Model.ValidateLoginSettingsModel? validateLoginSettingsModel { get; set; }=null;
 
-        public static string GetServerUrl(string url)
+        public  string GetServerUrl(string url)
         {
             if (string.IsNullOrWhiteSpace(url))
             {
@@ -697,5 +705,8 @@ namespace YiKdWebClient
 
             return url;
         }
+
+
+        public Model.LoginBySimplePassportModel? LoginBySimplePassportModel { get; set; } = null;
     }
 }

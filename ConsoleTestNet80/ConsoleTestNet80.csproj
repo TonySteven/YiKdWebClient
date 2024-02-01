@@ -9,6 +9,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\YiKdWebClient\YiKdWebClient.csproj" />
-  </ItemGroup>
+ </ItemGroup>
 
 </Project>

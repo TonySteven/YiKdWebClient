@@ -30,6 +30,13 @@ namespace YiKdWebClient.Model
         /// </summary>
         [EnumMember(Value = "ValidateLogin")]
         [Description("ValidateLogin")]
-        ValidateLogin
+        ValidateLogin,
+
+       ///集成密钥验证
+       /// </summary>
+       [EnumMember(Value = "LoginBySimplePassport")]
+       [Description("LoginBySimplePassport")]
+       LoginBySimplePassport,
+
     }
 }
