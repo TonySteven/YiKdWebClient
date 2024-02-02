@@ -3,6 +3,8 @@
 实现金蝶云星空第三方授权登录 使用纯HTTP协议实现
 移除了对官方SDK的依赖 
 移除了对Newtonsoft.Json的依赖
+# 配置文件路径
+配置的相对路径如下  YiKdWebCfg/appsettings.xml ，用于依赖于第三方登录授权验证和API签名验证，也可以自己实例化YiK3CloudClient中的AppSettingsModel类
 
 调用方式简单
 如下示例:
@@ -101,8 +103,7 @@ https://www.nuget.org/packages/YiKdWebClient
 # nuget包的使用方法
 ![输入图片说明](nuget%E4%BD%BF%E7%94%A8.png)
 
-# 配置文件路径
-配置路如下  YiKdWebCfg/appsettings.xml 
+
 
 # 配置文件内容
 注意：(最新公有云可能强制要求走网关(https://api.kingdee.com/galaxyapi/)
