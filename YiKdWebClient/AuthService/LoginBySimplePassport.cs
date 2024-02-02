@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace YiKdWebClient.AuthService
 {
-    public  class LoginBySimplePassport
+    public class LoginBySimplePassport
     {
 
         public TimeSpan Timeout { get; set; } = TimeSpan.FromSeconds(30);
@@ -49,18 +49,23 @@ namespace YiKdWebClient.AuthService
 
         }
 
-        public string GetLoginJson(Model.LoginBySimplePassportModel loginBySimplePassportModel , bool UnsafeRelaxedJsonEscaping)
+        public string GetLoginJson(Model.LoginBySimplePassportModel loginBySimplePassportModel, bool UnsafeRelaxedJsonEscaping)
         {
 
             string passportForBase64 = string.Empty;
 
-            if (loginBySimplePassportModel.bySimplePassportType.Equals( Model.BySimplePassportType.CnfFile))
+            if (loginBySimplePassportModel.bySimplePassportType.Equals(Model.BySimplePassportType.CnfFile))
             {
+                if (string.IsNullOrWhiteSpace(loginBySimplePassportModel.CnfFilePath))
+                {
+                    throw new Exception("CnfFile类型下,loginBySimplePassportModel.CnfFilePath必须传值");
+                }
                 passportForBase64 = GetPassportForBase64(loginBySimplePassportModel.CnfFilePath);
-                loginBySimplePassportModel.SimplePassportForBase64= passportForBase64;
+                loginBySimplePassportModel.SimplePassportForBase64 = passportForBase64;
             }
             if (loginBySimplePassportModel.bySimplePassportType.Equals(Model.BySimplePassportType.ForBase64))
             {
+                if (string.IsNullOrWhiteSpace(loginBySimplePassportModel.SimplePassportForBase64)) { throw new Exception("ForBase64类型下,loginBySimplePassportModel.SimplePassportForBase64必须传值"); }
                 passportForBase64 = loginBySimplePassportModel.SimplePassportForBase64;
             }
 
@@ -81,20 +86,20 @@ namespace YiKdWebClient.AuthService
             object[] Parameters = [passportForBase64, loginBySimplePassportModel.Lcid];
 
             string KdContent = System.Text.Json.JsonSerializer.Serialize(Parameters, options);
-            string RealContent = CommonService.JsonHelperServices.getLoginRequestBodystring(KdContent, UnsafeRelaxedJsonEscaping,true);
-            
+            string RealContent = CommonService.JsonHelperServices.getLoginRequestBodystring(KdContent, UnsafeRelaxedJsonEscaping, true);
+
             return RealContent;
         }
 
 
-        public byte[] GetCnfBytes(string cnffilepath) 
+        public byte[] GetCnfBytes(string cnffilepath)
         {
             byte[] passports = System.IO.File.ReadAllBytes(cnffilepath);
 
             return passports;
         }
 
-        public string GetPassportForBase64(string cnffilepath) 
+        public string GetPassportForBase64(string cnffilepath)
         {
             byte[] passports = GetCnfBytes(cnffilepath);
             string passportForBase64 = Convert.ToBase64String(passports);
