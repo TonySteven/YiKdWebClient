@@ -1,4 +1,5 @@
 ﻿
+using System.ComponentModel;
 using System.Net;
 using System.Text.Json;
 using System.Text.RegularExpressions;
@@ -18,6 +19,9 @@ namespace YiKdWebClient
         /// Cookie临时存放器
         /// </summary>
         /// 
+        [Description("Cookie临时存放器")]
+        [EditorBrowsable(EditorBrowsableState.Always)] // 这个方法将始终在 IntelliSense 中显示
+       // [EditorBrowsable(EditorBrowsableState.Never)] // 这个方法将不会在 IntelliSense 中显示 
         public CookieContainer Cookie { get; set; } = new CookieContainer();
         /// <summary>
         /// 请求头存放
