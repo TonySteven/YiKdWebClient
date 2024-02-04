@@ -137,6 +137,26 @@ namespace YiKdWebClient
             Convert.ToBase64CharArray(binBuffer, 0, binBuffer.Length, array, 0);
             return new string(array);
         }
+        /// <summary>
+        /// 对传入的字符串数组进行排序和拼接，然后计算拼接后的字符串的 SHA-1 哈希值，并将其以十六进制字符串的形式返回。
+        /// </summary>
+        /// <param name="arr"></param>
+        /// <returns></returns>
+        public static string GetSignatureSHA1Util(string[] arr)
+        {
+            Array.Sort(arr, StringComparer.Ordinal);
+            string s = string.Join("", arr);
+            SHA1 sHA = SHA1.Create();
+            byte[] array = sHA.ComputeHash(Encoding.UTF8.GetBytes(s));
+            StringBuilder stringBuilder = new StringBuilder();
+            byte[] array2 = array;
+            foreach (byte b in array2)
+            {
+                stringBuilder.AppendFormat("{0:x2}", b);
+            }
+
+            return stringBuilder.ToString();
+        }
 
 
     }

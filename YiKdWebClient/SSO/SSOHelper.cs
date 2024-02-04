@@ -127,6 +127,11 @@ namespace YiKdWebClient.SSO
 
             string sign = CommonFunctionHelper.Sha256Hex(sortdata);//签名 签名算法使用自己语言的sha256算法即可
 
+            this.url = appSettingsModel.XKDApiServerUrl;
+            this.simplePassportLoginArg.dbid = appSettingsModel.XKDApiAcctID;
+            this.simplePassportLoginArg.appid = appSettingsModel.XKDApiAppID;
+            this.simplePassportLoginArg.username = appSettingsModel.XKDApiUserName;
+            this.simplePassportLoginArg.lcid = appSettingsModel.XKDApiLCID;
             this.simplePassportLoginArg.signeddata = sign;
             this.simplePassportLoginArg.timestamp = timestamp.ToString();
             this.simplePassportLoginArg.username = usserName;
@@ -159,6 +164,236 @@ namespace YiKdWebClient.SSO
             string wpfUrl = string.Format(@"K3cloud://{1}/k3cloud/Clientbin/K3cloudclient/K3cloudclient.manifest?Lcid=2052&ExeType=WPFRUNTIME&LoginUrl={0}&ud=", this.Url, uri.Host+":"+uri.Port) + argJsonBase64;
             ssoUrls.wpfUrl = wpfUrl;
           
+            ssoUrlObject = ssoUrls;
+            return ssoUrlObject;
+        }
+        /// <summary>
+        /// 第三方系统单点登录V3(获取所有登录方式链接)
+        /// </summary>
+        /// <param name="usserName"></param>
+        /// <param name="url"></param>
+        /// <returns></returns>
+        public SsoUrlObject GetSsoUrlsV3(string usserName = "", string url = "")
+        {
+            string ServerUrl = string.Empty;
+            if (string.IsNullOrWhiteSpace(url)) { ServerUrl = this.url; }
+            SsoUrlObject ssoUrls = new SsoUrlObject();
+            timestamp = CommonFunctionHelper.GetTimestamp();
+
+            string dbId = this.appSettingsModel.XKDApiAcctID;//数据中心ID
+            if (string.IsNullOrWhiteSpace(usserName))
+            {
+                usserName = this.appSettingsModel.XKDApiUserName;//用户名称
+            }
+
+
+            string appId = this.appSettingsModel.XKDApiAppID;//第三方系统应用Id
+
+            string appSecret = this.appSettingsModel.XKDApiAppSec;//第三方系统应用秘钥
+
+            string[] arr = new string[] { dbId, usserName, appId, appSecret, timestamp.ToString() };
+            if (!string.IsNullOrWhiteSpace(permitcount))
+            {
+                arr = new string[] { dbId, usserName, appId, appSecret, timestamp.ToString(), permitcount };
+
+                this.simplePassportLoginArg.otherargs = string.Format("|{{\'permitcount\':'{0}'}}", permitcount);
+            }
+
+            //Array.Sort(arr, StringComparer.Ordinal);
+
+            //string sortdata = string.Join(string.Empty, arr);
+
+            string sign = CommonFunctionHelper.GetSignatureSHA1Util(arr);//签名 签名算法使用自己语言的sha256算法即可
+
+            this.url = appSettingsModel.XKDApiServerUrl;
+            this.simplePassportLoginArg.dbid = appSettingsModel.XKDApiAcctID;
+            this.simplePassportLoginArg.appid = appSettingsModel.XKDApiAppID;
+            this.simplePassportLoginArg.username = appSettingsModel.XKDApiUserName;
+            this.simplePassportLoginArg.lcid = appSettingsModel.XKDApiLCID;
+
+            this.simplePassportLoginArg.signeddata = sign;
+            this.simplePassportLoginArg.timestamp = timestamp.ToString();
+            this.simplePassportLoginArg.username = usserName;
+
+            var options = new JsonSerializerOptions();
+            options.WriteIndented = false; // 设置false格式化为非缩进格式，即不保留换行符;
+
+            if (UnsafeRelaxedJsonEscaping)
+            {
+                options.Encoder = System.Text.Encodings.Web.JavaScriptEncoder.UnsafeRelaxedJsonEscaping;
+            }
+            else
+            {
+                options.Encoder = System.Text.Encodings.Web.JavaScriptEncoder.Default;
+            }
+
+            argJosn = System.Text.Json.JsonSerializer.Serialize(simplePassportLoginArg, options); ;//json格式
+
+            argJsonBase64 = System.Text.UTF8Encoding.UTF8.GetBytes(argJosn).ToBase64();//base64编码
+
+            // var argJsonBase641 = Convert.ToBase64String(System.Text.UTF8Encoding.UTF8.GetBytes(argJosn));//base64编码
+
+            string silverlightUrl = this.Url + "Silverlight/index.aspx?ud=" + argJsonBase64;// Silverlight入口链接
+            ssoUrls.silverlightUrl = silverlightUrl;
+            string html5Url = this.Url + "html5/index.aspx?ud=" + argJsonBase64;// html5入口链接
+            ssoUrls.html5Url = html5Url;
+
+            Uri uri = new Uri(this.Url);
+
+            string wpfUrl = string.Format(@"K3cloud://{1}/k3cloud/Clientbin/K3cloudclient/K3cloudclient.manifest?Lcid=2052&ExeType=WPFRUNTIME&LoginUrl={0}&ud=", this.Url, uri.Host + ":" + uri.Port) + argJsonBase64;
+            ssoUrls.wpfUrl = wpfUrl;
+
+            ssoUrlObject = ssoUrls;
+            return ssoUrlObject;
+        }
+
+        /// <summary>
+        /// 第三方系统单点登录V2(获取所有登录方式链接)
+        /// </summary>
+        /// <param name="usserName"></param>
+        /// <param name="url"></param>
+        /// <returns></returns>
+        public SsoUrlObject GetSsoUrlsV2(string usserName = "", string url = "")
+        {
+            string ServerUrl = string.Empty;
+            if (string.IsNullOrWhiteSpace(url)) { ServerUrl = this.url; }
+            SsoUrlObject ssoUrls = new SsoUrlObject();
+            timestamp = CommonFunctionHelper.GetTimestamp();
+
+            string dbId = this.appSettingsModel.XKDApiAcctID;//数据中心ID
+            if (string.IsNullOrWhiteSpace(usserName))
+            {
+                usserName = this.appSettingsModel.XKDApiUserName;//用户名称
+            }
+
+
+            string appId = this.appSettingsModel.XKDApiAppID;//第三方系统应用Id
+
+            string appSecret = this.appSettingsModel.XKDApiAppSec;//第三方系统应用秘钥
+
+            string[] arr = new string[] { dbId, usserName, appId, appSecret, timestamp.ToString() };
+            //if (!string.IsNullOrWhiteSpace(permitcount))
+            //{
+            //    arr = new string[] { dbId, usserName, appId, appSecret, timestamp.ToString(), permitcount };
+
+            //    this.simplePassportLoginArg.otherargs = string.Format("|{{\'permitcount\':'{0}'}}", permitcount);
+            //}
+
+            //Array.Sort(arr, StringComparer.Ordinal);
+
+            //string sortdata = string.Join(string.Empty, arr);
+
+            string sign = CommonFunctionHelper.GetSignatureSHA1Util(arr);//签名 
+
+
+            this.url = appSettingsModel.XKDApiServerUrl;
+            this.simplePassportLoginArg.dbid = appSettingsModel.XKDApiAcctID;
+            this.simplePassportLoginArg.appid = appSettingsModel.XKDApiAppID;
+            this.simplePassportLoginArg.username = appSettingsModel.XKDApiUserName;
+            this.simplePassportLoginArg.lcid = appSettingsModel.XKDApiLCID;
+
+            this.simplePassportLoginArg.signeddata = sign;
+            this.simplePassportLoginArg.timestamp = timestamp.ToString();
+            this.simplePassportLoginArg.username = usserName;
+
+            var options = new JsonSerializerOptions();
+            options.WriteIndented = false; // 设置false格式化为非缩进格式，即不保留换行符;
+
+            if (UnsafeRelaxedJsonEscaping)
+            {
+                options.Encoder = System.Text.Encodings.Web.JavaScriptEncoder.UnsafeRelaxedJsonEscaping;
+            }
+            else
+            {
+                options.Encoder = System.Text.Encodings.Web.JavaScriptEncoder.Default;
+            }
+
+            argJosn = System.Text.Json.JsonSerializer.Serialize(simplePassportLoginArg, options); ;//json格式
+
+            argJsonBase64 = System.Text.UTF8Encoding.UTF8.GetBytes(argJosn).ToBase64();//base64编码
+
+            // var argJsonBase641 = Convert.ToBase64String(System.Text.UTF8Encoding.UTF8.GetBytes(argJosn));//base64编码
+
+            string silverlightUrl = this.Url + "Silverlight/index.aspx?ud=" + argJsonBase64;// Silverlight入口链接
+            ssoUrls.silverlightUrl = silverlightUrl;
+            string html5Url = this.Url + "html5/index.aspx?ud=" + argJsonBase64;// html5入口链接
+            ssoUrls.html5Url = html5Url;
+
+            Uri uri = new Uri(this.Url);
+
+            string wpfUrl = string.Format(@"K3cloud://{1}/k3cloud/Clientbin/K3cloudclient/K3cloudclient.manifest?Lcid=2052&ExeType=WPFRUNTIME&LoginUrl={0}&ud=", this.Url, uri.Host + ":" + uri.Port) + argJsonBase64;
+            ssoUrls.wpfUrl = wpfUrl;
+
+            ssoUrlObject = ssoUrls;
+            return ssoUrlObject;
+        }
+
+
+        /// <summary>
+        /// 第三方系统单点登录V1(获取所有登录方式链接)
+        /// </summary>
+        /// <param name="usserName"></param>
+        /// <param name="url"></param>
+        /// <returns></returns>
+        public SsoUrlObject GetSsoUrlsV1(string usserName = "", string url = "")
+        {
+            string ServerUrl = string.Empty;
+            if (string.IsNullOrWhiteSpace(url)) { ServerUrl = this.url; }
+            SsoUrlObject ssoUrls = new SsoUrlObject();
+            timestamp = CommonFunctionHelper.GetTimestamp();
+
+            string dbId = this.appSettingsModel.XKDApiAcctID;//数据中心ID
+            if (string.IsNullOrWhiteSpace(usserName))
+            {
+                usserName = this.appSettingsModel.XKDApiUserName;//用户名称
+            }
+
+
+            string appId = this.appSettingsModel.XKDApiAppID;//第三方系统应用Id
+
+            string appSecret = this.appSettingsModel.XKDApiAppSec;//第三方系统应用秘钥
+
+            string[] arr = new string[] { dbId, usserName, appId, appSecret, timestamp.ToString() };
+            //if (!string.IsNullOrWhiteSpace(permitcount))
+            //{
+            //    arr = new string[] { dbId, usserName, appId, appSecret, timestamp.ToString(), permitcount };
+
+            //    this.simplePassportLoginArg.otherargs = string.Format("|{{\'permitcount\':'{0}'}}", permitcount);
+            //}
+
+            //Array.Sort(arr, StringComparer.Ordinal);
+
+            //string sortdata = string.Join(string.Empty, arr);
+
+            string sign = CommonFunctionHelper.GetSignatureSHA1Util(arr);//签名 
+
+            string urlPara = string.Format("|{0}|{1}|{2}|{3}|{4}|{5}", dbId, usserName, appId, sign, timestamp, this.appSettingsModel.XKDApiLCID);
+
+            StringBuilder stringBuilder = new StringBuilder();
+            stringBuilder.AppendLine("V1版本构建参数(非json): ");
+            stringBuilder.AppendLine(urlPara);
+            argJosn = stringBuilder.ToString();
+
+            string urlBase64 = System.Text.UTF8Encoding.Default.GetBytes(urlPara).ToBase64();// Base64编码
+
+            argJsonBase64 = urlBase64;
+
+          //  argJosn = System.Text.Json.JsonSerializer.Serialize(simplePassportLoginArg, options); ;//json格式
+
+            // argJsonBase64 = System.Text.UTF8Encoding.UTF8.GetBytes(argJosn).ToBase64();//base64编码
+
+            // var argJsonBase641 = Convert.ToBase64String(System.Text.UTF8Encoding.UTF8.GetBytes(argJosn));//base64编码
+
+            string silverlightUrl = this.Url + "Silverlight/index.aspx?ud=" + argJsonBase64;// Silverlight入口链接
+            ssoUrls.silverlightUrl = silverlightUrl;
+            string html5Url = this.Url + "html5/index.aspx?ud=" + argJsonBase64;// html5入口链接
+            ssoUrls.html5Url = html5Url;
+
+            Uri uri = new Uri(this.Url);
+
+            string wpfUrl = string.Format(@"K3cloud://{1}/k3cloud/Clientbin/K3cloudclient/K3cloudclient.manifest?Lcid=2052&ExeType=WPFRUNTIME&LoginUrl={0}&ud=", this.Url, uri.Host + ":" + uri.Port) + argJsonBase64;
+            ssoUrls.wpfUrl = wpfUrl;
+
             ssoUrlObject = ssoUrls;
             return ssoUrlObject;
         }

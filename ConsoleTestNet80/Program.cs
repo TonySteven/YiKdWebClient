@@ -98,9 +98,27 @@ namespace ConsoleTestNet80
 
 
             #region 单点登录V4
-            SSOHelper sSOHelper = new SSOHelper() { Url= @"http://127.0.0.1:9980/K3Cloud" };
+            //SSOHelper sSOHelper = new SSOHelper() { Url= @"http://127.0.0.1:9980/K3Cloud" };
+            ////sSOHelper.appSettingsModel.XKDApiUserName = "demo"; /*指定用户，若不指定则取配置文件默认的集成用户*/
+            //sSOHelper.GetSsoUrlsV4();
+            #endregion
+
+            #region 单点登录V3
+            //SSOHelper sSOHelper = new SSOHelper() { Url = @"http://127.0.0.1:9980/K3Cloud" };
+            ////sSOHelper.appSettingsModel.XKDApiUserName = "demo"; /*指定用户，若不指定则取配置文件默认的集成用户*/
+            //sSOHelper.GetSsoUrlsV3();
+            #endregion
+
+            #region 单点登录V2
+            //SSOHelper sSOHelper = new SSOHelper() { Url = @"http://127.0.0.1:9980/K3Cloud" };
+            ////sSOHelper.appSettingsModel.XKDApiUserName = "demo"; /*指定用户，若不指定则取配置文件默认的集成用户*/
+            //sSOHelper.GetSsoUrlsV2();
+            #endregion
+
+            #region 单点登录V1
+            SSOHelper sSOHelper = new SSOHelper() { Url = @"http://127.0.0.1:9980/K3Cloud" };
             //sSOHelper.appSettingsModel.XKDApiUserName = "demo"; /*指定用户，若不指定则取配置文件默认的集成用户*/
-            sSOHelper.GetSsoUrlsV4();
+            sSOHelper.GetSsoUrlsV1();
             #endregion
 
             #region 单点登录结果
