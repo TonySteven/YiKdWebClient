@@ -8,6 +8,7 @@ using System.Xml.Linq;
 using System.Xml.Serialization;
 using YiKdWebClient;
 using YiKdWebClient.Model;
+using YiKdWebClient.SSO;
 
 namespace ConsoleTestNet80
 {
@@ -85,17 +86,64 @@ namespace ConsoleTestNet80
 
             #region 集成密钥Base64认证
 
-         
-            string Formid = "SEC_User";
-            string Json = @"{""IsUserModelInit"":""true"",""Number"":""Administrator"",""IsSortBySeq"":""false""}";
-            YiK3CloudClient yiK3CloudClient = new YiKdWebClient.YiK3CloudClient() { LoginType=LoginType.LoginBySimplePassport} ;
-            string simplePassportForBase64 = @"MKuiZlgby8qu3VTiY89wT3TXjLapXeQcZrnl3pYte9rvyv8nCllx1ybSz+iTdbZfV7/ggFufoXXNAVvPilcQtbLxiqmN8Iw9+R8HaMaf4lLta6BOuBA0r13MvXui0rIFXW6XgCyc1C3ppsikT3wUY5Ua39R+pZS0HApZmxGxc5pRC/AllsUDEcIIX7sMDXTzVz90wa6RVSguPTLo0vZ5ug5bZqKH3XT9wK4QSnHdzr9QbaULG4EIM/VvJjX3ttswL8yt4HP64IdjwYUR6uZhfRDotnsHhQAZSb/Wi4zXUNh7DKyRyZd8IcjWzfC/lvLqXleyqEi8P07HP8CSDzWooIjiQ77D6IVTeydBfqQ5W5ax6kWJOQBRC+rY8RzZTGG4DlZwosnjSfkS+Ydr+KNf9E2ppujYGPLWaXhIV5QKLDn8CzNW7KqtmihRlfRcueobhJ6JQwAwh0Kc4+nBldUaVep7kOeKtjARJaPaOW/r3nHFat1UhxAPC58tEd2cQP6GZ6HUaTqYAhe9XM4HEQ9rRC1Gt0PBUdwfoll3oBPv20qxUI3uj58NFijca3UeXhwWmW+CW/G5XIbesRX3WQsa7NdKLSYB/Vb4tSKrgCIpKL6Y8ivBlDohwYTXh/y5DxhkOyncyQo4nuZZJkFoxXVaie7/S8LFrVz5y2kjRuumWfvU7s/NDXgHF5+jLTtVyrRfBtpifFiKbLhKV+lnDX0Ho8CypV9fsF7vQkH13Tyann0Ye1J50M4OxyyTNuaiBPnlz3MREjBruNR+h5pp/YWeqeB0ZdtqUIBOD0YvBE5+BBilkZIsF937vBi3BKykgOCvBZ93C+1hmxA9P2xMU3+5DJifFlIvoJbkismNqciycQslrtDCmCG/CYlvMClLTCjs";
-            yiK3CloudClient.LoginBySimplePassportModel = new LoginBySimplePassportModel() { Url = @"http://127.0.0.1/K3Cloud/", SimplePassportForBase64 = simplePassportForBase64,bySimplePassportType=BySimplePassportType.ForBase64};
-            var resultJson = yiK3CloudClient.View(Formid, Json);
 
+            //string Formid = "SEC_User";
+            //string Json = @"{""IsUserModelInit"":""true"",""Number"":""Administrator"",""IsSortBySeq"":""false""}";
+            //YiK3CloudClient yiK3CloudClient = new YiKdWebClient.YiK3CloudClient() { LoginType=LoginType.LoginBySimplePassport} ;
+            //string simplePassportForBase64 = @"MKuiZlgby8qu3VTiY89wT3TXjLapXeQcZrnl3pYte9rvyv8nCllx1ybSz+iTdbZfV7/ggFufoXXNAVvPilcQtbLxiqmN8Iw9+R8HaMaf4lLta6BOuBA0r13MvXui0rIFXW6XgCyc1C3ppsikT3wUY5Ua39R+pZS0HApZmxGxc5pRC/AllsUDEcIIX7sMDXTzVz90wa6RVSguPTLo0vZ5ug5bZqKH3XT9wK4QSnHdzr9QbaULG4EIM/VvJjX3ttswL8yt4HP64IdjwYUR6uZhfRDotnsHhQAZSb/Wi4zXUNh7DKyRyZd8IcjWzfC/lvLqXleyqEi8P07HP8CSDzWooIjiQ77D6IVTeydBfqQ5W5ax6kWJOQBRC+rY8RzZTGG4DlZwosnjSfkS+Ydr+KNf9E2ppujYGPLWaXhIV5QKLDn8CzNW7KqtmihRlfRcueobhJ6JQwAwh0Kc4+nBldUaVep7kOeKtjARJaPaOW/r3nHFat1UhxAPC58tEd2cQP6GZ6HUaTqYAhe9XM4HEQ9rRC1Gt0PBUdwfoll3oBPv20qxUI3uj58NFijca3UeXhwWmW+CW/G5XIbesRX3WQsa7NdKLSYB/Vb4tSKrgCIpKL6Y8ivBlDohwYTXh/y5DxhkOyncyQo4nuZZJkFoxXVaie7/S8LFrVz5y2kjRuumWfvU7s/NDXgHF5+jLTtVyrRfBtpifFiKbLhKV+lnDX0Ho8CypV9fsF7vQkH13Tyann0Ye1J50M4OxyyTNuaiBPnlz3MREjBruNR+h5pp/YWeqeB0ZdtqUIBOD0YvBE5+BBilkZIsF937vBi3BKykgOCvBZ93C+1hmxA9P2xMU3+5DJifFlIvoJbkismNqciycQslrtDCmCG/CYlvMClLTCjs";
+            //yiK3CloudClient.LoginBySimplePassportModel = new LoginBySimplePassportModel() { Url = @"http://127.0.0.1/K3Cloud/", SimplePassportForBase64 = simplePassportForBase64,bySimplePassportType=BySimplePassportType.ForBase64};
+            //var resultJson = yiK3CloudClient.View(Formid, Json);
+            // Console.WriteLine(resultJson);
             #endregion
 
-            Console.WriteLine(resultJson);
+
+            #region 单点登录V4
+            SSOHelper sSOHelper = new SSOHelper() { Url= @"http://127.0.0.1:9980/K3Cloud" };
+            //sSOHelper.appSettingsModel.XKDApiUserName = "demo"; /*指定用户，若不指定则取配置文件默认的集成用户*/
+            sSOHelper.GetSsoUrlsV4();
+            #endregion
+
+            #region 单点登录结果
+
+            /*****如下为获取到的相关链接数据***********************************/
+
+            //数据中心ID
+            Console.WriteLine("数据中心ID："+" "+ sSOHelper.simplePassportLoginArg.dbid);
+
+            //应用ID
+            Console.WriteLine("应用ID：" + " " + sSOHelper.simplePassportLoginArg.appid);
+
+            //用户名称
+            Console.WriteLine("用户名称：" + " " + sSOHelper.simplePassportLoginArg.username);
+
+            //时间戳
+            Console.WriteLine("时间戳：" + " " + sSOHelper.timestamp);
+
+
+            //签名
+            Console.WriteLine("签名：" + " " + sSOHelper.simplePassportLoginArg.signeddata);
+
+            //签名
+            Console.WriteLine("请求参数（json格式）：" + " " + sSOHelper.argJosn);
+
+            //签名
+            Console.WriteLine("参数格式化（Base64）：" + " " + sSOHelper.argJsonBase64);
+
+
+            // Silverlight入口链接
+            Console.WriteLine("Silverlight入口链接:");
+            Console.WriteLine(sSOHelper.ssoUrlObject.silverlightUrl);
+            // html5入口链接
+            Console.WriteLine("html5入口链接:");
+            Console.WriteLine(sSOHelper.ssoUrlObject.html5Url);
+            //客户端入口链接
+            Console.WriteLine("客户端入口链接:");
+            Console.WriteLine(sSOHelper.ssoUrlObject.wpfUrl);
+
+            #endregion
+            
+
+
             Console.ReadKey();
 
 

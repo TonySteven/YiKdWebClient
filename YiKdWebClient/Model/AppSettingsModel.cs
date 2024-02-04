@@ -7,7 +7,9 @@ using System.Threading.Tasks;
 namespace YiKdWebClient.Model
 {
 
-
+    /// <summary>
+    /// 第三方系统登录授权配置文件的信息
+    /// </summary>
     public class AppSettingsModel
     {
 
@@ -31,10 +33,25 @@ namespace YiKdWebClient.Model
 
             }
         }
+        /// <summary>
+        /// 当前使用的 账套ID(即数据中心id)
+        /// </summary>
         public string XKDApiAcctID { get; set; } = string.Empty;
+        /// <summary>
+        /// 第三方系统登录授权的 应用ID
+        /// </summary>
         public string XKDApiAppID { get; set; } = string.Empty;
+        /// <summary>
+        /// 第三方系统登录授权的 应用密钥
+        /// </summary>
         public string XKDApiAppSec { get; set; } = string.Empty;
+        /// <summary>
+        /// 第三方系统登录授权的 集成用户名称
+        /// </summary>
         public string XKDApiUserName { get; set; } = string.Empty;
+        /// <summary>
+        /// 账套语系，默认2052
+        /// </summary>
         public string XKDApiLCID { get; set; } = string.Empty;
 
         private string _xkdaApiServerUrl;

@@ -1,0 +1,198 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Text.Json;
+using System.Threading.Tasks;
+
+
+namespace YiKdWebClient.SSO
+{
+    /// <summary>
+    /// 单点登录辅助类
+    /// </summary>
+    public class SSOHelper
+    {
+        /// <summary>
+        /// 单点登录辅助类
+        /// </summary>
+        public SSOHelper() { InitLoginArgs(); }
+        /// <summary>
+        /// Unix时间戳,定义为从格林威治时间1970年01月01日00时00分00秒起
+        /// </summary>
+        public long  timestamp { get; set; }
+
+        /// <summary>
+        /// 请求参数（json格式）
+        /// </summary>
+        public string argJosn { get; set; } = string.Empty;
+        /// <summary>
+        /// 参数格式化（Base64）
+        /// </summary>
+        public string argJsonBase64 { get; set; } = string.Empty;
+
+
+        /// <summary>
+        /// 允许登录次数，0 允许重复登录 ，1 只允许登录一次
+        /// </summary>
+        public string permitcount { get; set; } = string.Empty;
+
+        /// <summary>
+        /// 获取对编码内容不太严格的内置 JavaScript 编码器实例 
+        /// https://learn.microsoft.com/zh-cn/dotnet/api/system.text.encodings.web.javascriptencoder.unsaferelaxedjsonescaping?view=net-8.0#system-text-encodings-web-javascriptencoder-unsaferelaxedjsonescaping
+        /// </summary>
+        public bool UnsafeRelaxedJsonEscaping { get; set; } = true;
+
+
+        /// <summary>
+        /// V4单点登录参数类
+        /// </summary>
+        public SimplePassportLoginArg simplePassportLoginArg { get; set; } = new SimplePassportLoginArg();
+
+        /// <summary>
+        /// 系统的地址:例如【http://xxx.xxx.xxx.xxx/k3cloud/】以/结尾
+        /// </summary>  
+        private string url;
+        /// <summary>
+        /// 系统的地址:例如【http://xxx.xxx.xxx.xxx/k3cloud/】以/结尾
+        /// </summary>
+        public string Url
+        {
+            // 在 set 访问器中添加自定义赋值逻辑
+            get
+            {
+                return url;
+            }
+            set
+            {
+                url = CommonFunctionHelper.GetServerUrl(value);
+            }
+        }
+        /// <summary>
+        /// 所有登录方式的单点登录URL链接
+        /// </summary>
+        public SsoUrlObject ssoUrlObject { get; set; } = new SsoUrlObject();
+
+        /// <summary>
+        /// 第三方系统登录授权配置文件的信息
+        /// </summary>
+        public Model.AppSettingsModel appSettingsModel = new Model.AppSettingsModel();
+
+        /// <summary>
+        /// 初始化本对象的基本参数
+        /// </summary>
+        /// <param name="appSettingsModel"></param>
+        private void InitLoginArgs()
+        {
+            this.simplePassportLoginArg = new SimplePassportLoginArg();
+            this.url = appSettingsModel.XKDApiServerUrl;
+            this.simplePassportLoginArg.dbid = appSettingsModel.XKDApiAcctID;
+            this.simplePassportLoginArg.appid = appSettingsModel.XKDApiAppID;
+            this.simplePassportLoginArg.username = appSettingsModel.XKDApiUserName;
+            this.simplePassportLoginArg.lcid = appSettingsModel.XKDApiLCID;
+
+        }
+
+        /// <summary>
+        /// 第三方系统单点登录V4(获取所有登录方式链接)
+        /// </summary>
+        /// <returns></returns>
+        public SsoUrlObject GetSsoUrlsV4(string usserName = "", string url = "")
+        {
+            string ServerUrl = string.Empty;
+            if (string.IsNullOrWhiteSpace(url)) { ServerUrl = this.url; }
+            SsoUrlObject ssoUrls = new SsoUrlObject();
+            timestamp=CommonFunctionHelper.GetTimestamp();
+
+            string dbId = this.appSettingsModel.XKDApiAcctID;//数据中心ID
+            if (string.IsNullOrWhiteSpace(usserName))
+            {
+                usserName = this.appSettingsModel.XKDApiUserName;//用户名称
+            }
+             
+
+            string appId = this.appSettingsModel.XKDApiAppID;//第三方系统应用Id
+
+            string appSecret = this.appSettingsModel.XKDApiAppSec;//第三方系统应用秘钥
+
+            string[] arr = new string[] { dbId, usserName, appId, appSecret, timestamp.ToString() };
+            if (!string.IsNullOrWhiteSpace(permitcount)) {arr = new string[] { dbId, usserName, appId, appSecret, timestamp.ToString(), permitcount };
+
+                this.simplePassportLoginArg.otherargs = string.Format("|{{\'permitcount\':'{0}'}}", permitcount);
+            }
+
+            Array.Sort(arr, StringComparer.Ordinal);
+
+            string sortdata = string.Join(string.Empty, arr);
+
+            string sign = CommonFunctionHelper.Sha256Hex(sortdata);//签名 签名算法使用自己语言的sha256算法即可
+
+            this.simplePassportLoginArg.signeddata = sign;
+            this.simplePassportLoginArg.timestamp = timestamp.ToString();
+            this.simplePassportLoginArg.username = usserName;
+
+            var options = new JsonSerializerOptions();
+            options.WriteIndented = false; // 设置false格式化为非缩进格式，即不保留换行符;
+
+            if (UnsafeRelaxedJsonEscaping)
+            {
+                options.Encoder = System.Text.Encodings.Web.JavaScriptEncoder.UnsafeRelaxedJsonEscaping;
+            }
+            else
+            {
+                options.Encoder = System.Text.Encodings.Web.JavaScriptEncoder.Default;
+            }
+
+             argJosn = System.Text.Json.JsonSerializer.Serialize(simplePassportLoginArg, options); ;//json格式
+
+             argJsonBase64 = System.Text.UTF8Encoding.UTF8.GetBytes(argJosn).ToBase64();//base64编码
+
+            // var argJsonBase641 = Convert.ToBase64String(System.Text.UTF8Encoding.UTF8.GetBytes(argJosn));//base64编码
+
+            string silverlightUrl = this.Url+"Silverlight/index.aspx?ud=" + argJsonBase64;// Silverlight入口链接
+            ssoUrls.silverlightUrl = silverlightUrl;
+            string html5Url = this.Url+"html5/index.aspx?ud=" + argJsonBase64;// html5入口链接
+            ssoUrls.html5Url = html5Url;
+
+            Uri uri=new Uri(this.Url);
+
+            string wpfUrl = string.Format(@"K3cloud://{1}/k3cloud/Clientbin/K3cloudclient/K3cloudclient.manifest?Lcid=2052&ExeType=WPFRUNTIME&LoginUrl={0}&ud=", this.Url, uri.Host+":"+uri.Port) + argJsonBase64;
+            ssoUrls.wpfUrl = wpfUrl;
+          
+            ssoUrlObject = ssoUrls;
+            return ssoUrlObject;
+        }
+
+
+    }
+
+
+
+
+
+
+
+
+
+
+    /// <summary>
+    /// 所有登录方式的单点登录URL链接
+    /// </summary>
+    public class SsoUrlObject
+    {
+        /// <summary>
+        /// Silverlight入口链接
+        /// </summary>
+        public string silverlightUrl { get; set; } = string.Empty;
+        /// <summary>
+        /// html5入口链接
+        /// </summary>
+        public string html5Url { get; set; } = string.Empty;
+        /// <summary>
+        /// 客户端入口链接
+        /// </summary>
+        public string wpfUrl { get; set; } = string.Empty;
+    }
+
+
+}

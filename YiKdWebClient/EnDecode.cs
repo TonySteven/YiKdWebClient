@@ -24,6 +24,8 @@ namespace YiKdWebClient
                 byte[] bytes2 = Encoding.ASCII.GetBytes(s2);
                 byte[] inArray = null;
                 int length = 0;
+
+             
                 using (DESCryptoServiceProvider descryptoServiceProvider = new DESCryptoServiceProvider())
                 {
                     int keySize = descryptoServiceProvider.KeySize;
