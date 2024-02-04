@@ -21,6 +21,8 @@
     <Copyright>Copyright © zjw 2024</Copyright>
 
     <PackageReadmeFile>readme.md</PackageReadmeFile>
+
+    <GenerateDocumentationFile>True</GenerateDocumentationFile>
    
 
   </PropertyGroup>
