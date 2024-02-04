@@ -104,32 +104,21 @@ namespace ConsoleTestNet80
             #endregion
 
             #region 单点登录结果
-
             /*****如下为获取到的相关链接数据***********************************/
-
             //数据中心ID
             Console.WriteLine("数据中心ID："+" "+ sSOHelper.simplePassportLoginArg.dbid);
-
             //应用ID
             Console.WriteLine("应用ID：" + " " + sSOHelper.simplePassportLoginArg.appid);
-
             //用户名称
             Console.WriteLine("用户名称：" + " " + sSOHelper.simplePassportLoginArg.username);
-
             //时间戳
             Console.WriteLine("时间戳：" + " " + sSOHelper.timestamp);
-
-
             //签名
             Console.WriteLine("签名：" + " " + sSOHelper.simplePassportLoginArg.signeddata);
-
-            //签名
+            //请求参数（json格式）
             Console.WriteLine("请求参数（json格式）：" + " " + sSOHelper.argJosn);
-
-            //签名
+            //参数格式化（Base64）
             Console.WriteLine("参数格式化（Base64）：" + " " + sSOHelper.argJsonBase64);
-
-
             // Silverlight入口链接
             Console.WriteLine("Silverlight入口链接:");
             Console.WriteLine(sSOHelper.ssoUrlObject.silverlightUrl);
@@ -139,7 +128,6 @@ namespace ConsoleTestNet80
             //客户端入口链接
             Console.WriteLine("客户端入口链接:");
             Console.WriteLine(sSOHelper.ssoUrlObject.wpfUrl);
-
             #endregion
             
 
