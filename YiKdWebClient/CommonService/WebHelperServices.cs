@@ -55,8 +55,7 @@ namespace YiKdWebClient.CommonService
 
             StringContent requestContent = new StringContent(postData, Encoding.UTF8, "application/json"); ; // 示例请求内容  
             request.Content = requestContent; // 设置内容类型为 JSON
-            
-
+          
             // string cookiestring = string.Join(";", cookies);
             //if (cookies.Count()>0)
             //{

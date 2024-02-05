@@ -98,9 +98,16 @@ namespace ConsoleTestNet80
 
 
             #region 单点登录V4
-            //SSOHelper sSOHelper = new SSOHelper() { Url= @"http://127.0.0.1:9980/K3Cloud" };
-            ////sSOHelper.appSettingsModel.XKDApiUserName = "demo"; /*指定用户，若不指定则取配置文件默认的集成用户*/
-            //sSOHelper.GetSsoUrlsV4();
+            SSOHelper sSOHelper = new SSOHelper() { Url = @"http://127.0.0.1/K3Cloud" };
+            sSOHelper.appSettingsModel.XKDApiUserName = "demo"; /*指定用户，若不指定则取配置文件默认的集成用户*/
+            sSOHelper.simplePassportLoginArg.formid = "BD_MATERIAL";
+            sSOHelper.simplePassportLoginArg.formtype = "list";
+            sSOHelper.GetSsoUrlsV4();
+            
+
+
+            //SSOLogoutObject sSOLogoutObject = sSOHelper.GetSSOLogoutap0StrV2V1();
+
             #endregion
 
             #region 单点登录V3
@@ -116,9 +123,9 @@ namespace ConsoleTestNet80
             #endregion
 
             #region 单点登录V1
-            SSOHelper sSOHelper = new SSOHelper() { Url = @"http://127.0.0.1:9980/K3Cloud" };
-            //sSOHelper.appSettingsModel.XKDApiUserName = "demo"; /*指定用户，若不指定则取配置文件默认的集成用户*/
-            sSOHelper.GetSsoUrlsV1();
+            //SSOHelper sSOHelper = new SSOHelper() { Url = @"http://127.0.0.1:9980/K3Cloud" };
+            ////sSOHelper.appSettingsModel.XKDApiUserName = "demo"; /*指定用户，若不指定则取配置文件默认的集成用户*/
+            //sSOHelper.GetSsoUrlsV1();
             #endregion
 
             #region 单点登录结果
@@ -139,15 +146,25 @@ namespace ConsoleTestNet80
             Console.WriteLine("参数格式化（Base64）：" + " " + sSOHelper.argJsonBase64);
             // Silverlight入口链接
             Console.WriteLine("Silverlight入口链接:");
-            Console.WriteLine(sSOHelper.ssoUrlObject.silverlightUrl);
+            Console.WriteLine(sSOHelper.SSOLoginUrlObject.silverlightUrl);
             // html5入口链接
             Console.WriteLine("html5入口链接:");
-            Console.WriteLine(sSOHelper.ssoUrlObject.html5Url);
+            Console.WriteLine(sSOHelper.SSOLoginUrlObject.html5Url);
             //客户端入口链接
             Console.WriteLine("客户端入口链接:");
-            Console.WriteLine(sSOHelper.ssoUrlObject.wpfUrl);
+            Console.WriteLine(sSOHelper.SSOLoginUrlObject.wpfUrl);
+
+
+
+            //登出ap0参数
+            //Console.WriteLine("登出ap0参数:");
+            // Console.WriteLine(sSOHelper.SSOLogoutObject.ap0);
+
+             var logout=  sSOHelper.SSOExcuteLogout(sSOHelper.GetSSOLogoutap0StrV3());
+            Console.WriteLine("登出验证:");
+            Console.WriteLine(logout);
             #endregion
-            
+
 
 
             Console.ReadKey();
