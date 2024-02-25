@@ -160,7 +160,7 @@ namespace ConsoleTestNet80
             //Console.WriteLine("登出ap0参数:");
             // Console.WriteLine(sSOHelper.SSOLogoutObject.ap0);
 
-             var logout=  sSOHelper.SSOExcuteLogout(sSOHelper.GetSSOLogoutap0StrV3());
+             var logout=  sSOHelper.SSOExcuteLogout(sSOHelper.GetSSOLogoutap0StrV3("demo"));
             Console.WriteLine("登出验证:");
             Console.WriteLine(logout);
             #endregion

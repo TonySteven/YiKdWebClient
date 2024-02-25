@@ -80,9 +80,10 @@ namespace YiKdWebClient.CommonService
             }
             #endregion
 
-            HttpResponseMessage response= await  client.SendAsync(request);
+            //  HttpResponseMessage response= await  client.SendAsync(request); 此方法异步时候偶发卡顿无反应，待观察
+            HttpResponseMessage response = client.SendAsync(request).Result;
 
-           
+
 
 
             #region 弃用
