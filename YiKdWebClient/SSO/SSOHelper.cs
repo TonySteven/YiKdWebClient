@@ -16,9 +16,10 @@ namespace YiKdWebClient.SSO
     /// </summary>
     public class SSOHelper
     {
+        
         /// <summary>
         /// 单点登录辅助类
-        /// </summary>
+        /// </summary>      
         public SSOHelper() { InitLoginArgs(); }
         /// <summary>
         /// Unix时间戳,定义为从格林威治时间1970年01月01日00时00分00秒起
