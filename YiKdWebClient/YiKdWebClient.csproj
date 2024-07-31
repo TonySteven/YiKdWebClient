@@ -9,9 +9,9 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <Authors>zoujiawei</Authors>
-    <AssemblyVersion>1.0.0.7</AssemblyVersion>
-    <FileVersion>1.0.0.7</FileVersion>
-    <VersionPrefix>1.0.0.7</VersionPrefix>
+    <AssemblyVersion>1.0.0.8</AssemblyVersion>
+    <FileVersion>1.0.0.8</FileVersion>
+    <VersionPrefix>1.0.0.8</VersionPrefix>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageProjectUrl>https://gitee.com/lnsyzjw/yi-kd-web-client</PackageProjectUrl>
     <Description>
@@ -32,7 +32,7 @@
     <PackageReference Include="System.Net.Http" Version="4.3.4" />
     <PackageReference Include="System.Security.Cryptography.Cng" Version="5.0.0" />
     <PackageReference Include="System.Security.Cryptography.X509Certificates" Version="4.3.2" />
-    <PackageReference Include="System.Text.Json" Version="8.0.1" />
+    <PackageReference Include="System.Text.Json" Version="8.0.4" />
 
   </ItemGroup>
 
