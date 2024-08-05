@@ -9,9 +9,9 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <Authors>zoujiawei</Authors>
-    <AssemblyVersion>1.0.0.8</AssemblyVersion>
-    <FileVersion>1.0.0.8</FileVersion>
-    <VersionPrefix>1.0.0.8</VersionPrefix>
+    <AssemblyVersion>1.0.0.9</AssemblyVersion>
+    <FileVersion>1.0.0.9</FileVersion>
+    <VersionPrefix>1.0.0.9</VersionPrefix>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageProjectUrl>https://gitee.com/lnsyzjw/yi-kd-web-client</PackageProjectUrl>
     <Description>

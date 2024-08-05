@@ -160,7 +160,8 @@ namespace YiKdWebClient
 
             try
             {
-                resjson = ExecServicesStubByformid(formid, json, @"Kingdee.BOS.WebApi.ServicesStub.DynamicFormService.View.common.kdsvc");
+                //resjson = ExecServicesStubByformid(formid, json, @"Kingdee.BOS.WebApi.ServicesStub.DynamicFormService.View.common.kdsvc");
+                resjson = ExecServicesStubByformid(formid, json, ServicesStubpath);
                 if (AutoLogout) { Logout(); }
             }
             catch (Exception ex)
