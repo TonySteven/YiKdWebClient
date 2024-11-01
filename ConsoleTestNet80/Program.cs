@@ -100,8 +100,8 @@ namespace ConsoleTestNet80
             #region 单点登录V4
             SSOHelper sSOHelper = new SSOHelper() { Url = @"http://127.0.0.1/K3Cloud" };
             sSOHelper.appSettingsModel.XKDApiUserName = "demo"; /*指定用户，若不指定则取配置文件默认的集成用户*/
-            sSOHelper.simplePassportLoginArg.formid = "BD_MATERIAL";
-            sSOHelper.simplePassportLoginArg.formtype = "list";
+           // sSOHelper.simplePassportLoginArg.formid = "BD_MATERIAL";
+           // sSOHelper.simplePassportLoginArg.formtype = "list";
             sSOHelper.GetSsoUrlsV4();
             
 
@@ -154,7 +154,7 @@ namespace ConsoleTestNet80
             Console.WriteLine("客户端入口链接:");
             Console.WriteLine(sSOHelper.SSOLoginUrlObject.wpfUrl);
 
-
+            Console.ReadKey();
 
             //登出ap0参数
             //Console.WriteLine("登出ap0参数:");
