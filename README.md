@@ -227,3 +227,7 @@ sSOHelper.GetSsoUrlsV4();
  Console.WriteLine(sSOHelper.SSOLoginUrlObject.wpfUrl);
  #endregion
 ```
+# 自定义webapi
+调用YiK3CloudClient中的CustomBusinessService方法 如下图
+
+
