@@ -68,6 +68,11 @@ namespace YiKdWebClient.ComWebHelper
         /// 请求的超时设置
         /// </summary>
         public TimeSpan Timeout = System.Threading.Timeout.InfiniteTimeSpan;
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="url"></param>
+        /// <returns></returns>
         public async Task<string> SendHttpRequestAsync(string url)
         {
             HttpClientHandler handler = new HttpClientHandler();
