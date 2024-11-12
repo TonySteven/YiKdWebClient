@@ -719,9 +719,15 @@ namespace YiKdWebClient
             return resjson;
         }
 
-
+        /// <summary>
+        /// 
+        /// </summary>
         public Model.ValidateLoginSettingsModel? validateLoginSettingsModel { get; set; }=null;
-
+        /// <summary>
+        /// url地址补充/
+        /// </summary>
+        /// <param name="url"></param>
+        /// <returns></returns>
         public  string GetServerUrl(string url)
         {
             if (string.IsNullOrWhiteSpace(url))
@@ -744,7 +750,9 @@ namespace YiKdWebClient
 
             return url;
         }
-
+        /// <summary>
+        /// SimplePassportModel集成文件验证模型
+        /// </summary>
 
         public Model.LoginBySimplePassportModel? LoginBySimplePassportModel { get; set; } = null;
     }
