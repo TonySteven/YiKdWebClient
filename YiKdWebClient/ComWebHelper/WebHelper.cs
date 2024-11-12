@@ -67,7 +67,8 @@ namespace YiKdWebClient.ComWebHelper
         /// <summary>
         /// 请求的超时设置
         /// </summary>
-        public TimeSpan Timeout = System.Threading.Timeout.InfiniteTimeSpan;
+       // public TimeSpan Timeout = System.Threading.Timeout.InfiniteTimeSpan;
+        public TimeSpan Timeout = TimeSpan.FromSeconds(120);
         /// <summary>
         /// 
         /// </summary>
