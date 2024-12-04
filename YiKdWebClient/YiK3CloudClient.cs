@@ -298,37 +298,79 @@ namespace YiKdWebClient
         public string ExecuteOperation(string opNumber, string formid, string json, bool AutoLogin = true, bool AutoLogout = true)
         {
             string resjson = string.Empty;
+            #region 校验登录是否成功旧版
+            //string LoginResultType = string.Empty;
+            //try
+            //{
+            //    if (AutoLogin)
+            //    {
+            //        this.Login();
+            //    }
+            //    try
+            //    {
+            //        System.Text.Json.Nodes.JsonNode JsonNodes = System.Text.Json.Nodes.JsonNode.Parse(this.ReturnLoginWebModel.RealResponseBody)!;
+            //        LoginResultType = Convert.ToString(JsonNodes["LoginResultType"])!;
+            //    }
+            //    catch (Exception)
+            //    {
+
+            //      //  throw;
+            //    }
+            //if (!"1".Equals(LoginResultType, StringComparison.OrdinalIgnoreCase))
+            //{
+            //    return this.ReturnLoginWebModel.RealResponseBody;
+            //}
+
+
+            //}
+            //catch (Exception ex)
+            //{
+            //    return ex.Message;
+            //    // throw;
+            //}
+            #endregion
+
             #region 校验登录是否成功
-            string LoginResultType = string.Empty;
-            try
+
+            if (this.LoginType.Equals(Model.LoginType.LoginByApiSignHeaders))
             {
-                if (AutoLogin)
-                {
-                    this.Login();
-                }
+
+            }
+            else
+            {
+                string LoginResultType = string.Empty;
                 try
                 {
-                    System.Text.Json.Nodes.JsonNode JsonNodes = System.Text.Json.Nodes.JsonNode.Parse(this.ReturnLoginWebModel.RealResponseBody)!;
-                    LoginResultType = Convert.ToString(JsonNodes["LoginResultType"])!;
+                    if (AutoLogin)
+                    {
+                        this.Login();
+                    }
+                    try
+                    {
+                        System.Text.Json.Nodes.JsonNode JsonNodes = System.Text.Json.Nodes.JsonNode.Parse(this.ReturnLoginWebModel.RealResponseBody)!;
+                        LoginResultType = Convert.ToString(JsonNodes["LoginResultType"])!;
+                    }
+                    catch (Exception)
+                    {
+
+                        //throw;
+                    }
+
+
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
-
-                  //  throw;
+                    return ex.Message;
+                    // throw;
                 }
-                
+                if (!"1".Equals(LoginResultType, StringComparison.OrdinalIgnoreCase))
+                {
+                    return this.ReturnLoginWebModel.RealResponseBody;
+                }
+            }
 
-            }
-            catch (Exception ex)
-            {
-                return ex.Message;
-                // throw;
-            }
             #endregion
-            if (!"1".Equals(LoginResultType, StringComparison.OrdinalIgnoreCase))
-            {
-                return this.ReturnLoginWebModel.RealResponseBody;
-            }
+
 
             try
             {

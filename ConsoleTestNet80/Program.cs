@@ -35,27 +35,27 @@ namespace ConsoleTestNet80
 
 
             #region API签名认证
-            //string Formid = "SEC_User";
-            //string Json = @"{""IsUserModelInit"":""true"",""Number"":""Administrator"",""IsSortBySeq"":""false""}";
-            //YiK3CloudClient yiK3CloudClient = new YiKdWebClient.YiK3CloudClient();
-            //yiK3CloudClient.LoginType = LoginType.LoginByApiSignHeaders;
-            //var resultJson = yiK3CloudClient.View(Formid, Json);
-            ////签名请求头的字符串，可以直接导入postman，Apipost
-            //string RequestHeadersString = yiK3CloudClient.RequestHeadersString;
-            //Console.WriteLine("签名请求头的字符串，可以直接导入postman，Apipost:");
-            //Console.WriteLine(RequestHeadersString);
-            ////真实的请求地址
-            //string RequestUrl = yiK3CloudClient.ReturnOperationWebModel.RequestUrl;
-            //Console.WriteLine("真实的请求地址: ");
-            //Console.WriteLine(RequestUrl);
-            ////真实的请求报文
-            //string RealRequestBody = yiK3CloudClient.ReturnOperationWebModel.RealRequestBody;
+            string Formid = "SEC_User";
+            string Json = @"{""IsUserModelInit"":""true"",""Number"":""Administrator"",""IsSortBySeq"":""false""}";
+            YiK3CloudClient yiK3CloudClient = new YiKdWebClient.YiK3CloudClient();
+            yiK3CloudClient.LoginType = LoginType.LoginByApiSignHeaders;
+            var resultJson = yiK3CloudClient.ExecuteOperation("View",Formid, Json);
+            //签名请求头的字符串，可以直接导入postman，Apipost
+            string RequestHeadersString = yiK3CloudClient.RequestHeadersString;
+            Console.WriteLine("签名请求头的字符串，可以直接导入postman，Apipost:");
+            Console.WriteLine(RequestHeadersString);
+            //真实的请求地址
+            string RequestUrl = yiK3CloudClient.ReturnOperationWebModel.RequestUrl;
+            Console.WriteLine("真实的请求地址: ");
+            Console.WriteLine(RequestUrl);
+            //真实的请求报文
+            string RealRequestBody = yiK3CloudClient.ReturnOperationWebModel.RealRequestBody;
 
-            //Console.WriteLine("真实的请求报文: ");
-            //Console.WriteLine(RealRequestBody);
+            Console.WriteLine("真实的请求报文: ");
+            Console.WriteLine(RealRequestBody);
 
-            //Console.WriteLine("请求结果: ");
-            //Console.WriteLine(resultJson);
+            Console.WriteLine("请求结果: ");
+            Console.WriteLine(resultJson);
 
             #endregion
 
@@ -130,29 +130,29 @@ namespace ConsoleTestNet80
 
             #region 单点登录结果
             /*****如下为获取到的相关链接数据***********************************/
-            //数据中心ID
-            Console.WriteLine("数据中心ID："+" "+ sSOHelper.simplePassportLoginArg.dbid);
-            //应用ID
-            Console.WriteLine("应用ID：" + " " + sSOHelper.simplePassportLoginArg.appid);
-            //用户名称
-            Console.WriteLine("用户名称：" + " " + sSOHelper.simplePassportLoginArg.username);
-            //时间戳
-            Console.WriteLine("时间戳：" + " " + sSOHelper.timestamp);
-            //签名
-            Console.WriteLine("签名：" + " " + sSOHelper.simplePassportLoginArg.signeddata);
-            //请求参数（json格式）
-            Console.WriteLine("请求参数（json格式）：" + " " + sSOHelper.argJosn);
-            //参数格式化（Base64）
-            Console.WriteLine("参数格式化（Base64）：" + " " + sSOHelper.argJsonBase64);
-            // Silverlight入口链接
-            Console.WriteLine("Silverlight入口链接:");
-            Console.WriteLine(sSOHelper.SSOLoginUrlObject.silverlightUrl);
-            // html5入口链接
-            Console.WriteLine("html5入口链接:");
-            Console.WriteLine(sSOHelper.SSOLoginUrlObject.html5Url);
-            //客户端入口链接
-            Console.WriteLine("客户端入口链接:");
-            Console.WriteLine(sSOHelper.SSOLoginUrlObject.wpfUrl);
+            ////数据中心ID
+            //Console.WriteLine("数据中心ID："+" "+ sSOHelper.simplePassportLoginArg.dbid);
+            ////应用ID
+            //Console.WriteLine("应用ID：" + " " + sSOHelper.simplePassportLoginArg.appid);
+            ////用户名称
+            //Console.WriteLine("用户名称：" + " " + sSOHelper.simplePassportLoginArg.username);
+            ////时间戳
+            //Console.WriteLine("时间戳：" + " " + sSOHelper.timestamp);
+            ////签名
+            //Console.WriteLine("签名：" + " " + sSOHelper.simplePassportLoginArg.signeddata);
+            ////请求参数（json格式）
+            //Console.WriteLine("请求参数（json格式）：" + " " + sSOHelper.argJosn);
+            ////参数格式化（Base64）
+            //Console.WriteLine("参数格式化（Base64）：" + " " + sSOHelper.argJsonBase64);
+            //// Silverlight入口链接
+            //Console.WriteLine("Silverlight入口链接:");
+            //Console.WriteLine(sSOHelper.SSOLoginUrlObject.silverlightUrl);
+            //// html5入口链接
+            //Console.WriteLine("html5入口链接:");
+            //Console.WriteLine(sSOHelper.SSOLoginUrlObject.html5Url);
+            ////客户端入口链接
+            //Console.WriteLine("客户端入口链接:");
+            //Console.WriteLine(sSOHelper.SSOLoginUrlObject.wpfUrl);
 
             Console.ReadKey();
 
@@ -160,9 +160,9 @@ namespace ConsoleTestNet80
             //Console.WriteLine("登出ap0参数:");
             // Console.WriteLine(sSOHelper.SSOLogoutObject.ap0);
 
-             var logout=  sSOHelper.SSOExcuteLogout(sSOHelper.GetSSOLogoutap0StrV3("demo"));
-            Console.WriteLine("登出验证:");
-            Console.WriteLine(logout);
+            // var logout=  sSOHelper.SSOExcuteLogout(sSOHelper.GetSSOLogoutap0StrV3("demo"));
+            //Console.WriteLine("登出验证:");
+            //Console.WriteLine(logout);
             #endregion
 
 
