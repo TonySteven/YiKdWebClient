@@ -122,7 +122,16 @@ namespace YiKdWebClient
             return resjson;
         }
 
-        private string ExecApiDynamicFormService(string formid, string json, string ServicesStubpath, bool AutoLogin = true, bool AutoLogout = true)
+        /// <summary>
+        /// 根据ServicesStubpath接口服务地址调用例如:Kingdee.BOS.WebApi.ServicesStub.DynamicFormService.Allocate.common.kdsvc
+        /// </summary>
+        /// <param name="formid"></param>
+        /// <param name="json"></param>
+        /// <param name="ServicesStubpath">接口服务地址，k3cloud/后面的部分</param>
+        /// <param name="AutoLogin"></param>
+        /// <param name="AutoLogout"></param>
+        /// <returns></returns>
+        public string ExecApiDynamicFormService(string formid, string json, string ServicesStubpath, bool AutoLogin = true, bool AutoLogout = true)
         {
             string resjson = string.Empty;
             #region 校验登录是否成功
