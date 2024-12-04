@@ -148,9 +148,17 @@ namespace YiKdWebClient
                     {
                         this.Login();
                     }
+                    try
+                    {
+                        System.Text.Json.Nodes.JsonNode JsonNodes = System.Text.Json.Nodes.JsonNode.Parse(this.ReturnLoginWebModel.RealResponseBody)!;
+                        LoginResultType = Convert.ToString(JsonNodes["LoginResultType"])!;
+                    }
+                    catch (Exception)
+                    {
 
-                    System.Text.Json.Nodes.JsonNode JsonNodes = System.Text.Json.Nodes.JsonNode.Parse(this.ReturnLoginWebModel.RealResponseBody)!;
-                    LoginResultType = Convert.ToString(JsonNodes["LoginResultType"])!;
+                        //throw;
+                    }
+                   
 
                 }
                 catch (Exception ex)
@@ -298,9 +306,17 @@ namespace YiKdWebClient
                 {
                     this.Login();
                 }
+                try
+                {
+                    System.Text.Json.Nodes.JsonNode JsonNodes = System.Text.Json.Nodes.JsonNode.Parse(this.ReturnLoginWebModel.RealResponseBody)!;
+                    LoginResultType = Convert.ToString(JsonNodes["LoginResultType"])!;
+                }
+                catch (Exception)
+                {
 
-                System.Text.Json.Nodes.JsonNode JsonNodes = System.Text.Json.Nodes.JsonNode.Parse(this.ReturnLoginWebModel.RealResponseBody)!;
-                LoginResultType = Convert.ToString(JsonNodes["LoginResultType"])!;
+                  //  throw;
+                }
+                
 
             }
             catch (Exception ex)
