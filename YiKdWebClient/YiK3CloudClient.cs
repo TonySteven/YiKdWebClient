@@ -398,7 +398,7 @@ namespace YiKdWebClient
         /// <returns></returns>
         public string UnAudit(string formid, string json, bool AutoLogin = true, bool AutoLogout = true)
         {
-            return ExecApiDynamicFormService(formid, json, @"K3Cloud/Kingdee.BOS.WebApi.ServicesStub.DynamicFormService.UnAudit.common.kdsvc", AutoLogin, AutoLogout);
+            return ExecApiDynamicFormService(formid, json, @"Kingdee.BOS.WebApi.ServicesStub.DynamicFormService.UnAudit.common.kdsvc", AutoLogin, AutoLogout);
 
         }
         /// <summary>
