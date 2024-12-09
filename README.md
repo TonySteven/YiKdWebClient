@@ -108,6 +108,7 @@ https://www.nuget.org/packages/YiKdWebClient
 # 配置文件内容
 注意：(最新公有云可能强制要求走网关(https://api.kingdee.com/galaxyapi/)
 走网关的方式需要使用API签名认证的模式。
+最新询问总部（2024年10月)，目前不再强制公有云使用网关模式，公有云可以正常调用
 
 ```
 <?xml version="1.0" encoding="utf-8" ?>
@@ -147,7 +148,7 @@ https://www.nuget.org/packages/YiKdWebClient
 
     <!--<add key="X-KDApi-OrgNum" value="*****"/>-->
 
-    <!-- 服务Url地址(私有云必须配置金蝶云星空产品地址，K3Cloud/结尾。若为公有云则必须置空)-->
+    <!-- 服务Url地址(私有云必须配置金蝶云星空产品地址，K3Cloud/结尾。若为需要走公有云网关模式,则必须置空)-->
 
     <add key="X-KDApi-ServerUrl" value="http://127.0.0.1/k3cloud/"/>
   </appSettings>
