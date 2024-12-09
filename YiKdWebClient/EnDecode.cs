@@ -12,6 +12,8 @@ namespace YiKdWebClient
     public static class EnDecode
     {
         // Token: 0x060000B2 RID: 178 RVA: 0x00003500 File Offset: 0x00001700
+        // Disable the warning.
+
         public static string Encode(object data)
         {
             string s = "KingdeeK";
@@ -25,7 +27,7 @@ namespace YiKdWebClient
                 byte[] inArray = null;
                 int length = 0;
 
-             
+#pragma warning disable SYSLIB0021
                 using (DESCryptoServiceProvider descryptoServiceProvider = new DESCryptoServiceProvider())
                 {
                     int keySize = descryptoServiceProvider.KeySize;
@@ -54,6 +56,51 @@ namespace YiKdWebClient
             return result;
         }
 
+
+        public static string EncodeNew1(object data)
+        {
+            // 确保传入数据为字符串类型，可按需扩展支持更多类型
+            //if (!(data is string))
+            //{
+            //    throw new ArgumentException("data 必须为字符串类型", nameof(data));
+            //}
+
+            string s = "KingdeeK";
+            string s2 = "KingdeeK";
+            string result;
+
+            try
+            {
+                byte[] key = Encoding.ASCII.GetBytes(s);
+                byte[] iv = Encoding.ASCII.GetBytes(s2);
+                byte[] inArray = null;
+                int length = 0;
+
+                using (DES des = DES.Create())
+                {
+                    des.Key = key;
+                    des.IV = iv;
+
+                    using (MemoryStream memoryStream = new MemoryStream())
+                    {
+                        using (CryptoStream cryptoStream = new CryptoStream(memoryStream, des.CreateEncryptor(), CryptoStreamMode.Write))
+                        {
+                            byte[] dataBytes = Encoding.UTF8.GetBytes((string)data);
+                            cryptoStream.Write(dataBytes, 0, dataBytes.Length);
+                            cryptoStream.FlushFinalBlock();
+                            inArray = memoryStream.ToArray();
+                            length = inArray.Length;
+                        }
+                    }
+                }
+                result = Convert.ToBase64String(inArray, 0, length);
+            }
+            catch (Exception ex)
+            {
+                result = ex.Message;
+            }
+            return result;
+        }
         // Token: 0x060000B3 RID: 179 RVA: 0x0000362C File Offset: 0x0000182C
         public static string HmacSHA256(string message, string secret, Encoding encoding, bool isHex = false)
         {
@@ -158,14 +205,14 @@ namespace YiKdWebClient
             StringBuilder stringBuilder = new StringBuilder();
             foreach (char value in str)
             {
-               
+
 
                 if (System.Web.HttpUtility.UrlEncode(value.ToString()).Length > 1)
-               
+
                 {
                     stringBuilder.Append(System.Web.HttpUtility.UrlEncode(value.ToString(), encoding).ToUpper());
 
-                   
+
 
 
                 }
