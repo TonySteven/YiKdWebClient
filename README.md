@@ -60,6 +60,9 @@ yiK3CloudClient.LoginType=LoginType.LoginByApiSignHeaders;
 var resultJson = yiK3CloudClient.View(Formid, Json);
 Console.WriteLine(resultJson);
 ~~~
+API签名认证的最大特点是，真实的请求中，没有调用登陆验证接口，web请求次数会大幅度降低
+
+
 # 使用postman，Apipost 工具调试
 如下为使用postman，Apipost 工具的方法
 ~~~
