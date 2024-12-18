@@ -100,7 +100,7 @@ https://www.nuget.org/packages/YiKdWebClient
 
 
 
-# 配置文件内容
+# 配置文件内容(相对路径YiKdWebCfg/appsettings.xml 文件，如果没有就手动创建)
 注意：(最新公有云可能强制要求走网关(https://api.kingdee.com/galaxyapi/)
 走网关的方式需要使用API签名认证的模式。
 最新询问总部（2024年10月)，目前不再强制公有云使用网关模式，公有云可以正常调用
