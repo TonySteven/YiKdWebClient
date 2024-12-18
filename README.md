@@ -8,12 +8,12 @@
 
 调用方式简单
 如下示例:
-# 1.第三方授权认证
+# 1.第三方授权认证(需要设置配置文件:YiKdWebCfg/appsettings.xml)
 
 
 
 ```
-///1.第三方授权认证(需要设置配置文件:YiKdWebCfg/appsettings.xml)
+///1.第三方授权认证
 string Formid = "SEC_User";
 string Json =@"{""IsUserModelInit"":""true"",""Number"":""Administrator"",""IsSortBySeq"":""false""}";
 YiK3CloudClient yiK3CloudClient = new YiKdWebClient.YiK3CloudClient();
@@ -28,10 +28,10 @@ var resultJson  = yiK3CloudClient.View(Formid, Json);
 可以利用此信息，使用postman 等接口调试工具进行调试，更方便快捷。 也可以使用其它开发语言进行请求，原理一致
 
 
-# 2.旧版用户名密码认证
+# 2.旧版用户名密码认证(不需要设置appsettings.xml)
  
 ```
-///2.旧版用户名密码认证(不需要设置appsettings.xml)
+///2.旧版用户名密码认证
  string Formid = "SEC_User";
  string Json =@"{""IsUserModelInit"":""true"",""Number"":""Administrator"",""IsSortBySeq"":""false""}";
  YiK3CloudClient yiK3CloudClient = new YiKdWebClient.YiK3CloudClient();
