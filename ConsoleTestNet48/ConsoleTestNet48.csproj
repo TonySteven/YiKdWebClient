@@ -82,12 +82,20 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+    <None Include="YiKdWebCfg\API测试.cnf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\YiKdWebClient\YiKdWebClient.csproj">
       <Project>{0c4365e2-fe32-4c75-bd7b-84ddef8d1b7a}</Project>
       <Name>YiKdWebClient</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="YiKdWebCfg\appsettings.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
