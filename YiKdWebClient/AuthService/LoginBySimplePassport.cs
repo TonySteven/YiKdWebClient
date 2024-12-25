@@ -8,10 +8,18 @@ using System.Threading.Tasks;
 
 namespace YiKdWebClient.AuthService
 {
+    /// <summary>
+    /// 简易通行证/集成密钥文件方式
+    /// </summary>
     public class LoginBySimplePassport
     {
-
+        /// <summary>
+        /// 
+        /// </summary>
         public TimeSpan Timeout { get; set; } = TimeSpan.FromSeconds(30);
+        /// <summary>
+        /// 
+        /// </summary>
         public Dictionary<string, string> RequestHeaders = new Dictionary<string, string>();
 
 
@@ -48,7 +56,13 @@ namespace YiKdWebClient.AuthService
 
 
         }
-
+        /// <summary>
+        /// 获取简易通行证/集成密钥文件方式的json
+        /// </summary>
+        /// <param name="loginBySimplePassportModel"></param>
+        /// <param name="UnsafeRelaxedJsonEscaping"></param>
+        /// <returns></returns>
+        /// <exception cref="Exception"></exception>
         public string GetLoginJson(Model.LoginBySimplePassportModel loginBySimplePassportModel, bool UnsafeRelaxedJsonEscaping)
         {
 

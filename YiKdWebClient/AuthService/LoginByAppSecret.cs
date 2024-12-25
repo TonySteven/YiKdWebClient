@@ -8,12 +8,28 @@ using System.Threading.Tasks;
 
 namespace YiKdWebClient.AuthService
 {
+    /// <summary>
+    /// 第三方登陆授权验证
+    /// </summary>
     public class LoginByAppSecret
 
 
     {
+        /// <summary>
+        /// 
+        /// </summary>
         public TimeSpan Timeout { get; set; } = TimeSpan.FromSeconds(30);
+        /// <summary>
+        /// 
+        /// </summary>
         public Dictionary<string, string> RequestHeaders = new Dictionary<string, string>();
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="url"></param>
+        /// <param name="json"></param>
+        /// <param name="UnsafeRelaxedJsonEscaping"></param>
+        /// <returns></returns>
         public Model.RequestWebModel Login(string url, string json, bool UnsafeRelaxedJsonEscaping = true)
         {
             Model.RequestWebModel requestWebModel = new Model.RequestWebModel();

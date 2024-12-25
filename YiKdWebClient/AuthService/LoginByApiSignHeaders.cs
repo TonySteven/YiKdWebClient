@@ -12,10 +12,11 @@ namespace YiKdWebClient.AuthService
     public static class LoginByApiSignHeaders
     {
         /// <summary>
-      /// 获取签名的请求头字典
-     /// </summary>
-     /// <param name="appSettingsModel"></param>
-     /// <returns></returns>
+        /// 获取签名的请求头字典
+        /// </summary>
+        /// <param name="appSettingsModel"></param>
+        /// <param name="uri"></param>
+        /// <returns></returns>
         public static Dictionary<string,string> GetApiHeaders(Model.AppSettingsModel appSettingsModel,Uri uri) 
         {
             Dictionary<string, string> dictionary= new Dictionary<string, string>();
@@ -64,7 +65,11 @@ namespace YiKdWebClient.AuthService
 
             return dictionary;
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="uri"></param>
+        /// <returns></returns>
         public static Dictionary<string, string> GetApiHeaders(Uri uri) { 
 
             return GetApiHeaders(new Model.AppSettingsModel(), uri);

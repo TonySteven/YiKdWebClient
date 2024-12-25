@@ -7,11 +7,27 @@ using System.Threading.Tasks;
 
 namespace YiKdWebClient.AuthService
 {
+    /// <summary>
+    /// 用户名密码验证(不建议使用)
+    /// </summary>
     public  class ValidateLogin
     {
+        /// <summary>
+        /// 
+        /// </summary>
         public TimeSpan Timeout { get; set; } = TimeSpan.FromSeconds(30);
+        /// <summary>
+        /// 
+        /// </summary>
         public Dictionary<string, string> RequestHeaders = new Dictionary<string, string>();
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="url"></param>
+        /// <param name="json"></param>
+        /// <param name="UnsafeRelaxedJsonEscaping"></param>
+        /// <returns></returns>
 
         public Model.RequestWebModel Login(string url, string json, bool UnsafeRelaxedJsonEscaping = true)
         {
@@ -46,7 +62,12 @@ namespace YiKdWebClient.AuthService
 
 
         }
-
+        /// <summary>
+        /// 获取用户名密码登陆的真实json
+        /// </summary>
+        /// <param name="validateLoginSettingsModel"></param>
+        /// <param name="UnsafeRelaxedJsonEscaping"></param>
+        /// <returns></returns>
         public string GetLoginJson(Model.ValidateLoginSettingsModel validateLoginSettingsModel, bool UnsafeRelaxedJsonEscaping)
         {
             JsonSerializerOptions options = new JsonSerializerOptions();
