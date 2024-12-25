@@ -18,6 +18,18 @@ namespace ConsoleTestNet80
         {
 
 
+            string Formid = "SEC_User";
+            string Json = @"{""IsUserModelInit"":""true"",""Number"":""Administrator"",""IsSortBySeq"":""false""}";
+            YiK3CloudClient yiK3CloudClient = new YiKdWebClient.YiK3CloudClient();
+            yiK3CloudClient.LoginType = LoginType.LoginBySimplePassport;
+            string cnfFilePath = Path.Combine(System.AppDomain.CurrentDomain.BaseDirectory, "YiKdWebCfg", "API测试.cnf");
+            yiK3CloudClient.LoginBySimplePassportModel = new LoginBySimplePassportModel() { Url = @"http://127.0.0.1/K3Cloud/", CnfFilePath = cnfFilePath };
+            var resultJson = yiK3CloudClient.View(Formid, Json);
+            Console.WriteLine(resultJson);
+            Console.ReadKey();
+
+
+
             #region 第三方授权验证
 
 
@@ -98,11 +110,11 @@ namespace ConsoleTestNet80
 
 
             #region 单点登录V4
-            SSOHelper sSOHelper = new SSOHelper() { Url = @"http://127.0.0.1/K3Cloud" };
-            sSOHelper.appSettingsModel.XKDApiUserName = "demo"; /*指定用户，若不指定则取配置文件默认的集成用户*/
-           // sSOHelper.simplePassportLoginArg.formid = "BD_MATERIAL";
-           // sSOHelper.simplePassportLoginArg.formtype = "list";
-            sSOHelper.GetSsoUrlsV4();
+           // SSOHelper sSOHelper = new SSOHelper() { Url = @"http://127.0.0.1/K3Cloud" };
+           // sSOHelper.appSettingsModel.XKDApiUserName = "demo"; /*指定用户，若不指定则取配置文件默认的集成用户*/
+           //// sSOHelper.simplePassportLoginArg.formid = "BD_MATERIAL";
+           //// sSOHelper.simplePassportLoginArg.formtype = "list";
+           // sSOHelper.GetSsoUrlsV4();
             
 
 

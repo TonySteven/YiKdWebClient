@@ -15,4 +15,13 @@
     <ProjectReference Include="..\YiKdWebClient\YiKdWebClient.csproj" />
  </ItemGroup>
 
+  <ItemGroup>
+    <None Update="YiKdWebCfg\API测试.cnf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="YiKdWebCfg\appsettings.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>
