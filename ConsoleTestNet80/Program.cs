@@ -18,14 +18,25 @@ namespace ConsoleTestNet80
         {
 
 
-            string Formid = "SEC_User";
-            string Json = @"{""IsUserModelInit"":""true"",""Number"":""Administrator"",""IsSortBySeq"":""false""}";
+
+
+            //string Formid = "SEC_User";
+            //string Json = @"{""IsUserModelInit"":""true"",""Number"":""Administrator"",""IsSortBySeq"":""false""}";
             YiK3CloudClient yiK3CloudClient = new YiKdWebClient.YiK3CloudClient();
             yiK3CloudClient.LoginType = LoginType.LoginBySimplePassport;
             string cnfFilePath = Path.Combine(System.AppDomain.CurrentDomain.BaseDirectory, "YiKdWebCfg", "API测试.cnf");
             yiK3CloudClient.LoginBySimplePassportModel = new LoginBySimplePassportModel() { Url = @"http://127.0.0.1/K3Cloud/", CnfFilePath = cnfFilePath };
-            var resultJson = yiK3CloudClient.View(Formid, Json);
-            Console.WriteLine(resultJson);
+            string path = @"D:\test1.mp4";
+            Action<byte[]> action = (resbyte) => 
+            { 
+                string base64=Convert.ToBase64String(resbyte);
+                Console.WriteLine(base64);
+            };
+            YiKdWebClient.ToolsHelper.AttachmentHelper.ReadFileInChunksByAction(path, action);
+            
+
+           // var resultJson = yiK3CloudClient.View(Formid, Json);
+           // Console.WriteLine(resultJson);
             Console.ReadKey();
 
 
