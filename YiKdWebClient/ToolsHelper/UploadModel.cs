@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 
@@ -19,7 +20,9 @@ namespace YiKdWebClient.ToolsHelper
         /// <summary>
         /// 文件上传模型数据结构
         /// </summary>
-        public UploadModelData Data { get; set; }=new UploadModelData();
+        [JsonPropertyName("data")]
+        //[JsonIgnore]
+        public UploadModelData data { get; set; }=new UploadModelData();
     }
 
     /// <summary>

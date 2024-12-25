@@ -13,7 +13,11 @@ namespace YiKdWebClient
     {
         // Token: 0x060000B2 RID: 178 RVA: 0x00003500 File Offset: 0x00001700
         // Disable the warning.
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns></returns>
         public static string Encode(object data)
         {
             string s = "KingdeeK";
@@ -56,7 +60,11 @@ namespace YiKdWebClient
             return result;
         }
 
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns></returns>
         public static string EncodeNew1(object data)
         {
             // 确保传入数据为字符串类型，可按需扩展支持更多类型
@@ -101,6 +109,14 @@ namespace YiKdWebClient
             }
             return result;
         }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="message"></param>
+        /// <param name="secret"></param>
+        /// <param name="encoding"></param>
+        /// <param name="isHex"></param>
+        /// <returns></returns>
         // Token: 0x060000B3 RID: 179 RVA: 0x0000362C File Offset: 0x0000182C
         public static string HmacSHA256(string message, string secret, Encoding encoding, bool isHex = false)
         {
@@ -125,6 +141,11 @@ namespace YiKdWebClient
         }
 
         // Token: 0x060000B4 RID: 180 RVA: 0x000036A8 File Offset: 0x000018A8
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="bytes"></param>
+        /// <returns></returns>
         public static string ByteToHexStr(byte[] bytes)
         {
             string text = "";
@@ -139,6 +160,11 @@ namespace YiKdWebClient
         }
 
         // Token: 0x060000B5 RID: 181 RVA: 0x000036E5 File Offset: 0x000018E5
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="appSecret"></param>
+        /// <returns></returns>
         internal static string EncryptAppSecret(string appSecret)
         {
             if (Regex.IsMatch(appSecret, "^([0-9a-zA-Z]{32})$"))
@@ -198,6 +224,12 @@ namespace YiKdWebClient
             }
             return text;
         }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="str"></param>
+        /// <param name="encoding"></param>
+        /// <returns></returns>
 
         // Token: 0x060000B9 RID: 185 RVA: 0x00003800 File Offset: 0x00001A00
         public static string UrlEncodeWithUpperCode(string str, Encoding encoding)

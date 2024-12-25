@@ -9,8 +9,13 @@ namespace YiKdWebClient.CommonService
 {
     public static class XmlConfigHelper
     {
+        /// <summary>
+        /// 
+        /// </summary>
         public static string Currentpath = AppDomain.CurrentDomain.BaseDirectory;/*应用程序文件的目录AppDomain*/
-
+        /// <summary>
+        /// 
+        /// </summary>
         public static string AppConfigPath = Path.Combine(Currentpath, "YiKdWebCfg", "appsettings.xml");
         private static Dictionary<string, Dictionary<string, string>> GetAllServerInfo(string path = "")
         {
@@ -83,7 +88,11 @@ namespace YiKdWebClient.CommonService
             return xmlDoc;
         }
 
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="path"></param>
+        /// <returns></returns>
         public static Dictionary<string, string> GetAllCfgDic(string path = "")
         {
             if (string.IsNullOrWhiteSpace(path))
