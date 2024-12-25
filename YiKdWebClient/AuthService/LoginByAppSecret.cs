@@ -64,7 +64,12 @@ namespace YiKdWebClient.AuthService
 
         }
 
-
+        /// <summary>
+        /// 第三方登陆授权验证的登录json
+        /// </summary>
+        /// <param name="AppSettingsModel"></param>
+        /// <param name="UnsafeRelaxedJsonEscaping"></param>
+        /// <returns></returns>
         public string GetLoginJson(Model.AppSettingsModel AppSettingsModel, bool UnsafeRelaxedJsonEscaping)
         {
             JsonSerializerOptions options = new JsonSerializerOptions();

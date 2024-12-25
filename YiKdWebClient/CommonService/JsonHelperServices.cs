@@ -13,6 +13,9 @@ using static System.Net.Mime.MediaTypeNames;
 
 namespace YiKdWebClient.CommonService
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public static class JsonHelperServices
     {
         /// <summary>
@@ -21,6 +24,7 @@ namespace YiKdWebClient.CommonService
         /// <param name="Formid"></param>
         /// <param name="strjson"></param>
         /// <param name="UnsafeRelaxedJsonEscaping">获取对编码内容不太严格的内置 JavaScript 编码器实例。--允许某些不安全的、不严格的转义 https://learn.microsoft.com/zh-cn/dotnet/api/system.text.encodings.web.javascriptencoder?view=net-8.0</param>
+        /// <param name="opNumber">操作代码</param>
         /// <returns></returns>
         public static string getRequestBodystring(string Formid,string strjson, bool UnsafeRelaxedJsonEscaping,string opNumber)
 

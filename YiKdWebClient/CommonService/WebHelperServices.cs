@@ -10,18 +10,41 @@ using System.Threading.Tasks;
 
 namespace YiKdWebClient.CommonService
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class WebHelperServices
     {
-
+        /// <summary>
+        /// 
+        /// </summary>
         public CookieContainer cookies = new CookieContainer();
 
+        /// <summary>
+        /// 
+        /// </summary>
         public Dictionary<string, string> RequestHeaders = new Dictionary<string, string>();
 
+        /// <summary>
+        /// 
+        /// </summary>
         public HttpResponseHeaders ResponseHeaders = null;
 
+        /// <summary>
+        /// 
+        /// </summary>
         public HttpMethod HttpMethod = HttpMethod.Post;
 
+        /// <summary>
+        /// 
+        /// </summary>
         public TimeSpan Timeout = System.Threading.Timeout.InfiniteTimeSpan;
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="url"></param>
+        /// <param name="postData"></param>
+        /// <returns></returns>
         public  async Task<string> SendHttpRequestAsync(string url, string postData = "")
         {
 

@@ -24,7 +24,7 @@ namespace YiKdWebClient
         {
             //  return (long)(DateTime.UtcNow - Jan1st1970).TotalMilliseconds;
             // 创建一个 DateTimeOffset 对象，表示 Unix 时间戳的起始时间（1970年1月1日）
-            /// DateTimeOffset unixStart = new DateTimeOffset(1970, 1, 1, 0, 0, 0, TimeSpan.Zero);
+            //// DateTimeOffset unixStart = new DateTimeOffset(1970, 1, 1, 0, 0, 0, TimeSpan.Zero);
 
             // 计算当前时间与起始时间之间的时间间隔
             TimeSpan unixTimeSpan = DateTimeOffset.UtcNow - UnixStart;
@@ -37,7 +37,6 @@ namespace YiKdWebClient
         /// <summary>
         ///  Unix 时间戳总秒数
         /// </summary>
-        /// <param name="dt"></param>
         /// <returns></returns>
         public static long GetTimestamp()
         {
