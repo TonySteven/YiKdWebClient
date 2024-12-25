@@ -22,7 +22,13 @@ namespace YiKdWebClient.AuthService
         /// </summary>
         public Dictionary<string, string> RequestHeaders = new Dictionary<string, string>();
 
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="url"></param>
+        /// <param name="json"></param>
+        /// <param name="UnsafeRelaxedJsonEscaping"></param>
+        /// <returns></returns>
         public Model.RequestWebModel Login(string url, string json, bool UnsafeRelaxedJsonEscaping = true)
         {
             Model.RequestWebModel requestWebModel = new Model.RequestWebModel();
@@ -105,14 +111,22 @@ namespace YiKdWebClient.AuthService
             return RealContent;
         }
 
-
+        /// <summary>
+        /// 获取文件的byte[]流
+        /// </summary>
+        /// <param name="cnffilepath"></param>
+        /// <returns></returns>
         public byte[] GetCnfBytes(string cnffilepath)
         {
             byte[] passports = System.IO.File.ReadAllBytes(cnffilepath);
 
             return passports;
         }
-
+        /// <summary>
+        /// 获取文件的Base64
+        /// </summary>
+        /// <param name="cnffilepath"></param>
+        /// <returns></returns>
         public string GetPassportForBase64(string cnffilepath)
         {
             byte[] passports = GetCnfBytes(cnffilepath);
