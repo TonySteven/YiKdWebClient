@@ -56,7 +56,7 @@ namespace YiKdWebClient.ToolsHelper
         public string Entrykey { get; set; } = string.Empty;
 
         /// <summary>
-        /// 分录内码，如果是单据头附件，要么不填，要么填1 (字符, 选填)
+        /// 分录内码，如果是单据头附件，要么不填，要么填-1 (字符, 选填)
         /// </summary>
         public string EntryinterId { get; set; } = string.Empty;
 
