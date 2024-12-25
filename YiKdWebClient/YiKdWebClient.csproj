@@ -65,9 +65,4 @@
    
   </ItemGroup>
 
-
-  <ItemGroup>
-    <Folder Include="ToolsHelper\" />
-  </ItemGroup>
-
 </Project>

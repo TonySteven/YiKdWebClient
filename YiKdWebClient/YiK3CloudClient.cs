@@ -6,9 +6,20 @@ using System.Text.RegularExpressions;
 
 namespace YiKdWebClient
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class YiK3CloudClient
     {
+        /// <summary>
+        /// 
+        /// </summary>
         public YiK3CloudClient() { initialize(); }
+
+        /// <summary>
+        /// 最后一个启动的 YiK3CloudClient实例
+        /// </summary>
+        public static YiK3CloudClient? Instance { get; set; }
         private void initialize()
         {
 
@@ -55,6 +66,9 @@ namespace YiKdWebClient
         /// </summary>
         public bool UnsafeRelaxedJsonEscaping { get; set; } = true;
 
+        /// <summary>
+        /// 请求超时时间
+        /// </summary>
         public TimeSpan Timeout { get; set; } = TimeSpan.FromSeconds(60);
 
         //TimeSpan timeSpan = new TimeSpan(0, 0, 10);
@@ -133,6 +147,7 @@ namespace YiKdWebClient
         /// <returns></returns>
         public string ExecApiDynamicFormService(string formid, string json, string ServicesStubpath, bool AutoLogin = true, bool AutoLogout = true)
         {
+            Instance = this;
             string resjson = string.Empty;
             #region 校验登录是否成功
 
