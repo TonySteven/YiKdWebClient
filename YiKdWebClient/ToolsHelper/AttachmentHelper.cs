@@ -13,7 +13,7 @@ namespace YiKdWebClient.ToolsHelper
     {
 
         /// <summary>
-        /// 
+        /// 文件分块
         /// </summary>
         /// <param name="filePath"></param>
         /// <param name="chunkSize"></param>
@@ -60,21 +60,27 @@ namespace YiKdWebClient.ToolsHelper
         /// 
         /// </summary>
         /// <param name="yiK3CloudClient"></param>
-        /// <param name="UploadModeltemplate"></param>
+        /// <param name="UploadModelTemplate"></param>
         /// <param name="filePath"></param>
         /// <param name="chunkSize"></param>
-        public static string AttachmentUpload(string filePath, YiK3CloudClient yiK3CloudClient, UploadModel UploadModeltemplate, long chunkSize = 1024 * 1024)
+        public static string AttachmentUpload(string filePath, YiK3CloudClient yiK3CloudClient, UploadModel UploadModelTemplate, long chunkSize = 1024 * 1024)
         {
 
 
-
+            UploadModelData data = UploadModelTemplate.data;
 
             string FileId = string.Empty;
             string resjson = string.Empty;
 
             Action<FileChunk> action = (fileChunk) =>
             {
+                data.FileName=fileChunk.Filename;
+                data.SendByte=fileChunk.ChunkBase64;
+                data.IsLast = fileChunk.IsLast;
+
                 if (fileChunk.IsLast) { resjson = "ok"; }
+
+                if (fileChunk.Chunkindex == 0) { data.FileId = ""; };
             };
             ReadFileInChunksByAction(filePath, action, chunkSize);
             return resjson;
@@ -87,49 +93,52 @@ namespace YiKdWebClient.ToolsHelper
         /// <exception cref="ArgumentException"></exception>
         public static void CheckUploadModelData(UploadModel UploadModelTemplate)
         {
-            var data = UploadModelTemplate.data;
+            UploadModelData data = UploadModelTemplate.data;
 
             if (string.IsNullOrWhiteSpace(data.FileName))
             {
-                throw new ArgumentException("FileName cannot be null or empty.");
+                throw new ArgumentException("文件名不能为空。");
             }
 
             if (string.IsNullOrWhiteSpace(data.FormId))
             {
-                throw new ArgumentException("FormId cannot be null or empty.");
+                throw new ArgumentException("表单ID不能为空。");
             }
 
             if (string.IsNullOrWhiteSpace(data.InterId))
             {
-                throw new ArgumentException("InterId cannot be null or empty.");
+                throw new ArgumentException("单据内码不能为空。");
             }
 
             if (string.IsNullOrWhiteSpace(data.BillNO))
             {
-                throw new ArgumentException("BillNO cannot be null or empty.");
+                throw new ArgumentException("单据编号不能为空。");
             }
 
             if (string.IsNullOrWhiteSpace(data.FileId))
             {
-                throw new ArgumentException("FileId cannot be null or empty.");
+                throw new ArgumentException("文件ID不能为空。");
             }
 
             if (string.IsNullOrWhiteSpace(data.SendByte))
             {
-                throw new ArgumentException("SendByte cannot be null or empty.");
+                throw new ArgumentException("文件字节流不能为空。");
             }
 
             // Check Entrykey and EntryinterId conditions
             if (string.IsNullOrWhiteSpace(data.Entrykey) != string.IsNullOrWhiteSpace(data.EntryinterId))
             {
-                throw new ArgumentException("Both Entrykey and EntryinterId should be either null or non-empty.");
+                throw new ArgumentException("Entrykey 和 EntryinterId 要么全有，要么全没有。");
             }
 
             // Add additional validation rules as needed
         }
+
+   
+    
+    
+    
     }
-
-
 
 
 
