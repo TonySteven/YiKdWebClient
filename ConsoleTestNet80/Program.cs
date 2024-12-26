@@ -9,6 +9,7 @@ using System.Xml.Serialization;
 using YiKdWebClient;
 using YiKdWebClient.Model;
 using YiKdWebClient.SSO;
+using YiKdWebClient.ToolsHelper;
 
 namespace ConsoleTestNet80
 {
@@ -20,23 +21,18 @@ namespace ConsoleTestNet80
 
 
 
-            //string Formid = "SEC_User";
-            //string Json = @"{""IsUserModelInit"":""true"",""Number"":""Administrator"",""IsSortBySeq"":""false""}";
+            
             YiK3CloudClient yiK3CloudClient = new YiKdWebClient.YiK3CloudClient();
             yiK3CloudClient.LoginType = LoginType.LoginBySimplePassport;
             string cnfFilePath = Path.Combine(System.AppDomain.CurrentDomain.BaseDirectory, "YiKdWebCfg", "API测试.cnf");
             yiK3CloudClient.LoginBySimplePassportModel = new LoginBySimplePassportModel() { Url = @"http://127.0.0.1/K3Cloud/", CnfFilePath = cnfFilePath };
             string path = @"D:\test1.mp4";
-            Action<byte[]> action = (resbyte) => 
-            { 
-                string base64=Convert.ToBase64String(resbyte);
-                Console.WriteLine(base64);
-            };
-            YiKdWebClient.ToolsHelper.AttachmentHelper.ReadFileInChunksByAction(path, action);
-            
+            UploadModel uploadModeltemplate =new UploadModel();
+            AttachmentHelper.AttachmentUpload(path, yiK3CloudClient, uploadModeltemplate);
 
-           // var resultJson = yiK3CloudClient.View(Formid, Json);
-           // Console.WriteLine(resultJson);
+
+            // var resultJson = yiK3CloudClient.View(Formid, Json);
+            // Console.WriteLine(resultJson);
             Console.ReadKey();
 
 
@@ -121,12 +117,12 @@ namespace ConsoleTestNet80
 
 
             #region 单点登录V4
-           // SSOHelper sSOHelper = new SSOHelper() { Url = @"http://127.0.0.1/K3Cloud" };
-           // sSOHelper.appSettingsModel.XKDApiUserName = "demo"; /*指定用户，若不指定则取配置文件默认的集成用户*/
-           //// sSOHelper.simplePassportLoginArg.formid = "BD_MATERIAL";
-           //// sSOHelper.simplePassportLoginArg.formtype = "list";
-           // sSOHelper.GetSsoUrlsV4();
-            
+            // SSOHelper sSOHelper = new SSOHelper() { Url = @"http://127.0.0.1/K3Cloud" };
+            // sSOHelper.appSettingsModel.XKDApiUserName = "demo"; /*指定用户，若不指定则取配置文件默认的集成用户*/
+            //// sSOHelper.simplePassportLoginArg.formid = "BD_MATERIAL";
+            //// sSOHelper.simplePassportLoginArg.formtype = "list";
+            // sSOHelper.GetSsoUrlsV4();
+
 
 
             //SSOLogoutObject sSOLogoutObject = sSOHelper.GetSSOLogoutap0StrV2V1();
