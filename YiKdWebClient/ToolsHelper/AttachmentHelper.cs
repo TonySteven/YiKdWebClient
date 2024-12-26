@@ -76,8 +76,8 @@ namespace YiKdWebClient.ToolsHelper
 
             Action<FileChunk> action = (fileChunk) =>
             {
-                data.FileName=fileChunk.Filename;
-                data.SendByte=fileChunk.ChunkBase64;
+                data.FileName = fileChunk.Filename;
+                data.SendByte = fileChunk.ChunkBase64;
                 data.IsLast = fileChunk.IsLast;
 
                 JsonSerializerOptions options = new JsonSerializerOptions();
@@ -91,41 +91,38 @@ namespace YiKdWebClient.ToolsHelper
                     options.Encoder = System.Text.Encodings.Web.JavaScriptEncoder.Default;
                 }
 
-                    string upjson = System.Text.Json.JsonSerializer.Serialize(UploadModelTemplate, options);
-                    string resjon= yiK3CloudClient.AttachmentUpLoad(upjson);
-                    JsonNode jsonNode = JsonNode.Parse(resjon);
-                    string isSuccess=string.Empty;
-                    try
-                    {
-                         isSuccess = Convert.ToString(jsonNode["Result"]["ResponseStatus"]["IsSuccess"]);
-                       
-                       
-                    }
-                    catch (Exception )
-                    {
-                        resjson = resjon;
-                        throw new ArgumentException(resjson);
-                        //throw;
-                    }
-                    if ("true".Equals(isSuccess, StringComparison.OrdinalIgnoreCase))
-                    {
-                        //string fileId = Convert.ToString(jsonNode["Result"]["FileId"]);
-                        data.FileId = Convert.ToString(jsonNode["Result"]["FileId"]);
-                    }
-                    else 
-                    {
-                        resjson = resjon;
-                        throw new ArgumentException(resjson);
+                string upjson = System.Text.Json.JsonSerializer.Serialize(UploadModelTemplate, options);
+                resjson = yiK3CloudClient.AttachmentUpLoad(upjson);
+                Console.WriteLine("");
+                
+                JsonNode jsonNode = JsonNode.Parse(resjson);
+                string isSuccess = string.Empty;
+                try
+                {
+                    isSuccess = Convert.ToString(jsonNode["Result"]["ResponseStatus"]["IsSuccess"]);
 
 
-                    }
+                }
+                catch (Exception)
+                {
+                    //resjson = resjon;
+                    throw new ArgumentException(resjson);
+                    //throw;
+                }
+                if ("true".Equals(isSuccess, StringComparison.OrdinalIgnoreCase))
+                {
+                    //string fileId = Convert.ToString(jsonNode["Result"]["FileId"]);
+                    data.FileId = Convert.ToString(jsonNode["Result"]["FileId"]);
+                }
+                else
+                {
+                   // resjson = resjon;
+                    throw new ArgumentException(resjson);
 
-                    if (fileChunk.IsLast) {resjson = resjon; }
-
-
-
-
-
+                    
+                }
+                
+                //if (fileChunk.IsLast) {resjson = resjon; }
 
             };
             try
@@ -135,13 +132,13 @@ namespace YiKdWebClient.ToolsHelper
             catch (Exception ex)
             {
                 return ex.Message;
-               // throw;
+                // throw;
             }
-            
+
             return resjson;
         }
 
-       
+
 
         /// <summary>
         /// 
@@ -191,10 +188,10 @@ namespace YiKdWebClient.ToolsHelper
             // Add additional validation rules as needed
         }
 
-   
-    
-    
-    
+
+
+
+
     }
 
 
