@@ -50,4 +50,32 @@ namespace YiKdWebClient.ToolsHelper
 
 
     }
+    /// <summary>
+    /// 文件块
+    /// </summary>
+    public class FileChunk 
+    {
+        /// <summary>
+        /// 文件块索引
+        /// </summary>
+        public long Chunkindex { get; set; } = 0;
+
+        /// <summary>
+        /// 文件名
+        /// </summary>
+        public string Filename { get; set; }=string.Empty;
+
+        /// <summary>
+        /// 是否为最后一块
+        /// </summary>
+        public bool IsLast { get; set; } = false;
+        /// <summary>
+        /// 分块byte流
+        /// </summary>
+        public byte[] Chunkbyte { get; set; }=new byte[0];
+        /// <summary>
+        /// 分块base64流
+        /// </summary>
+        public string ChunkBase64 { get; set; } = string.Empty;
+    }
 }
