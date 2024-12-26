@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json;
+using System.Text.Json.Nodes;
 using System.Threading.Tasks;
 
 namespace YiKdWebClient.ToolsHelper
@@ -33,7 +35,7 @@ namespace YiKdWebClient.ToolsHelper
                     FileChunk fileChunk = new FileChunk();
                     fileChunk.Filename = fileName;
                     fileChunk.Chunkindex = Chunkindex;
-                    if (bytesRead <= chunkSize)
+                    if (bytesRead < chunkSize)
                     {
                         byte[] lastChunk = new byte[bytesRead];
                         Array.Copy(buffer, lastChunk, bytesRead);
@@ -78,13 +80,68 @@ namespace YiKdWebClient.ToolsHelper
                 data.SendByte=fileChunk.ChunkBase64;
                 data.IsLast = fileChunk.IsLast;
 
-                if (fileChunk.IsLast) { resjson = "ok"; }
+                JsonSerializerOptions options = new JsonSerializerOptions();
+                options.WriteIndented = true; // 设置false格式化为非缩进格式，即不保留换行符;
+                if (yiK3CloudClient.UnsafeRelaxedJsonEscaping)
+                {
+                    options.Encoder = System.Text.Encodings.Web.JavaScriptEncoder.UnsafeRelaxedJsonEscaping;
+                }
+                else
+                {
+                    options.Encoder = System.Text.Encodings.Web.JavaScriptEncoder.Default;
+                }
 
-                if (fileChunk.Chunkindex == 0) { data.FileId = ""; };
+                    string upjson = System.Text.Json.JsonSerializer.Serialize(UploadModelTemplate, options);
+                    string resjon= yiK3CloudClient.AttachmentUpLoad(upjson);
+                    JsonNode jsonNode = JsonNode.Parse(resjon);
+                    string isSuccess=string.Empty;
+                    try
+                    {
+                         isSuccess = Convert.ToString(jsonNode["Result"]["ResponseStatus"]["IsSuccess"]);
+                       
+                       
+                    }
+                    catch (Exception )
+                    {
+                        resjson = resjon;
+                        throw new ArgumentException(resjson);
+                        //throw;
+                    }
+                    if ("true".Equals(isSuccess, StringComparison.OrdinalIgnoreCase))
+                    {
+                        //string fileId = Convert.ToString(jsonNode["Result"]["FileId"]);
+                        data.FileId = Convert.ToString(jsonNode["Result"]["FileId"]);
+                    }
+                    else 
+                    {
+                        resjson = resjon;
+                        throw new ArgumentException(resjson);
+
+
+                    }
+
+                    if (fileChunk.IsLast) {resjson = resjon; }
+
+
+
+
+
+
             };
-            ReadFileInChunksByAction(filePath, action, chunkSize);
+            try
+            {
+                ReadFileInChunksByAction(filePath, action, chunkSize);
+            }
+            catch (Exception ex)
+            {
+                return ex.Message;
+               // throw;
+            }
+            
             return resjson;
         }
+
+       
 
         /// <summary>
         /// 
@@ -110,10 +167,10 @@ namespace YiKdWebClient.ToolsHelper
                 throw new ArgumentException("单据内码不能为空。");
             }
 
-            if (string.IsNullOrWhiteSpace(data.BillNO))
-            {
-                throw new ArgumentException("单据编号不能为空。");
-            }
+            //if (string.IsNullOrWhiteSpace(data.BillNO))
+            //{
+            //    throw new ArgumentException("单据编号不能为空。");
+            //}
 
             if (string.IsNullOrWhiteSpace(data.FileId))
             {

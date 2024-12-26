@@ -75,7 +75,7 @@ namespace YiKdWebClient
         //TimeSpan timeSpan = TimeSpan.FromSeconds(10);
         //   public TimeSpan Timeout = System.Threading.Timeout.InfiniteTimeSpan;
 
-        private string ExecServicesStubByformid(string formid, string json, string ServicesStubpath, string opNumber = "")
+        private string ExecServicesStubByformid(string formid, string json, string ServicesStubpath, string opNumber = "",bool userawjson=false)
         {
 
             string apiurl = string.Empty;
@@ -119,7 +119,13 @@ namespace YiKdWebClient
             webHelperServices.RequestHeaders = this.RequestHeaders;
           
             this.ReturnOperationWebModel.RequestUrl = apiurl;
-            string jsonString = CommonService.JsonHelperServices.getRequestBodystring(formid, json, UnsafeRelaxedJsonEscaping, opNumber);
+
+            string jsonString=string.Empty;
+            if (userawjson) { jsonString = json; }
+            else
+            { 
+             jsonString = CommonService.JsonHelperServices.getRequestBodystring(formid, json, UnsafeRelaxedJsonEscaping, opNumber);
+            }
             this.ReturnOperationWebModel.RealRequestBody = jsonString;
 
 
@@ -144,8 +150,9 @@ namespace YiKdWebClient
         /// <param name="ServicesStubpath">接口服务地址，k3cloud/后面的部分</param>
         /// <param name="AutoLogin"></param>
         /// <param name="AutoLogout"></param>
+        ///  <param name="userawjson"></param>
         /// <returns></returns>
-        public string ExecApiDynamicFormService(string formid, string json, string ServicesStubpath, bool AutoLogin = true, bool AutoLogout = true)
+        public string ExecApiDynamicFormService(string formid, string json, string ServicesStubpath, bool AutoLogin = true, bool AutoLogout = true,bool userawjson=false)
         {
             Instance = this;
             string resjson = string.Empty;
@@ -193,7 +200,7 @@ namespace YiKdWebClient
             try
             {
                 //resjson = ExecServicesStubByformid(formid, json, @"Kingdee.BOS.WebApi.ServicesStub.DynamicFormService.View.common.kdsvc");
-                resjson = ExecServicesStubByformid(formid, json, ServicesStubpath);
+                resjson = ExecServicesStubByformid(formid, json, ServicesStubpath,"", userawjson);
                 if (AutoLogout) { Logout(); }
             }
             catch (Exception ex)
@@ -650,7 +657,7 @@ namespace YiKdWebClient
         /// <returns></returns>
         public string AttachmentUpLoad(string json, bool AutoLogin = true, bool AutoLogout = true)
         {
-            return ExecApiDynamicFormService("", json, @"Kingdee.BOS.WebApi.ServicesStub.DynamicFormService.AttachmentUpLoad.common.kdsvc", AutoLogin, AutoLogout);
+            return ExecApiDynamicFormService("", json, @"Kingdee.BOS.WebApi.ServicesStub.DynamicFormService.AttachmentUpLoad.common.kdsvc", AutoLogin, AutoLogout,true);
         }
 
         /// <summary>
@@ -662,7 +669,7 @@ namespace YiKdWebClient
         /// <returns></returns>
         public string AttachmentDownLoad(string json, bool AutoLogin = true, bool AutoLogout = true)
         {
-            return ExecApiDynamicFormService("", json, @"Kingdee.BOS.WebApi.ServicesStub.DynamicFormService.AttachmentDownLoad.common.kdsvc", AutoLogin, AutoLogout);
+            return ExecApiDynamicFormService("", json, @"Kingdee.BOS.WebApi.ServicesStub.DynamicFormService.AttachmentDownLoad.common.kdsvc", AutoLogin, AutoLogout,true);
         }
 
         /// <summary>

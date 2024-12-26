@@ -28,11 +28,15 @@ namespace ConsoleTestNet80
             yiK3CloudClient.LoginBySimplePassportModel = new LoginBySimplePassportModel() { Url = @"http://127.0.0.1/K3Cloud/", CnfFilePath = cnfFilePath };
             string path = @"D:\test1.mp4";
             UploadModel uploadModeltemplate =new UploadModel();
-            AttachmentHelper.AttachmentUpload(path, yiK3CloudClient, uploadModeltemplate);
+            uploadModeltemplate.data.FormId = "BD_Currency1";
+            uploadModeltemplate.data.InterId = "143717";
+            uploadModeltemplate.data.BillNO = "测试";
+
+          string resjosn=  AttachmentHelper.AttachmentUpload(path, yiK3CloudClient, uploadModeltemplate,100);
 
 
             // var resultJson = yiK3CloudClient.View(Formid, Json);
-            // Console.WriteLine(resultJson);
+             Console.WriteLine(resjosn);
             Console.ReadKey();
 
 
