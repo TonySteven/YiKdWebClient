@@ -93,7 +93,7 @@ namespace YiKdWebClient.ToolsHelper
 
                 string upjson = System.Text.Json.JsonSerializer.Serialize(UploadModelTemplate, options);
                 resjson = yiK3CloudClient.AttachmentUpLoad(upjson);
-                Console.WriteLine("");
+                Console.WriteLine(resjson);
                 
                 JsonNode jsonNode = JsonNode.Parse(resjson);
                 string isSuccess = string.Empty;
