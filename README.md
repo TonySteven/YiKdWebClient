@@ -322,6 +322,7 @@ Console.WriteLine(resJson);
 ```
 
 ## base64流分块上传辅助函数
+AttachmentUploadByFilePath函数更换为AttachmentUploadByBase64
 
 
 
