@@ -30,11 +30,14 @@ namespace ConsoleTestNet80
             UploadModel uploadModeltemplate =new UploadModel();
             uploadModeltemplate.data.FormId = "BD_Currency";
             uploadModeltemplate.data.InterId = "143717";
-            uploadModeltemplate.data.BillNO = "测试";
+            uploadModeltemplate.data.BillNO = "测试编码";
 
+
+             /*获取分块上传进度*/
              Action<FileChunk, YiK3CloudClient> progressaction = (fileChunk,yiK3CloudClient)=>
              {
                  Console.WriteLine("正在处理第" + (fileChunk.Chunkindex + 1) + "分块");
+                 Console.WriteLine("请求报文为:" + yiK3CloudClient.ReturnOperationWebModel.RealRequestBody);
                  Console.WriteLine("处理结果为:" + yiK3CloudClient.ReturnOperationWebModel.RealResponseBody);
                  if (fileChunk.IsLast)
                  {
@@ -42,7 +45,7 @@ namespace ConsoleTestNet80
                  }
              };
 
-             string resjosn=  AttachmentHelper.AttachmentUploadByFilePath(path, yiK3CloudClient, uploadModeltemplate,1024*1024, progressaction);
+             string resjosn=  AttachmentHelper.AttachmentUploadByFilePath(path, yiK3CloudClient, uploadModeltemplate,1024*1024*2, progressaction);
 
 
             // var resultJson = yiK3CloudClient.View(Formid, Json);

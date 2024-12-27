@@ -230,4 +230,10 @@ sSOHelper.GetSsoUrlsV4();
 调用YiK3CloudClient中的CustomBusinessService方法 如下图
 ![输入图片说明](%E8%87%AA%E5%AE%9A%E4%B9%89webapi.png)
 
+# 辅助工具函数
+## 文件分块上传辅助函数
+
+## base64流分块上传辅助函数
+
+
 
