@@ -324,7 +324,7 @@ Console.WriteLine(resJson);
 ## base64流分块上传辅助函数
 AttachmentUploadByFilePath函数更换为AttachmentUploadByBase64
 
-## 附件上传下载报文格式原理参考官方结构
+## 官方报文结构以及原理
 https://vip.kingdee.com/article/296577252589190400?productLineId=1&isKnowledge=2&lang=zh-CN
 
 
