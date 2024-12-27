@@ -45,7 +45,7 @@ namespace ConsoleTestNet80
                  }
              };
 
-             string resjosn=  AttachmentHelper.AttachmentUploadByFilePath(path, yiK3CloudClient, uploadModeltemplate,1024*1024*2, progressaction);
+             string resjosn=  AttachmentHelper.AttachmentUploadByFilePath(path, yiK3CloudClient, uploadModeltemplate,100, progressaction);
 
 
             // var resultJson = yiK3CloudClient.View(Formid, Json);
