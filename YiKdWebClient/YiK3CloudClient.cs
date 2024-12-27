@@ -681,7 +681,7 @@ namespace YiKdWebClient
         /// <returns></returns>
         public string UploadFile(string json, bool AutoLogin = true, bool AutoLogout = true)
         {
-            return ExecApiDynamicFormService("", json, @"Kingdee.BOS.WebApi.ServicesStub.DynamicFormService. UploadFile.common.kdsvc", AutoLogin, AutoLogout);
+            return ExecApiDynamicFormService("", json, @"Kingdee.BOS.WebApi.ServicesStub.DynamicFormService. UploadFile.common.kdsvc", AutoLogin, AutoLogout, true);
         }
 
 
