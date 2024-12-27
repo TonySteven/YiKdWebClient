@@ -18,19 +18,20 @@ namespace ConsoleTestNet80
         static void Main(string[] args)
         {
 
-            YiKdWebClient.AuthService.ValidateUserEnDeCode validateUserEnDeCode = new YiKdWebClient.AuthService.ValidateUserEnDeCode();
-            ValidateLoginSettingsModel validateLoginSettingsModel = new ValidateLoginSettingsModel(){ Url = @"http://127.0.0.1/K3Cloud/", DbId = "675c0162520ad7", UserName = "demo", Password = "123456", lcid = 2052 };
-            string logjon = validateUserEnDeCode.GetLoginJson(validateLoginSettingsModel);
-            RequestWebModel logres =  validateUserEnDeCode.Login(validateLoginSettingsModel.Url, logjon);
+            //YiKdWebClient.AuthService.ValidateUserEnDeCode validateUserEnDeCode = new YiKdWebClient.AuthService.ValidateUserEnDeCode();
+            //ValidateLoginSettingsModel validateLoginSettingsModel = new ValidateLoginSettingsModel(){ Url = @"http://127.0.0.1/K3Cloud/", DbId = "675c0162520ad7", UserName = "demo", Password = "123456", lcid = 2052 };
+            //string logjon = validateUserEnDeCode.GetLoginJson(validateLoginSettingsModel);
+            //RequestWebModel logres =  validateUserEnDeCode.Login(validateLoginSettingsModel.Url, logjon);
 
 
-            Console.ReadKey();
+            //Console.ReadKey();
 
 
             YiK3CloudClient yiK3CloudClient = new YiKdWebClient.YiK3CloudClient();
-            yiK3CloudClient.LoginType = LoginType.LoginBySimplePassport;
-            string cnfFilePath = Path.Combine(System.AppDomain.CurrentDomain.BaseDirectory, "YiKdWebCfg", "API测试.cnf");
-            yiK3CloudClient.LoginBySimplePassportModel = new LoginBySimplePassportModel() { Url = @"http://127.0.0.1/K3Cloud/", CnfFilePath = cnfFilePath };
+            yiK3CloudClient.LoginType = LoginType.ValidateUserEnDeCode;
+            yiK3CloudClient.validateLoginSettingsModel= new ValidateLoginSettingsModel() { Url = @"http://127.0.0.1/K3Cloud/", DbId = "675c0162520ad7", UserName = "demo", Password = "123456", lcid = 2052 };
+            //string cnfFilePath = Path.Combine(System.AppDomain.CurrentDomain.BaseDirectory, "YiKdWebCfg", "API测试.cnf");
+            // yiK3CloudClient.LoginBySimplePassportModel = new LoginBySimplePassportModel() { Url = @"http://127.0.0.1/K3Cloud/", CnfFilePath = cnfFilePath };
             string path = @"D:\test1.pdf";
             UploadModel uploadModeltemplate =new UploadModel();
             uploadModeltemplate.data.FormId = "BD_Currency";

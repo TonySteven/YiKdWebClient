@@ -97,7 +97,10 @@ namespace YiKdWebClient
             {
                 apiurl = this.LoginBySimplePassportModel.Url + ServicesStubpath;
             }
-
+            if (this.LoginType.Equals(Model.LoginType.ValidateUserEnDeCode))
+            {
+                apiurl = this.validateLoginSettingsModel.Url + ServicesStubpath;
+            }
 
             string resjson = string.Empty;
 
