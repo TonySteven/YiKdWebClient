@@ -307,17 +307,10 @@ Action<FileChunk, YiK3CloudClient> progressAction = (fileChunk, yiK3CloudClient)
 };
 
 // 上传附件
-string resJson = AttachmentHelper.AttachmentUploadByFilePath(
-    path, 
-    yiK3CloudClient, 
-    uploadModelTemplate, 
-    1024 * 1024 * 2,  // 限制每个分块最大为 2MB
-    progressAction
-);
+string resJson = AttachmentHelper.AttachmentUploadByFilePath(path,yiK3CloudClient,uploadModelTemplate,1024 * 1024 * 2,progressAction);
 
 // 输出结果
 Console.WriteLine(resJson);
-
 
 ```
 
