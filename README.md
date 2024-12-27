@@ -231,7 +231,95 @@ sSOHelper.GetSsoUrlsV4();
 ![输入图片说明](%E8%87%AA%E5%AE%9A%E4%B9%89webapi.png)
 
 # 辅助工具函数
-## 文件分块上传辅助函数
+## 文件分块上传辅助函数(直接返回最终结果)
+
+```
+YiK3CloudClient yiK3CloudClient = new YiKdWebClient.YiK3CloudClient();
+
+// 设置登录类型
+yiK3CloudClient.LoginType = LoginType.LoginBySimplePassport;
+
+// 配置文件路径
+string cnfFilePath = Path.Combine(System.AppDomain.CurrentDomain.BaseDirectory, "YiKdWebCfg", "API测试.cnf");
+
+// 设置登录信息
+yiK3CloudClient.LoginBySimplePassportModel = new LoginBySimplePassportModel()
+{
+    Url = @"http://127.0.0.1/K3Cloud/",
+    CnfFilePath = cnfFilePath
+};
+
+// 文件路径
+string path = @"D:\test1.pdf";
+
+// 创建上传模型
+UploadModel uploadModelTemplate = new UploadModel();
+uploadModelTemplate.data.FormId = "BD_Currency";
+uploadModelTemplate.data.InterId = "143717";
+uploadModelTemplate.data.BillNO = "测试编码";
+
+// 上传附件
+string resJson = AttachmentHelper.AttachmentUploadByFilePath(path, yiK3CloudClient, uploadModelTemplate, 1024 * 1024 * 2);
+
+// 输出结果
+Console.WriteLine(resJson);
+
+```
+
+
+## 文件分块上传辅助函数(获取完整的上传过程)
+
+```
+YiK3CloudClient yiK3CloudClient = new YiKdWebClient.YiK3CloudClient();
+
+// 设置登录类型
+yiK3CloudClient.LoginType = LoginType.LoginBySimplePassport;
+
+// 配置文件路径
+string cnfFilePath = Path.Combine(System.AppDomain.CurrentDomain.BaseDirectory, "YiKdWebCfg", "API测试.cnf");
+
+// 设置登录信息
+yiK3CloudClient.LoginBySimplePassportModel = new LoginBySimplePassportModel()
+{
+    Url = @"http://127.0.0.1/K3Cloud/",
+    CnfFilePath = cnfFilePath
+};
+
+// 文件路径
+string path = @"D:\test1.pdf";
+
+// 创建上传模型
+UploadModel uploadModelTemplate = new UploadModel();
+uploadModelTemplate.data.FormId = "BD_Currency";
+uploadModelTemplate.data.InterId = "143717";
+uploadModelTemplate.data.BillNO = "测试编码";
+
+// 定义上传进度回调
+Action<FileChunk, YiK3CloudClient> progressAction = (fileChunk, yiK3CloudClient) =>
+{
+    Console.WriteLine("正在处理第" + (fileChunk.Chunkindex + 1) + "分块");
+    Console.WriteLine("请求报文为:" + yiK3CloudClient.ReturnOperationWebModel.RealRequestBody);
+    Console.WriteLine("处理结果为:" + yiK3CloudClient.ReturnOperationWebModel.RealResponseBody);
+    if (fileChunk.IsLast)
+    {
+        Console.WriteLine("所有分块处理结束");
+    }
+};
+
+// 上传附件
+string resJson = AttachmentHelper.AttachmentUploadByFilePath(
+    path, 
+    yiK3CloudClient, 
+    uploadModelTemplate, 
+    1024 * 1024 * 2,  // 限制每个分块最大为 2MB
+    progressAction
+);
+
+// 输出结果
+Console.WriteLine(resJson);
+
+
+```
 
 ## base64流分块上传辅助函数
 
