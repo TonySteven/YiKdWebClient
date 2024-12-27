@@ -39,5 +39,16 @@ namespace YiKdWebClient.Model
        [Description("LoginBySimplePassport")]
        LoginBySimplePassport,
 
+        /// <summary>
+        ///EnDeCode用户密码验证
+        /// </summary>
+        /// <remarks>
+        /// 此枚举成员不再推荐使用，请使用其他方法。
+        /// </remarks>
+        [EnumMember(Value = "ValidateUserEnDeCode")]
+        [Description("ValidateUserEnDeCode")]
+        [Obsolete("不推荐使用,官方API验证没有推出这个方式，仅某些附件场景提供过")]
+        ValidateUserEnDeCode,
+
     }
 }

@@ -272,6 +272,25 @@ namespace YiKdWebClient
 
             }
 
+            if (LoginType.Equals(Model.LoginType.ValidateUserEnDeCode))
+            {
+                if (validateLoginSettingsModel == null)
+                {
+                    throw new Exception("LoginType使用ValidateUserEnDeCode方式的时候，validateLoginSettingsModel 需要实例化赋值");
+                }
+                if (string.IsNullOrWhiteSpace(validateLoginSettingsModel.Url))
+                {
+                    throw new Exception("LoginType使用ValidateUserEnDeCode方式的时候，validateLoginSettingsModel.Url需要赋值");
+                }
+                AuthService.ValidateUserEnDeCode validateUserEnDeCode = new AuthService.ValidateUserEnDeCode();
+                validateUserEnDeCode.Timeout = this.Timeout;
+                validateUserEnDeCode.RequestHeaders = this.RequestHeaders;
+                string jsonString = validateUserEnDeCode.GetLoginJson(validateLoginSettingsModel, UnsafeRelaxedJsonEscaping);
+                ReturnLoginWebModel.RealRequestBody = jsonString;
+                requestWebModel = validateUserEnDeCode.Login(this.validateLoginSettingsModel.Url, jsonString, true);
+
+            }
+
             Cookie = requestWebModel.Cookie;
             this.ReturnLoginWebModel = requestWebModel;
 
