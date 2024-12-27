@@ -239,7 +239,7 @@ YiK3CloudClient yiK3CloudClient = new YiKdWebClient.YiK3CloudClient();
 // 设置登录类型
 yiK3CloudClient.LoginType = LoginType.LoginBySimplePassport;
 
-// 配置文件路径
+// 配置集成密钥路径
 string cnfFilePath = Path.Combine(System.AppDomain.CurrentDomain.BaseDirectory, "YiKdWebCfg", "API测试.cnf");
 
 // 设置登录信息
@@ -275,7 +275,7 @@ YiK3CloudClient yiK3CloudClient = new YiKdWebClient.YiK3CloudClient();
 // 设置登录类型
 yiK3CloudClient.LoginType = LoginType.LoginBySimplePassport;
 
-// 配置文件路径
+// 配置集成密钥路径
 string cnfFilePath = Path.Combine(System.AppDomain.CurrentDomain.BaseDirectory, "YiKdWebCfg", "API测试.cnf");
 
 // 设置登录信息
