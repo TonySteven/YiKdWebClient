@@ -26,13 +26,23 @@ namespace ConsoleTestNet80
             yiK3CloudClient.LoginType = LoginType.LoginBySimplePassport;
             string cnfFilePath = Path.Combine(System.AppDomain.CurrentDomain.BaseDirectory, "YiKdWebCfg", "API测试.cnf");
             yiK3CloudClient.LoginBySimplePassportModel = new LoginBySimplePassportModel() { Url = @"http://127.0.0.1/K3Cloud/", CnfFilePath = cnfFilePath };
-            string path = @"D:\TEST1.pdf";
+            string path = @"D:\test1.mp4";
             UploadModel uploadModeltemplate =new UploadModel();
             uploadModeltemplate.data.FormId = "BD_Currency";
             uploadModeltemplate.data.InterId = "143717";
             uploadModeltemplate.data.BillNO = "测试";
 
-          string resjosn=  AttachmentHelper.AttachmentUpload(path, yiK3CloudClient, uploadModeltemplate,1024*1024*2);
+             Action<FileChunk, YiK3CloudClient> progressaction = (fileChunk,yiK3CloudClient)=>
+             {
+                 Console.WriteLine("正在处理第" + fileChunk.Chunkindex + 1 + "分块");
+                 Console.WriteLine("处理结果为:" + yiK3CloudClient.ReturnOperationWebModel.RealResponseBody);
+                 if (fileChunk.IsLast)
+                 {
+                     Console.WriteLine("所有分块处理结束");
+                 }
+             };
+
+             string resjosn=  AttachmentHelper.AttachmentUpload(path, yiK3CloudClient, uploadModeltemplate,1024*1024*2, progressaction);
 
 
             // var resultJson = yiK3CloudClient.View(Formid, Json);

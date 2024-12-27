@@ -68,7 +68,7 @@ namespace YiKdWebClient.ToolsHelper
         /// <param name="upprogress"></param>
         /// <returns></returns>
         /// <exception cref="ArgumentException"></exception>
-        public static string AttachmentUpload(string filePath, YiK3CloudClient yiK3CloudClient, UploadModel UploadModelTemplate, long chunkSize = 1024 * 1024,Action<string> upprogress=null)
+        public static string AttachmentUpload(string filePath, YiK3CloudClient yiK3CloudClient, UploadModel UploadModelTemplate, long chunkSize = 1024 * 1024,Action<FileChunk, YiK3CloudClient> progressaction = null)
         {
 
 
@@ -96,8 +96,11 @@ namespace YiKdWebClient.ToolsHelper
 
                 string upjson = System.Text.Json.JsonSerializer.Serialize(UploadModelTemplate, options);
                 resjson = yiK3CloudClient.AttachmentUpLoad(upjson);
-                if (upprogress != null) { upprogress(resjson); }
-                Console.WriteLine(resjson);
+                if (progressaction != null) {
+
+                    progressaction(fileChunk, yiK3CloudClient); 
+                }
+               
                 
                 JsonNode jsonNode = JsonNode.Parse(resjson);
                 string isSuccess = string.Empty;
