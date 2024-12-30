@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.Data.SqlTypes;
 using System.Net;
+using System.Text.Encodings.Web;
 using System.Text.Json;
 using System.Text.RegularExpressions;
 using System.Xml;
@@ -23,9 +24,13 @@ namespace ConsoleTestNet80
                 LoginType = LoginType.LoginBySimplePassport,
                 LoginBySimplePassportModel = new LoginBySimplePassportModel() { Url = @"http://127.0.0.1/K3Cloud/", CnfFilePath = cnfFilePath }
             };
-            yiK3CloudClient.QueryBusinessInfo("");
-
-            //Console.ReadKey();
+           
+            JsonSerializerOptions options = new JsonSerializerOptions() { WriteIndented=true,Encoder= System.Text.Encodings.Web.JavaScriptEncoder.UnsafeRelaxedJsonEscaping};
+            object QueryBusinessInfodata = new { FormId = "ER_ExpenseRequest" };
+            string QueryBusinessInfojson= System.Text.Json.JsonSerializer.Serialize(QueryBusinessInfodata, options);
+            string resultJson= yiK3CloudClient.QueryBusinessInfo(QueryBusinessInfojson);
+            Console.WriteLine(resultJson);
+            Console.ReadKey();
 
             #region 分块上传
 

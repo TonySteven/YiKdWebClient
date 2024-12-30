@@ -716,7 +716,7 @@ namespace YiKdWebClient
         /// <returns></returns>
         public string GroupDelete(string json, bool AutoLogin = true, bool AutoLogout = true)
         {
-            return ExecApiDynamicFormService("", json, @"Kingdee.BOS.WebApi.ServicesStub.DynamicFormService.GroupDelete", AutoLogin, AutoLogout);
+            return ExecApiDynamicFormService("", json, @"Kingdee.BOS.WebApi.ServicesStub.DynamicFormService.GroupDelete.common.kdsvc", AutoLogin, AutoLogout);
         }
         /// <summary>
         /// 取消分配
@@ -728,7 +728,7 @@ namespace YiKdWebClient
         /// <returns></returns>
         public string CancelAllocate(string formid, string json, bool AutoLogin = true, bool AutoLogout = true)
         {
-            return ExecApiDynamicFormService(formid, json, @"Kingdee.BOS.WebApi.ServicesStub.DynamicFormService.CancelAllocate", AutoLogin, AutoLogout);
+            return ExecApiDynamicFormService(formid, json, @"Kingdee.BOS.WebApi.ServicesStub.DynamicFormService.CancelAllocate.common.kdsvc", AutoLogin, AutoLogout);
 
         }
         /// <summary>
@@ -741,7 +741,7 @@ namespace YiKdWebClient
         /// <returns></returns>
         public string CancelAssign(string formid, string json, bool AutoLogin = true, bool AutoLogout = true)
         {
-            return ExecApiDynamicFormService(formid, json, @"Kingdee.BOS.WebApi.ServicesStub.DynamicFormService.CancelAssign", AutoLogin, AutoLogout);
+            return ExecApiDynamicFormService(formid, json, @"Kingdee.BOS.WebApi.ServicesStub.DynamicFormService.CancelAssign.common.kdsvc", AutoLogin, AutoLogout);
 
         }
 
@@ -755,7 +755,7 @@ namespace YiKdWebClient
         /// <returns></returns>
         public string Disassembly(string formid, string json, bool AutoLogin = true, bool AutoLogout = true)
         {
-            return ExecApiDynamicFormService(formid, json, @"Kingdee.BOS.WebApi.ServicesStub.DynamicFormService.Disassembly", AutoLogin, AutoLogout);
+            return ExecApiDynamicFormService(formid, json, @"Kingdee.BOS.WebApi.ServicesStub.DynamicFormService.Disassembly.common.kdsvc", AutoLogin, AutoLogout);
 
         }
         /// <summary>
@@ -768,7 +768,7 @@ namespace YiKdWebClient
 
         public string QueryBusinessInfo( string json, bool AutoLogin = true, bool AutoLogout = true)
         {
-            return ExecApiDynamicFormService("", json, @"Kingdee.BOS.WebApi.ServicesStub.DynamicFormService.QueryBusinessInfo", AutoLogin, AutoLogout);
+            return ExecApiDynamicFormService("", json, @"Kingdee.BOS.WebApi.ServicesStub.DynamicFormService.QueryBusinessInfo.common.kdsvc", AutoLogin, AutoLogout);
 
         }
         /// <summary>
@@ -780,7 +780,7 @@ namespace YiKdWebClient
         /// <returns></returns>
         public string QueryGroupInfo(string json, bool AutoLogin = true, bool AutoLogout = true)
         {
-            return ExecApiDynamicFormService("", json, @"Kingdee.BOS.WebApi.ServicesStub.DynamicFormService.QueryGroupInfo", AutoLogin, AutoLogout);
+            return ExecApiDynamicFormService("", json, @"Kingdee.BOS.WebApi.ServicesStub.DynamicFormService.QueryGroupInfo.common.kdsvc", AutoLogin, AutoLogout);
 
         }
 
