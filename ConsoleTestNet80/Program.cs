@@ -17,15 +17,19 @@ namespace ConsoleTestNet80
     {
         static void Main(string[] args)
         {
-
-
-
+            string cnfFilePath = Path.Combine(System.AppDomain.CurrentDomain.BaseDirectory, "YiKdWebCfg", "API测试.cnf");
+            YiK3CloudClient yiK3CloudClient = new YiKdWebClient.YiK3CloudClient()
+            {
+                LoginType = LoginType.LoginBySimplePassport,
+                LoginBySimplePassportModel = new LoginBySimplePassportModel() { Url = @"http://127.0.0.1/K3Cloud/", CnfFilePath = cnfFilePath }
+            };
+            yiK3CloudClient.QueryBusinessInfo("");
 
             //Console.ReadKey();
 
             #region 分块上传
 
-         
+
             //YiK3CloudClient yiK3CloudClient = new YiKdWebClient.YiK3CloudClient();
             //yiK3CloudClient.LoginType = LoginType.ValidateUserEnDeCode;
             //yiK3CloudClient.validateLoginSettingsModel= new ValidateLoginSettingsModel() { Url = @"http://127.0.0.1/K3Cloud/", DbId = "675c0162520ad7", UserName = "demo", Password = "123456", lcid = 2052 };

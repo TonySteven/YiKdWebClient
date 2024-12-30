@@ -759,7 +759,7 @@ namespace YiKdWebClient
 
         }
         /// <summary>
-        /// 查询单据信息
+        /// 查询单据信息(元数据查询)
         /// </summary>
         /// <param name="json"></param>
         /// <param name="AutoLogin"></param>
