@@ -18,47 +18,46 @@ namespace ConsoleTestNet80
         static void Main(string[] args)
         {
 
-            //YiKdWebClient.AuthService.ValidateUserEnDeCode validateUserEnDeCode = new YiKdWebClient.AuthService.ValidateUserEnDeCode();
-            //ValidateLoginSettingsModel validateLoginSettingsModel = new ValidateLoginSettingsModel(){ Url = @"http://127.0.0.1/K3Cloud/", DbId = "675c0162520ad7", UserName = "demo", Password = "123456", lcid = 2052 };
-            //string logjon = validateUserEnDeCode.GetLoginJson(validateLoginSettingsModel);
-            //RequestWebModel logres =  validateUserEnDeCode.Login(validateLoginSettingsModel.Url, logjon);
+
 
 
             //Console.ReadKey();
 
+            #region 分块上传
 
-            YiK3CloudClient yiK3CloudClient = new YiKdWebClient.YiK3CloudClient();
-            yiK3CloudClient.LoginType = LoginType.ValidateUserEnDeCode;
-            yiK3CloudClient.validateLoginSettingsModel= new ValidateLoginSettingsModel() { Url = @"http://127.0.0.1/K3Cloud/", DbId = "675c0162520ad7", UserName = "demo", Password = "123456", lcid = 2052 };
-            //string cnfFilePath = Path.Combine(System.AppDomain.CurrentDomain.BaseDirectory, "YiKdWebCfg", "API测试.cnf");
-            // yiK3CloudClient.LoginBySimplePassportModel = new LoginBySimplePassportModel() { Url = @"http://127.0.0.1/K3Cloud/", CnfFilePath = cnfFilePath };
-            string path = @"D:\test1.pdf";
-            UploadModel uploadModeltemplate =new UploadModel();
-            uploadModeltemplate.data.FormId = "BD_Currency";
-            uploadModeltemplate.data.InterId = "143717";
-            uploadModeltemplate.data.BillNO = "测试编码";
-
-
-             /*获取分块上传进度*/
-             Action<FileChunk, YiK3CloudClient> progressaction = (fileChunk,yiK3CloudClient)=>
-             {
-                 Console.WriteLine("正在处理第" + (fileChunk.Chunkindex + 1) + "分块");
-                 Console.WriteLine("请求报文为:" + yiK3CloudClient.ReturnOperationWebModel.RealRequestBody);
-                 Console.WriteLine("处理结果为:" + yiK3CloudClient.ReturnOperationWebModel.RealResponseBody);
-                 if (fileChunk.IsLast)
-                 {
-                     Console.WriteLine("所有分块处理结束");
-                 }
-             };
-
-             string resjosn=  AttachmentHelper.AttachmentUploadByFilePath(path, yiK3CloudClient, uploadModeltemplate,1024*1024*2, progressaction);
+         
+            //YiK3CloudClient yiK3CloudClient = new YiKdWebClient.YiK3CloudClient();
+            //yiK3CloudClient.LoginType = LoginType.ValidateUserEnDeCode;
+            //yiK3CloudClient.validateLoginSettingsModel= new ValidateLoginSettingsModel() { Url = @"http://127.0.0.1/K3Cloud/", DbId = "675c0162520ad7", UserName = "demo", Password = "123456", lcid = 2052 };
+            ////string cnfFilePath = Path.Combine(System.AppDomain.CurrentDomain.BaseDirectory, "YiKdWebCfg", "API测试.cnf");
+            //// yiK3CloudClient.LoginBySimplePassportModel = new LoginBySimplePassportModel() { Url = @"http://127.0.0.1/K3Cloud/", CnfFilePath = cnfFilePath };
+            //string path = @"D:\test1.pdf";
+            //UploadModel uploadModeltemplate =new UploadModel();
+            //uploadModeltemplate.data.FormId = "BD_Currency";
+            //uploadModeltemplate.data.InterId = "143717";
+            //uploadModeltemplate.data.BillNO = "测试编码";
 
 
-            // var resultJson = yiK3CloudClient.View(Formid, Json);
-             Console.WriteLine(resjosn);
-            Console.ReadKey();
+            // /*获取分块上传进度*/
+            // Action<FileChunk, YiK3CloudClient> progressaction = (fileChunk,yiK3CloudClient)=>
+            // {
+            //     Console.WriteLine("正在处理第" + (fileChunk.Chunkindex + 1) + "分块");
+            //     Console.WriteLine("请求报文为:" + yiK3CloudClient.ReturnOperationWebModel.RealRequestBody);
+            //     Console.WriteLine("处理结果为:" + yiK3CloudClient.ReturnOperationWebModel.RealResponseBody);
+            //     if (fileChunk.IsLast)
+            //     {
+            //         Console.WriteLine("所有分块处理结束");
+            //     }
+            // };
+
+            // string resjosn=  AttachmentHelper.AttachmentUploadByFilePath(path, yiK3CloudClient, uploadModeltemplate,1024*1024*2, progressaction);
 
 
+            //// var resultJson = yiK3CloudClient.View(Formid, Json);
+            // Console.WriteLine(resjosn);
+            //Console.ReadKey();
+
+            #endregion
 
             #region 第三方授权验证
 
