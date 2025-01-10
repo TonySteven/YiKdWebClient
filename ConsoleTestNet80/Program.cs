@@ -31,7 +31,7 @@ namespace ConsoleTestNet80
 
 
             #region 自定义webapi
-            string cnfFilePath = Path.Combine(System.AppDomain.CurrentDomain.BaseDirectory, "YiKdWebCfg", "API测试.cnf");
+            string cnfFilePath = Path.Combine(System.AppDomain.CurrentDomain.BaseDirectory, "YiKdWebCfg", "API开发测试.cnf");
             YiK3CloudClient yiK3CloudClient = new YiKdWebClient.YiK3CloudClient()
             {
                 LoginType = LoginType.LoginBySimplePassport,
@@ -59,10 +59,10 @@ namespace ConsoleTestNet80
             object parametersdata = new { parameters = new string[] { sql } };
             string parametersdatajson = System.Text.Json.JsonSerializer.Serialize(parametersdata, options);
 
-            string resultJson3 = yiK3CloudClient.CustomBusinessService(parametersdatajson, customServicesStubpath);
-            Console.WriteLine(resultJson3);
+            //string resultJson3 = yiK3CloudClient.CustomBusinessService(parametersdatajson, customServicesStubpath);
+            //Console.WriteLine(resultJson3);
 
-            string resultJson4 = yiK3CloudClient.CustomBusinessServiceByParameters(sql, customServicesStubpath);
+            string resultJson4 = yiK3CloudClient.CustomBusinessServiceByParameters(parametersdatajson, customServicesStubpath);
             Console.WriteLine(resultJson4);
             Console.ReadKey();
             #endregion
