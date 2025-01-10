@@ -20,37 +20,46 @@ namespace ConsoleTestNet80
         static void Main(string[] args)
         {
 
+            #region 自定义AppSettings
+
+           
+            AppSettingsModel appSettingsModel = new AppSettingsModel();
+            YiK3CloudClient yiK3CloudClient = new YiKdWebClient.YiK3CloudClient();
+            yiK3CloudClient.AppSettingsModel = appSettingsModel;
+
+            #endregion
+
 
             #region 自定义webapi
-            string cnfFilePath = Path.Combine(System.AppDomain.CurrentDomain.BaseDirectory, "YiKdWebCfg", "API测试.cnf");
-            YiK3CloudClient yiK3CloudClient = new YiKdWebClient.YiK3CloudClient()
-            {
-                LoginType = LoginType.LoginBySimplePassport,
-                LoginBySimplePassportModel = new LoginBySimplePassportModel() { Url = @"http://127.0.0.1/K3Cloud/", CnfFilePath = cnfFilePath }
-            };
-            JsonSerializerOptions options = new JsonSerializerOptions() { WriteIndented = true, Encoder = System.Text.Encodings.Web.JavaScriptEncoder.UnsafeRelaxedJsonEscaping };
-            object parametersdata = new { parameters = new string[] { "aaaa","bbbb"} };
-            string parametersdatajson = System.Text.Json.JsonSerializer.Serialize(parametersdata, options);
+            //string cnfFilePath = Path.Combine(System.AppDomain.CurrentDomain.BaseDirectory, "YiKdWebCfg", "API测试.cnf");
+            //YiK3CloudClient yiK3CloudClient = new YiKdWebClient.YiK3CloudClient()
+            //{
+            //    LoginType = LoginType.LoginBySimplePassport,
+            //    LoginBySimplePassportModel = new LoginBySimplePassportModel() { Url = @"http://127.0.0.1/K3Cloud/", CnfFilePath = cnfFilePath }
+            //};
+            //JsonSerializerOptions options = new JsonSerializerOptions() { WriteIndented = true, Encoder = System.Text.Encodings.Web.JavaScriptEncoder.UnsafeRelaxedJsonEscaping };
+            //object parametersdata = new { parameters = new string[] { "aaaa","bbbb"} };
+            //string parametersdatajson = System.Text.Json.JsonSerializer.Serialize(parametersdata, options);
 
-            string resultJson1 = yiK3CloudClient.CustomBusinessService(parametersdatajson, "GlobalServiceCustom.WebApi.DataServiceHandler.CommonRunnerService,GlobalServiceCustom.WebApi.common.kdsvc");
-            Console.WriteLine(resultJson1);
+            //string resultJson1 = yiK3CloudClient.CustomBusinessService(parametersdatajson, "GlobalServiceCustom.WebApi.DataServiceHandler.CommonRunnerService,GlobalServiceCustom.WebApi.common.kdsvc");
+            //Console.WriteLine(resultJson1);
 
-            string resultJson2 = yiK3CloudClient.CustomBusinessServiceByParameters(parametersdatajson, "GlobalServiceCustom.WebApi.DataServiceHandler.CommonRunnerService,GlobalServiceCustom.WebApi.common.kdsvc");
-            Console.WriteLine(resultJson2);
+            //string resultJson2 = yiK3CloudClient.CustomBusinessServiceByParameters(parametersdatajson, "GlobalServiceCustom.WebApi.DataServiceHandler.CommonRunnerService,GlobalServiceCustom.WebApi.common.kdsvc");
+            //Console.WriteLine(resultJson2);
 
-            YiKdWebClient.Model.CustomServicesStubpath customServicesStubpath = new() 
-            {
-                ProjetNamespace= "GlobalServiceCustom.WebApi",
-                ProjetClassName= "DataServiceHandler",
-                ProjetClassMethod="CommonRunnerService"
-            };
+            //YiKdWebClient.Model.CustomServicesStubpath customServicesStubpath = new() 
+            //{
+            //    ProjetNamespace= "GlobalServiceCustom.WebApi",
+            //    ProjetClassName= "DataServiceHandler",
+            //    ProjetClassMethod="CommonRunnerService"
+            //};
 
-            string resultJson3 = yiK3CloudClient.CustomBusinessService(parametersdatajson, customServicesStubpath);
-            Console.WriteLine(resultJson3);
+            //string resultJson3 = yiK3CloudClient.CustomBusinessService(parametersdatajson, customServicesStubpath);
+            //Console.WriteLine(resultJson3);
 
-            string resultJson4 = yiK3CloudClient.CustomBusinessServiceByParameters(parametersdatajson, customServicesStubpath);
-            Console.WriteLine(resultJson4);
-            Console.ReadKey();
+            //string resultJson4 = yiK3CloudClient.CustomBusinessServiceByParameters(parametersdatajson, customServicesStubpath);
+            //Console.WriteLine(resultJson4);
+            //Console.ReadKey();
             #endregion
 
 
