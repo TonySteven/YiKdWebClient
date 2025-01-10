@@ -50,20 +50,20 @@ Jac.XkDemo.BOS.WebApi.CustomWebApiDemoWebApiService.DoSth2,Jac.XkDemo.BOS.WebApi
         }
 
         /// <summary>
-        /// 执行方法
+        /// 执行方法(定义多少个参数，在报文parameters数组中就可以接受多少个数组)
         /// </summary>
         /// <param name="parameter"></param>
         /// <returns></returns>
-        public string CommonRunnerService(Object parameter) 
+        public string CommonRunnerService(string parameter) 
         {
-            string res="test";
+           // string res="test";
 
             Context context = this.KDContext.Session.AppContext;
 
          //var a=   Kingdee.BOS.ServiceHelper.DBServiceHelper.ExecuteDataSet(this.KDContext.Session.AppContext, "decryptSql");
 
 
-            return res; 
+            return parameter; 
         }
     }
 }
