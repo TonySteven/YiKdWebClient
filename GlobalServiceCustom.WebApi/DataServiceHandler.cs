@@ -68,11 +68,19 @@ Jac.XkDemo.BOS.WebApi.CustomWebApiDemoWebApiService.DoSth2,Jac.XkDemo.BOS.WebApi
                 res = "会话超时，需重新登录";
               return res;
             }
-
+            try
+            {
+                DataSet dataSet = Kingdee.BOS.ServiceHelper.DBServiceHelper.ExecuteDataSet(this.KDContext.Session.AppContext, parameter);
+                DataTable dataTable = dataSet.Tables[0];
+                res = DataTableToJson(dataTable);
+            }
+            catch (Exception ex)
+            {
+                res = ex.Message;
+               // throw;
+            }
             /*执行数据库逻辑*/
-            DataSet dataSet = Kingdee.BOS.ServiceHelper.DBServiceHelper.ExecuteDataSet(this.KDContext.Session.AppContext, parameter);
-            DataTable dataTable = dataSet.Tables[0];
-            res = DataTableToJson(dataTable);
+           
 
             return res; 
         }
