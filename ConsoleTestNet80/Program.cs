@@ -30,7 +30,7 @@ namespace ConsoleTestNet80
             JsonSerializerOptions options = new JsonSerializerOptions() { WriteIndented = true, Encoder = System.Text.Encodings.Web.JavaScriptEncoder.UnsafeRelaxedJsonEscaping };
             object parametersdata = new { parameters = new string[] { "aaaa","bbbb"} };
             string parametersdatajson = System.Text.Json.JsonSerializer.Serialize(parametersdata, options);
-            string resultJson1 = yiK3CloudClient.CustomBusinessService(parametersdatajson, "GlobalServiceCustom.WebApi.DataServiceHandler.CommonRunnerService,GlobalServiceCustom");
+            string resultJson1 = yiK3CloudClient.CustomBusinessService(parametersdatajson, "GlobalServiceCustom.WebApi.DataServiceHandler.CommonRunnerService,GlobalServiceCustom.WebApi");
             Console.WriteLine(resultJson1);
             string resultJson2 = yiK3CloudClient.CustomBusinessServiceByParameters(parametersdatajson, "GlobalServiceCustom.WebApi.DataServiceHandler.CommonRunnerService,GlobalServiceCustom.WebApi.common.kdsvc");
             Console.WriteLine(resultJson2);

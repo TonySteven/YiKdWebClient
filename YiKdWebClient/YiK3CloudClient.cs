@@ -556,6 +556,21 @@ namespace YiKdWebClient
             return ExecApiDynamicFormService("",json, apiname, AutoLogin, AutoLogout);
 
         }
+        /// <summary>
+        /// 自定义WebAPI接口,直接接收到原始发送的json
+        /// </summary>
+        /// <param name="json"></param>
+        /// <param name="customServicesStubpath"></param>
+        /// <param name="AutoLogin"></param>
+        /// <param name="AutoLogout"></param>
+        /// <returns></returns>
+        public string CustomBusinessService(string json, Model.CustomServicesStubpath customServicesStubpath, bool AutoLogin = true, bool AutoLogout = true)
+        {
+
+            string apiname = customServicesStubpath.GetCustomServicesStubpathUrl();
+            return ExecApiDynamicFormService("", json, apiname, AutoLogin, AutoLogout);
+
+        }
 
         /// <summary>
         /// 自定义WebAPI接口,直接接受parameters数组的参数值
@@ -571,6 +586,23 @@ namespace YiKdWebClient
             return ExecApiDynamicFormService("", json, apiname, AutoLogin, AutoLogout,true);
 
         }
+
+        /// <summary>
+        /// 自定义WebAPI接口,直接接受parameters数组的参数值
+        /// </summary>
+        /// <param name="json"></param>
+        /// <param name="customServicesStubpath"></param>
+        /// <param name="AutoLogin"></param>
+        /// <param name="AutoLogout"></param>
+        /// <returns></returns>
+        public string CustomBusinessServiceByParameters(string json, Model.CustomServicesStubpath customServicesStubpath, bool AutoLogin = true, bool AutoLogout = true)
+        {
+             string apiname = customServicesStubpath.GetCustomServicesStubpathUrl();
+            return ExecApiDynamicFormService("", json, apiname, AutoLogin, AutoLogout, true);
+
+        }
+
+
         /// <summary>
         /// 暂存表单数据接口
         /// </summary>
