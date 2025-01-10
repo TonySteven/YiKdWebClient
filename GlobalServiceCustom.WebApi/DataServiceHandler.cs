@@ -89,23 +89,23 @@ Jac.XkDemo.BOS.WebApi.CustomWebApiDemoWebApiService.DoSth2,Jac.XkDemo.BOS.WebApi
 
        
 
-        public static List<Dictionary<string, string>> ConvertDataTableToList(DataTable dataTable)
-        {
-            List<Dictionary<string, string>> list = new List<Dictionary<string, string>>();
+        //public static List<Dictionary<string, string>> ConvertDataTableToList(DataTable dataTable)
+        //{
+        //    List<Dictionary<string, string>> list = new List<Dictionary<string, string>>();
 
-            foreach (DataRow row in dataTable.Rows)
-            {
-                Dictionary<string, string> dict = new Dictionary<string, string>();
+        //    foreach (DataRow row in dataTable.Rows)
+        //    {
+        //        Dictionary<string, string> dict = new Dictionary<string, string>();
 
-                foreach (DataColumn column in dataTable.Columns)
-                {
-                    dict[column.ColumnName] = Convert.ToString(row[column]);
-                }
+        //        foreach (DataColumn column in dataTable.Columns)
+        //        {
+        //            dict[column.ColumnName] = Convert.ToString(row[column]);
+        //        }
 
-                list.Add(dict);
-            }
+        //        list.Add(dict);
+        //    }
 
-            return list;
-        }
+        //    return list;
+        //}
     }
 }

@@ -62,8 +62,8 @@ namespace ConsoleTestNet80
             string resultJson3 = yiK3CloudClient.CustomBusinessService(parametersdatajson, customServicesStubpath);
             Console.WriteLine(resultJson3);
 
-            //string resultJson4 = yiK3CloudClient.CustomBusinessServiceByParameters(parametersdatajson, customServicesStubpath);
-            //Console.WriteLine(resultJson4);
+            string resultJson4 = yiK3CloudClient.CustomBusinessServiceByParameters(sql, customServicesStubpath);
+            Console.WriteLine(resultJson4);
             Console.ReadKey();
             #endregion
 
