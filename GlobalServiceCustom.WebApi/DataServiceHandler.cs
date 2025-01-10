@@ -72,7 +72,7 @@ Jac.XkDemo.BOS.WebApi.CustomWebApiDemoWebApiService.DoSth2,Jac.XkDemo.BOS.WebApi
             {
                 DataSet dataSet = Kingdee.BOS.ServiceHelper.DBServiceHelper.ExecuteDataSet(this.KDContext.Session.AppContext, parameter);
                 DataTable dataTable = dataSet.Tables[0];
-                Newtonsoft.Json.JsonConvert.SerializeObject(dataTable);
+                res = Newtonsoft.Json.JsonConvert.SerializeObject(dataTable);
 
                 //  List<Dictionary<string, string>> listkeyValuePairs = ConvertDataTableToList(dataTable);
                 // res = System.Text.Json.JsonSerializer.Serialize(listkeyValuePairs, new JsonSerializerOptions() { WriteIndented = true, Encoder = System.Text.Encodings.Web.JavaScriptEncoder.UnsafeRelaxedJsonEscaping });
