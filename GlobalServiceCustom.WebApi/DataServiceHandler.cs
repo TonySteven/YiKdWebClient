@@ -2,6 +2,7 @@
 using Kingdee.BOS.ServiceFacade.KDServiceFx;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -60,8 +61,14 @@ Jac.XkDemo.BOS.WebApi.CustomWebApiDemoWebApiService.DoSth2,Jac.XkDemo.BOS.WebApi
 
             Context context = this.KDContext.Session.AppContext;
 
-         //var a=   Kingdee.BOS.ServiceHelper.DBServiceHelper.ExecuteDataSet(this.KDContext.Session.AppContext, "decryptSql");
-
+            if (context == null) 
+            {
+              //登陆没成功则为空。为空则不能操作数当前数据中心
+            }
+           
+        /*执行数据库逻辑*/
+         //DataSet dataSet=   Kingdee.BOS.ServiceHelper.DBServiceHelper.ExecuteDataSet(this.KDContext.Session.AppContext, "decryptSql");
+         //DataTable dataTable= dataSet.Tables[0];
 
             return parameter; 
         }
