@@ -1,4 +1,5 @@
-﻿using Kingdee.BOS.ServiceFacade.KDServiceFx;
+﻿using Kingdee.BOS;
+using Kingdee.BOS.ServiceFacade.KDServiceFx;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -57,8 +58,10 @@ Jac.XkDemo.BOS.WebApi.CustomWebApiDemoWebApiService.DoSth2,Jac.XkDemo.BOS.WebApi
         {
             string res="test";
 
+            Context context = this.KDContext.Session.AppContext;
+
          //var a=   Kingdee.BOS.ServiceHelper.DBServiceHelper.ExecuteDataSet(this.KDContext.Session.AppContext, "decryptSql");
-          
+
 
             return res; 
         }
