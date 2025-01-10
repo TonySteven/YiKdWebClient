@@ -54,7 +54,7 @@ Jac.XkDemo.BOS.WebApi.CustomWebApiDemoWebApiService.DoSth2,Jac.XkDemo.BOS.WebApi
         /// </summary>
         /// <param name="parameter"></param>
         /// <returns></returns>
-        public string CommonRunnerService(string parameter) 
+        public string CommonRunnerService(Object parameter) 
         {
             string res="test";
 
