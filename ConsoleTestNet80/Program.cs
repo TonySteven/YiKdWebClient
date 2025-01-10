@@ -18,19 +18,27 @@ namespace ConsoleTestNet80
     {
         static void Main(string[] args)
         {
-            string cnfFilePath = Path.Combine(System.AppDomain.CurrentDomain.BaseDirectory, "YiKdWebCfg", "API测试.cnf");
-            YiK3CloudClient yiK3CloudClient = new YiKdWebClient.YiK3CloudClient()
-            {
-                LoginType = LoginType.LoginBySimplePassport,
-                LoginBySimplePassportModel = new LoginBySimplePassportModel() { Url = @"http://127.0.0.1/K3Cloud/", CnfFilePath = cnfFilePath }
-            };
 
-            JsonSerializerOptions options = new JsonSerializerOptions() { WriteIndented=true,Encoder= System.Text.Encodings.Web.JavaScriptEncoder.UnsafeRelaxedJsonEscaping};
-            object QueryBusinessInfodata = new { FormId = "ER_ExpenseRequest"};
-            string QueryBusinessInfojson= System.Text.Json.JsonSerializer.Serialize(QueryBusinessInfodata, options);
-            string resultJson= yiK3CloudClient.QueryBusinessInfo(QueryBusinessInfojson);
-            Console.WriteLine(resultJson);
-            Console.ReadKey();
+
+
+            #region 元数据查询
+
+           
+            //string cnfFilePath = Path.Combine(System.AppDomain.CurrentDomain.BaseDirectory, "YiKdWebCfg", "API测试.cnf");
+            //YiK3CloudClient yiK3CloudClient = new YiKdWebClient.YiK3CloudClient()
+            //{
+            //    LoginType = LoginType.LoginBySimplePassport,
+            //    LoginBySimplePassportModel = new LoginBySimplePassportModel() { Url = @"http://127.0.0.1/K3Cloud/", CnfFilePath = cnfFilePath }
+            //};
+
+            //JsonSerializerOptions options = new JsonSerializerOptions() { WriteIndented=true,Encoder= System.Text.Encodings.Web.JavaScriptEncoder.UnsafeRelaxedJsonEscaping};
+            //object QueryBusinessInfodata = new { FormId = "ER_ExpenseRequest"};
+            //string QueryBusinessInfojson= System.Text.Json.JsonSerializer.Serialize(QueryBusinessInfodata, options);
+            //string resultJson= yiK3CloudClient.QueryBusinessInfo(QueryBusinessInfojson);
+            //Console.WriteLine(resultJson);
+            //Console.ReadKey();
+
+            #endregion
 
             #region 分块上传
 
