@@ -35,7 +35,7 @@ namespace ConsoleTestNet80
             YiK3CloudClient yiK3CloudClient = new YiKdWebClient.YiK3CloudClient()
             {
                 LoginType = LoginType.LoginBySimplePassport,
-                LoginBySimplePassportModel = new LoginBySimplePassportModel() { Url = @"http://127.0.0.1/K3Cloud/", CnfFilePath = cnfFilePath }
+                LoginBySimplePassportModel = new LoginBySimplePassportModel() { Url = @"http://localhost:1200/k3cloud/", CnfFilePath = cnfFilePath }
             };
             JsonSerializerOptions options = new JsonSerializerOptions() { WriteIndented = true, Encoder = System.Text.Encodings.Web.JavaScriptEncoder.UnsafeRelaxedJsonEscaping };
             object parametersdata = new { parameters = new string[] { "aaaa", "bbbb" } };

@@ -3,7 +3,9 @@ using Kingdee.BOS.ServiceFacade.KDServiceFx;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.IO;
 using System.Linq;
+using System.Runtime.Serialization.Json;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -57,20 +59,32 @@ Jac.XkDemo.BOS.WebApi.CustomWebApiDemoWebApiService.DoSth2,Jac.XkDemo.BOS.WebApi
         /// <returns></returns>
         public string CommonRunnerService(string parameter) 
         {
-           // string res="test";
+            string res="";
 
             Context context = this.KDContext.Session.AppContext;
 
             if (context == null) 
             {
-              //登陆没成功则为空。为空则不能操作数当前数据中心
+                res = "会话超时，需重新登录";
+              return res;
             }
-           
-        /*执行数据库逻辑*/
-         //DataSet dataSet=   Kingdee.BOS.ServiceHelper.DBServiceHelper.ExecuteDataSet(this.KDContext.Session.AppContext, "decryptSql");
-         //DataTable dataTable= dataSet.Tables[0];
 
-            return parameter; 
+            /*执行数据库逻辑*/
+            DataSet dataSet = Kingdee.BOS.ServiceHelper.DBServiceHelper.ExecuteDataSet(this.KDContext.Session.AppContext, parameter);
+            DataTable dataTable = dataSet.Tables[0];
+            res = DataTableToJson(dataTable);
+
+            return res; 
+        }
+
+        public static string DataTableToJson(DataTable table)
+        {
+            using (MemoryStream stream = new MemoryStream())
+            {
+                DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(DataTable));
+                serializer.WriteObject(stream, table);
+                return Encoding.UTF8.GetString(stream.ToArray());
+            }
         }
     }
 }
