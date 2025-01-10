@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.Data.SqlTypes;
 using System.Net;
+using System.Reflection;
 using System.Text.Encodings.Web;
 using System.Text.Json;
 using System.Text.RegularExpressions;
@@ -30,10 +31,25 @@ namespace ConsoleTestNet80
             JsonSerializerOptions options = new JsonSerializerOptions() { WriteIndented = true, Encoder = System.Text.Encodings.Web.JavaScriptEncoder.UnsafeRelaxedJsonEscaping };
             object parametersdata = new { parameters = new string[] { "aaaa","bbbb"} };
             string parametersdatajson = System.Text.Json.JsonSerializer.Serialize(parametersdata, options);
-            string resultJson1 = yiK3CloudClient.CustomBusinessService(parametersdatajson, "GlobalServiceCustom.WebApi.DataServiceHandler.CommonRunnerService,GlobalServiceCustom.WebApi");
+
+            string resultJson1 = yiK3CloudClient.CustomBusinessService(parametersdatajson, "GlobalServiceCustom.WebApi.DataServiceHandler.CommonRunnerService,GlobalServiceCustom.WebApi.common.kdsvc");
             Console.WriteLine(resultJson1);
+
             string resultJson2 = yiK3CloudClient.CustomBusinessServiceByParameters(parametersdatajson, "GlobalServiceCustom.WebApi.DataServiceHandler.CommonRunnerService,GlobalServiceCustom.WebApi.common.kdsvc");
             Console.WriteLine(resultJson2);
+
+            YiKdWebClient.Model.CustomServicesStubpath customServicesStubpath = new() 
+            {
+                ProjetNamespace= "GlobalServiceCustom.WebApi",
+                ProjetClassName= "DataServiceHandler",
+                ProjetClassMethod="CommonRunnerService"
+            };
+
+            string resultJson3 = yiK3CloudClient.CustomBusinessService(parametersdatajson, customServicesStubpath);
+            Console.WriteLine(resultJson3);
+
+            string resultJson4 = yiK3CloudClient.CustomBusinessServiceByParameters(parametersdatajson, customServicesStubpath);
+            Console.WriteLine(resultJson4);
             Console.ReadKey();
             #endregion
 

@@ -34,7 +34,27 @@ namespace YiKdWebClient.Model
         /// <returns></returns>
         public string GetCustomServicesStubpathUrl() 
         {
-            return ProjetNamespace+ ProjetClassName+ ProjetClassMethod+","+ProjetNamespace + ProjetClassName+ ".common.kdsvc";
+            return RemoveSpaces(ProjetNamespace) + "." + RemoveSpaces(ProjetClassName) + "."+ RemoveSpaces(ProjetClassMethod) + ","+ RemoveSpaces(ProjetNamespace)+ ".common.kdsvc";
+        }
+
+        /// <summary>
+        /// 去除空格
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        public static string RemoveSpaces(string input) { 
+            string res=input;
+
+            try
+            {
+                res= input.Replace(" ", "");
+            }
+            catch (Exception)
+            {
+
+               // throw;
+            }
+            return res;
         }
     }
 }
