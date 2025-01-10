@@ -31,7 +31,7 @@ namespace ConsoleTestNet80
 
 
             #region 自定义webapi
-            string cnfFilePath = Path.Combine(System.AppDomain.CurrentDomain.BaseDirectory, "YiKdWebCfg", "API开发测试.cnf");
+            string cnfFilePath = Path.Combine(System.AppDomain.CurrentDomain.BaseDirectory, "YiKdWebCfg", "API测试.cnf");
             YiK3CloudClient yiK3CloudClient = new YiKdWebClient.YiK3CloudClient()
             {
                 LoginType = LoginType.LoginBySimplePassport,
