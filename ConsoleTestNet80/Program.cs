@@ -38,14 +38,14 @@ namespace ConsoleTestNet80
                 LoginBySimplePassportModel = new LoginBySimplePassportModel() { Url = @"http://localhost:1200/k3cloud/", CnfFilePath = cnfFilePath }
             };
             JsonSerializerOptions options = new JsonSerializerOptions() { WriteIndented = true, Encoder = System.Text.Encodings.Web.JavaScriptEncoder.UnsafeRelaxedJsonEscaping };
-            object parametersdata = new { parameters = new string[] { "aaaa", "bbbb" } };
-            string parametersdatajson = System.Text.Json.JsonSerializer.Serialize(parametersdata, options);
+            //object parametersdata = new { parameters = new string[] { "aaaa", "bbbb" } };
+            //string parametersdatajson = System.Text.Json.JsonSerializer.Serialize(parametersdata, options);
 
-            string resultJson1 = yiK3CloudClient.CustomBusinessService(parametersdatajson, "GlobalServiceCustom.WebApi.DataServiceHandler.CommonRunnerService,GlobalServiceCustom.WebApi.common.kdsvc");
-            Console.WriteLine(resultJson1);
+            //string resultJson1 = yiK3CloudClient.CustomBusinessService(parametersdatajson, "GlobalServiceCustom.WebApi.DataServiceHandler.CommonRunnerService,GlobalServiceCustom.WebApi.common.kdsvc");
+            //Console.WriteLine(resultJson1);
 
-            string resultJson2 = yiK3CloudClient.CustomBusinessServiceByParameters(parametersdatajson, "GlobalServiceCustom.WebApi.DataServiceHandler.CommonRunnerService,GlobalServiceCustom.WebApi.common.kdsvc");
-            Console.WriteLine(resultJson2);
+            //string resultJson2 = yiK3CloudClient.CustomBusinessServiceByParameters(parametersdatajson, "GlobalServiceCustom.WebApi.DataServiceHandler.CommonRunnerService,GlobalServiceCustom.WebApi.common.kdsvc");
+            //Console.WriteLine(resultJson2);
 
             YiKdWebClient.Model.CustomServicesStubpath customServicesStubpath = new()
             {
@@ -54,11 +54,16 @@ namespace ConsoleTestNet80
                 ProjetClassMethod = "CommonRunnerService"
             };
 
+            string sql = string.Format(@"SELECT TOP 10 *from T_BD_MATERIAL_L");
+
+            object parametersdata = new { parameters = new string[] { sql } };
+            string parametersdatajson = System.Text.Json.JsonSerializer.Serialize(parametersdata, options);
+
             string resultJson3 = yiK3CloudClient.CustomBusinessService(parametersdatajson, customServicesStubpath);
             Console.WriteLine(resultJson3);
 
-            string resultJson4 = yiK3CloudClient.CustomBusinessServiceByParameters(parametersdatajson, customServicesStubpath);
-            Console.WriteLine(resultJson4);
+            //string resultJson4 = yiK3CloudClient.CustomBusinessServiceByParameters(parametersdatajson, customServicesStubpath);
+            //Console.WriteLine(resultJson4);
             Console.ReadKey();
             #endregion
 

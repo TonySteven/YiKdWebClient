@@ -7,6 +7,7 @@ using System.IO;
 using System.Linq;
 using System.Runtime.Serialization.Json;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace GlobalServiceCustom.WebApi
@@ -72,7 +73,9 @@ Jac.XkDemo.BOS.WebApi.CustomWebApiDemoWebApiService.DoSth2,Jac.XkDemo.BOS.WebApi
             {
                 DataSet dataSet = Kingdee.BOS.ServiceHelper.DBServiceHelper.ExecuteDataSet(this.KDContext.Session.AppContext, parameter);
                 DataTable dataTable = dataSet.Tables[0];
-                res = DataTableToJson(dataTable);
+                List<Dictionary<string, string>> listkeyValuePairs = ConvertDataTableToList(dataTable);
+
+                res = System.Text.Json.JsonSerializer.Serialize(listkeyValuePairs, new JsonSerializerOptions() { WriteIndented = true, Encoder = System.Text.Encodings.Web.JavaScriptEncoder.UnsafeRelaxedJsonEscaping });
             }
             catch (Exception ex)
             {
@@ -85,14 +88,25 @@ Jac.XkDemo.BOS.WebApi.CustomWebApiDemoWebApiService.DoSth2,Jac.XkDemo.BOS.WebApi
             return res; 
         }
 
-        public static string DataTableToJson(DataTable table)
+       
+
+        public static List<Dictionary<string, string>> ConvertDataTableToList(DataTable dataTable)
         {
-            using (MemoryStream stream = new MemoryStream())
+            List<Dictionary<string, string>> list = new List<Dictionary<string, string>>();
+
+            foreach (DataRow row in dataTable.Rows)
             {
-                DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(DataTable));
-                serializer.WriteObject(stream, table);
-                return Encoding.UTF8.GetString(stream.ToArray());
+                Dictionary<string, string> dict = new Dictionary<string, string>();
+
+                foreach (DataColumn column in dataTable.Columns)
+                {
+                    dict[column.ColumnName] = Convert.ToString(row[column]);
+                }
+
+                list.Add(dict);
             }
+
+            return list;
         }
     }
 }
