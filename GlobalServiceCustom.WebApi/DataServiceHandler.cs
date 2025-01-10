@@ -1,4 +1,5 @@
 ﻿using Kingdee.BOS;
+using Kingdee.BOS.Core.DependencyRules;
 using Kingdee.BOS.ServiceFacade.KDServiceFx;
 using System;
 using System.Collections.Generic;
@@ -6,8 +7,6 @@ using System.Data;
 using System.IO;
 using System.Linq;
 using System.Runtime.Serialization.Json;
-using System.Text;
-using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace GlobalServiceCustom.WebApi
@@ -73,9 +72,10 @@ Jac.XkDemo.BOS.WebApi.CustomWebApiDemoWebApiService.DoSth2,Jac.XkDemo.BOS.WebApi
             {
                 DataSet dataSet = Kingdee.BOS.ServiceHelper.DBServiceHelper.ExecuteDataSet(this.KDContext.Session.AppContext, parameter);
                 DataTable dataTable = dataSet.Tables[0];
-                List<Dictionary<string, string>> listkeyValuePairs = ConvertDataTableToList(dataTable);
+                Newtonsoft.Json.JsonConvert.SerializeObject(dataTable);
 
-                res = System.Text.Json.JsonSerializer.Serialize(listkeyValuePairs, new JsonSerializerOptions() { WriteIndented = true, Encoder = System.Text.Encodings.Web.JavaScriptEncoder.UnsafeRelaxedJsonEscaping });
+                //  List<Dictionary<string, string>> listkeyValuePairs = ConvertDataTableToList(dataTable);
+                // res = System.Text.Json.JsonSerializer.Serialize(listkeyValuePairs, new JsonSerializerOptions() { WriteIndented = true, Encoder = System.Text.Encodings.Web.JavaScriptEncoder.UnsafeRelaxedJsonEscaping });
             }
             catch (Exception ex)
             {
