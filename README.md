@@ -5,18 +5,21 @@
 移除了对Newtonsoft.Json的依赖
 
 # 框架引入方式:
-## nuget地址:
-https://www.nuget.org/packages/YiKdWebClient
+
 
 ## nuget包的使用方法
+使用vs自带的nuget管理器安装YiKdWebClient,如下图:<br>
 ![输入图片说明](nuget%E4%BD%BF%E7%94%A8.png)
+
+## nuget地址:
+https://www.nuget.org/packages/YiKdWebClient
 
 # 配置文件路径
 配置的相对路径如下  YiKdWebCfg/appsettings.xml ，用于依赖于第三方登录授权验证和API签名验证，也可以自己实例化YiK3CloudClient中的AppSettingsModel类
 
 # 配置文件内容(相对路径YiKdWebCfg/appsettings.xml 文件，如果没有就手动创建)
-注意：(最新公有云可能强制要求走网关(https://api.kingdee.com/galaxyapi/)
-走网关的方式需要使用API签名认证的模式。
+注意：(最新公有云可能强制要求走网关(https://api.kingdee.com/galaxyapi/)<br>
+走网关的方式需要使用API签名认证的模式。<br>
 最新询问总部（2024年10月)，目前不再强制公有云使用网关模式，公有云可以正常调用api，后续实际情况根据官方为准。框架功能里面已经全部包含，均可使用
 
 ```
