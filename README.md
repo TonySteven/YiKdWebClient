@@ -20,24 +20,23 @@ yiK3CloudClient.LoginType= LoginType.LoginBySignSHA1;
 string resultJson = yiK3CloudClient.View(Formid, Json);
 
 
- /*如下信息为可以使用postman调试的报文和地址*/
- Console.WriteLine("真实的登录地址: ");
- Console.WriteLine(yiK3CloudClient.ReturnLoginWebModel.RequestUrl);
 
- Console.WriteLine("真实的登录报文: ");
- Console.WriteLine(yiK3CloudClient.ReturnLoginWebModel.RealRequestBody);
-
- //真实的操作请求地址
- string RequestUrl = yiK3CloudClient.ReturnOperationWebModel.RequestUrl;
- Console.WriteLine("真实的操作请求地址: ");
- Console.WriteLine(RequestUrl);
- //真实的操作请求报文
- string RealRequestBody = yiK3CloudClient.ReturnOperationWebModel.RealRequestBody;
-
- Console.WriteLine("真实的操作请求报文: ");
- Console.WriteLine(RealRequestBody);
- Console.WriteLine("真实的操作请求返回结果: ");
- Console.WriteLine(resultJson);
+/*如下信息为可以使用postman调试的报文和地址*/
+Console.WriteLine("真实的登录地址: ");
+Console.WriteLine(yiK3CloudClient.ReturnLoginWebModel.RequestUrl);
+Console.WriteLine("真实的登录报文: ");
+Console.WriteLine(yiK3CloudClient.ReturnLoginWebModel.RealRequestBody);
+//真实的操作请求地址
+string RequestUrl = yiK3CloudClient.ReturnOperationWebModel.RequestUrl;
+Console.WriteLine("真实的操作请求地址: ");
+Console.WriteLine(RequestUrl);
+//真实的操作请求报文
+string RealRequestBody = yiK3CloudClient.ReturnOperationWebModel.RealRequestBody;
+Console.WriteLine("真实的操作请求报文: ");
+Console.WriteLine(RealRequestBody);
+Console.WriteLine("真实的操作请求返回结果: ");
+Console.WriteLine(resultJson);
+Console.ReadKey();
 ```
 
 # 2.第三方授权认证(需要设置配置文件:YiKdWebCfg/appsettings.xml)
