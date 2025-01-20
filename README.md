@@ -100,7 +100,7 @@ Console.WriteLine(resultJson);
 Console.ReadKey();
 ```
 
-# 2.第三方授权认证(需要设置配置文件:YiKdWebCfg/appsettings.xml)
+# 2.第三方授权认证:<br>(需要设置配置文件:YiKdWebCfg/appsettings.xml)
 
 
 
@@ -120,7 +120,7 @@ var resultJson  = yiK3CloudClient.View(Formid, Json);
 可以利用此信息，使用postman 等接口调试工具进行调试，更方便快捷。 也可以使用其它开发语言进行请求，原理一致
 
 
-# 3.旧版用户名密码认证(不需要设置appsettings.xml)
+# 3.旧版用户名密码认证:(不需要设置appsettings.xml)
  
 ```
 ///旧版用户名密码认证
@@ -131,7 +131,7 @@ var resultJson  = yiK3CloudClient.View(Formid, Json);
  yiK3CloudClient.validateLoginSettingsModel=new ValidateLoginSettingsModel() { Url = @"http://127.0.0.1/K3Cloud/", DbId= "629bd5285d655d", UserName="demo",Password="123456",lcid=2052};
  var resultJson = yiK3CloudClient.View(Formid, Json);
 ```
-# 4.集成密钥文件认证(不需要设置appsettings.xml)
+# 4.集成密钥文件认证:(不需要设置appsettings.xml)
 ```
 string Formid = "SEC_User";
 string Json = @"{""IsUserModelInit"":""true"",""Number"":""Administrator"",""IsSortBySeq"":""false""}";
@@ -142,7 +142,7 @@ yiK3CloudClient.LoginBySimplePassportModel = new LoginBySimplePassportModel() { 
 var resultJson = yiK3CloudClient.View(Formid, Json);
 ```
 
-# 5.API请求头签名(需要设置配置文件:YiKdWebCfg/appsettings.xml)
+# 5.API请求头签名:(需要设置配置文件:YiKdWebCfg/appsettings.xml)
 
 ~~~
 string Formid = "SEC_User";
