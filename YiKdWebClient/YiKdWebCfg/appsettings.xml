@@ -9,7 +9,7 @@
 
     <!-- 在第三方系统登录授权页面点击“生成测试链接”按钮后即可查看   -->
 
-    <add key="X-KDApi-AcctID" value="629bd5285d655d"/>
+    <add key="X-KDApi-AcctID" value="675c0162520ad7"/>
 
     <!-- 第三方系统登录授权的 集成用户名称  -->
 
@@ -21,11 +21,11 @@
 
     <!-- 第三方系统登录授权的 应用ID  -->
 
-    <add key="X-KDApi-AppID" value="269091_265DQZgP5oGVS/TtQ+1tzcWr3I6U1qrP"/>
+    <add key="X-KDApi-AppID" value="299772_0Z0p19HL3vqf0YTO51TsTdUs5MQ6TpsH"/>
 
     <!-- 第三方系统登录授权的 应用密钥  -->
 
-    <add key="X-KDApi-AppSec" value="a7dd6d183d954b1788162401179d0757"/>
+    <add key="X-KDApi-AppSec" value="6357eaf640ef4a0a9bac59e28f13030f"/>
 
     <!-- 账套语系，默认2052  -->
 
