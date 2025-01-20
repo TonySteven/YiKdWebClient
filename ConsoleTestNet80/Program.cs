@@ -40,12 +40,12 @@ namespace ConsoleTestNet80
             string RequestUrl = yiK3CloudClient.ReturnOperationWebModel.RequestUrl;
             Console.WriteLine("真实的操作请求地址: ");
             Console.WriteLine(RequestUrl);
-            //真实的请求报文
+            //真实的操作请求报文
             string RealRequestBody = yiK3CloudClient.ReturnOperationWebModel.RealRequestBody;
 
-            Console.WriteLine("真实的请求报文: ");
+            Console.WriteLine("真实的操作请求报文: ");
             Console.WriteLine(RealRequestBody);
-            Console.WriteLine("真实的请求返回结果: ");
+            Console.WriteLine("真实的操作请求返回结果: ");
             Console.WriteLine(resultJson);
             Console.ReadKey();
             //var resultJson = yiK3CloudClient.GetDataCenterList();
