@@ -122,14 +122,26 @@ namespace ConsoleTestNet80
             string Json = @"{""IsUserModelInit"":""true"",""Number"":""Administrator"",""IsSortBySeq"":""false""}";
             YiK3CloudClient yiK3CloudClient = new YiKdWebClient.YiK3CloudClient();
             var resultJson = yiK3CloudClient.View(Formid, Json);
-            Console.WriteLine(resultJson);
+           
 
             /*登陆地址*/
-            Console.WriteLine("真实的登陆地址: ");
+            Console.WriteLine("真实的登录地址: ");
             Console.WriteLine(yiK3CloudClient.ReturnLoginWebModel.RequestUrl);
 
-            Console.WriteLine("真实的登陆报文: ");
+            Console.WriteLine("真实的登录报文: ");
             Console.WriteLine(yiK3CloudClient.ReturnLoginWebModel.RealRequestBody);
+
+            //真实的请求地址
+            string RequestUrl = yiK3CloudClient.ReturnOperationWebModel.RequestUrl;
+            Console.WriteLine("真实的请求地址: ");
+            Console.WriteLine(RequestUrl);
+            //真实的请求报文
+            string RealRequestBody = yiK3CloudClient.ReturnOperationWebModel.RealRequestBody;
+
+            Console.WriteLine("真实的请求报文: ");
+            Console.WriteLine(RealRequestBody);
+            Console.WriteLine("真实的请求返回结果: ");
+            Console.WriteLine(resultJson);
             Console.ReadKey();
             //var resultJson = yiK3CloudClient.GetDataCenterList();
             // var res = yiK3CloudClient.ExecuteOperation("view",Formid, Json);
