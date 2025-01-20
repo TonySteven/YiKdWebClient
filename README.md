@@ -8,12 +8,43 @@
 
 调用方式简单
 如下示例:
+# 1.签名信息认证(需要设置配置文件:YiKdWebCfg/appsettings.xml) （目前推荐方式）注意：PT-146911 8.0.0.202205 之前的版本不支持SHA256加密，需要使用SHA1加密算法
+
+```
+string Formid = "SEC_User";
+string Json = @"{""IsUserModelInit"":""true"",""Number"":""Administrator"",""IsSortBySeq"":""false""}";
+YiK3CloudClient yiK3CloudClient = new YiKdWebClient.YiK3CloudClient();
+yiK3CloudClient.LoginType= LoginType.LoginBySignSHA1;
+//yiK3CloudClient.LoginType= LoginType.LoginBySignSHA256;
+string resultJson = yiK3CloudClient.View(Formid, Json);
+
+
+ /*如下信息为可以使用postman调试的报文和地址*/
+ Console.WriteLine("真实的登录地址: ");
+ Console.WriteLine(yiK3CloudClient.ReturnLoginWebModel.RequestUrl);
+
+ Console.WriteLine("真实的登录报文: ");
+ Console.WriteLine(yiK3CloudClient.ReturnLoginWebModel.RealRequestBody);
+
+ //真实的操作请求地址
+ string RequestUrl = yiK3CloudClient.ReturnOperationWebModel.RequestUrl;
+ Console.WriteLine("真实的操作请求地址: ");
+ Console.WriteLine(RequestUrl);
+ //真实的操作请求报文
+ string RealRequestBody = yiK3CloudClient.ReturnOperationWebModel.RealRequestBody;
+
+ Console.WriteLine("真实的操作请求报文: ");
+ Console.WriteLine(RealRequestBody);
+ Console.WriteLine("真实的操作请求返回结果: ");
+ Console.WriteLine(resultJson);
+```
+
 # 2.第三方授权认证(需要设置配置文件:YiKdWebCfg/appsettings.xml)
 
 
 
 ```
-///2.第三方授权认证
+///第三方授权认证
 string Formid = "SEC_User";
 string Json =@"{""IsUserModelInit"":""true"",""Number"":""Administrator"",""IsSortBySeq"":""false""}";
 YiK3CloudClient yiK3CloudClient = new YiKdWebClient.YiK3CloudClient();
@@ -31,7 +62,7 @@ var resultJson  = yiK3CloudClient.View(Formid, Json);
 # 3.旧版用户名密码认证(不需要设置appsettings.xml)
  
 ```
-///3.旧版用户名密码认证
+///旧版用户名密码认证
  string Formid = "SEC_User";
  string Json =@"{""IsUserModelInit"":""true"",""Number"":""Administrator"",""IsSortBySeq"":""false""}";
  YiK3CloudClient yiK3CloudClient = new YiKdWebClient.YiK3CloudClient();
