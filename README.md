@@ -11,7 +11,7 @@
 使用vs自带的nuget管理器安装YiKdWebClient,如下图:<br>
 ![输入图片说明](nuget%E4%BD%BF%E7%94%A8.png)
 
-## nuget地址:
+## nuget发布地址(可以手动下载安装/引入):
 https://www.nuget.org/packages/YiKdWebClient
 
 # 配置文件路径
