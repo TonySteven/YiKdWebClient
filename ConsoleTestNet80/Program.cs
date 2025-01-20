@@ -29,17 +29,16 @@ namespace ConsoleTestNet80
             yiK3CloudClient.LoginType= LoginType.LoginBySignSHA256;
             var resultJson = yiK3CloudClient.View(Formid, Json);
 
-
-            /*登陆地址*/
+            /*登录地址*/
             Console.WriteLine("真实的登录地址: ");
             Console.WriteLine(yiK3CloudClient.ReturnLoginWebModel.RequestUrl);
 
             Console.WriteLine("真实的登录报文: ");
             Console.WriteLine(yiK3CloudClient.ReturnLoginWebModel.RealRequestBody);
 
-            //真实的请求地址
+            //真实的操作请求地址
             string RequestUrl = yiK3CloudClient.ReturnOperationWebModel.RequestUrl;
-            Console.WriteLine("真实的请求地址: ");
+            Console.WriteLine("真实的操作请求地址: ");
             Console.WriteLine(RequestUrl);
             //真实的请求报文
             string RealRequestBody = yiK3CloudClient.ReturnOperationWebModel.RealRequestBody;
