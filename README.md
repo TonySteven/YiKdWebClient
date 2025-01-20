@@ -6,8 +6,60 @@
 # 配置文件路径
 配置的相对路径如下  YiKdWebCfg/appsettings.xml ，用于依赖于第三方登录授权验证和API签名验证，也可以自己实例化YiK3CloudClient中的AppSettingsModel类
 
-调用方式简单
-如下示例:
+# 配置文件内容(相对路径YiKdWebCfg/appsettings.xml 文件，如果没有就手动创建)
+注意：(最新公有云可能强制要求走网关(https://api.kingdee.com/galaxyapi/)
+走网关的方式需要使用API签名认证的模式。
+最新询问总部（2024年10月)，目前不再强制公有云使用网关模式，公有云可以正常调用api，后续实际情况根据官方为准。框架功能里面已经全部包含，均可使用
+
+```
+<?xml version="1.0" encoding="utf-8" ?>
+<configuration>
+
+  <appSettings>
+
+    <!-- 当前使用的 账套ID(即数据中心id) -->
+
+    <!-- 第三方系统登录授权的账套ID（即open.kingdee.com网站的第三方系统登录授权中的数据中心标识）-->
+
+    <!-- 在第三方系统登录授权页面点击“生成测试链接”按钮后即可查看   -->
+
+    <add key="X-KDApi-AcctID" value="629bd5285d655d"/>
+
+    <!-- 第三方系统登录授权的 集成用户名称  -->
+
+    <!-- 补丁版本为PT-146894 [7.7.0.202111]及后续的版本，则为指定用户登录列表中任一用户  -->
+
+    <!-- 若第三方系统登录授权已勾选“允许全部用户登录”，则无以上限制  -->
+
+    <add key="X-KDApi-UserName" value="Administrator"/>
+
+    <!-- 第三方系统登录授权的 应用ID  -->
+
+    <add key="X-KDApi-AppID" value="2********************P"/>
+
+    <!-- 第三方系统登录授权的 应用密钥  -->
+
+    <add key="X-KDApi-AppSec" value="a***********************7"/>
+
+    <!-- 账套语系，默认2052  -->
+
+    <add key="X-KDApi-LCID" value="2052"/>
+
+    <!-- 组织编码，启用多组织时配置对应的组织编码才有效(使用签名模式认证有效，其他待测试，可以先不填写)  -->
+
+    <!--<add key="X-KDApi-OrgNum" value="*****"/>-->
+
+    <!-- 服务Url地址(私有云必须配置金蝶云星空产品地址，K3Cloud/结尾。若为需要走公有云网关模式,则必须置空)-->
+
+    <add key="X-KDApi-ServerUrl" value="http://127.0.0.1/k3cloud/"/>
+  </appSettings>
+
+</configuration>
+```
+
+
+# 调用方式如下示例:
+
 # 1.签名信息认证(需要设置配置文件:YiKdWebCfg/appsettings.xml) 
 ## (目前推荐方式)注意：PT-146911 8.0.0.202205 之前的版本不支持SHA256加密，需要使用SHA1加密算法
 
@@ -135,56 +187,7 @@ https://www.nuget.org/packages/YiKdWebClient
 
 
 
-# 配置文件内容(相对路径YiKdWebCfg/appsettings.xml 文件，如果没有就手动创建)
-注意：(最新公有云可能强制要求走网关(https://api.kingdee.com/galaxyapi/)
-走网关的方式需要使用API签名认证的模式。
-最新询问总部（2024年10月)，目前不再强制公有云使用网关模式，公有云可以正常调用api，后续实际情况根据官方为准。框架功能里面已经全部包含，均可使用
 
-```
-<?xml version="1.0" encoding="utf-8" ?>
-<configuration>
-
-  <appSettings>
-
-    <!-- 当前使用的 账套ID(即数据中心id) -->
-
-    <!-- 第三方系统登录授权的账套ID（即open.kingdee.com网站的第三方系统登录授权中的数据中心标识）-->
-
-    <!-- 在第三方系统登录授权页面点击“生成测试链接”按钮后即可查看   -->
-
-    <add key="X-KDApi-AcctID" value="629bd5285d655d"/>
-
-    <!-- 第三方系统登录授权的 集成用户名称  -->
-
-    <!-- 补丁版本为PT-146894 [7.7.0.202111]及后续的版本，则为指定用户登录列表中任一用户  -->
-
-    <!-- 若第三方系统登录授权已勾选“允许全部用户登录”，则无以上限制  -->
-
-    <add key="X-KDApi-UserName" value="Administrator"/>
-
-    <!-- 第三方系统登录授权的 应用ID  -->
-
-    <add key="X-KDApi-AppID" value="2********************P"/>
-
-    <!-- 第三方系统登录授权的 应用密钥  -->
-
-    <add key="X-KDApi-AppSec" value="a***********************7"/>
-
-    <!-- 账套语系，默认2052  -->
-
-    <add key="X-KDApi-LCID" value="2052"/>
-
-    <!-- 组织编码，启用多组织时配置对应的组织编码才有效(使用签名模式认证有效，其他待测试，可以先不填写)  -->
-
-    <!--<add key="X-KDApi-OrgNum" value="*****"/>-->
-
-    <!-- 服务Url地址(私有云必须配置金蝶云星空产品地址，K3Cloud/结尾。若为需要走公有云网关模式,则必须置空)-->
-
-    <add key="X-KDApi-ServerUrl" value="http://127.0.0.1/k3cloud/"/>
-  </appSettings>
-
-</configuration>
-```
 # 功能列表(功能名称与官方功能名方式相同，以此类推)
 
 | 接口名称 | 接口含义 |
