@@ -91,7 +91,8 @@ yiK3CloudClient.LoginType=LoginType.LoginByApiSignHeaders;
 var resultJson = yiK3CloudClient.View(Formid, Json);
 Console.WriteLine(resultJson);
 ~~~
-API签名认证的最大特点是，真实的请求中，没有调用登陆验证接口，web请求次数会大幅度降低
+API请求头签名认证的最大特点是，真实的请求中，没有调用登陆验证接口，web请求次数会大幅度降低<br>
+(注:但是官方已经删除了这种方式对应的帖子已经算法，使用的时候需要慎重)
 
 
 # 使用postman，Apipost 工具调试
@@ -124,7 +125,7 @@ Console.WriteLine(resultJson);
 net9.0;net8.0;net7.0;net6.0;net5.0;net481;net48;net472;net471;net47;net462;netstandard2.1;netstandard2.0;
 
 # 项目的依赖项
-System.Net.Http;      System.Text.Json;      System.Security.Cryptography.Cng;
+System.Net.Http;<br>System.Text.Json;<br>System.Security.Cryptography.Cng;
 
 # nuget地址:
 https://www.nuget.org/packages/YiKdWebClient
