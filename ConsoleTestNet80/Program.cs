@@ -27,7 +27,7 @@ namespace ConsoleTestNet80
             string Json = @"{""IsUserModelInit"":""true"",""Number"":""Administrator"",""IsSortBySeq"":""false""}";
             YiK3CloudClient yiK3CloudClient = new YiKdWebClient.YiK3CloudClient();
             yiK3CloudClient.LoginType= LoginType.LoginBySignSHA256;
-            var resultJson = yiK3CloudClient.View(Formid, Json);
+            string resultJson = yiK3CloudClient.View(Formid, Json);
 
             /*登录地址*/
             Console.WriteLine("真实的登录地址: ");
