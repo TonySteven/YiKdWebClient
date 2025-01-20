@@ -99,7 +99,8 @@ Console.WriteLine("真实的操作请求返回结果: ");
 Console.WriteLine(resultJson);
 Console.ReadKey();
 ```
-
+完整的请求以及返回示例:
+![输入图片说明](%E8%AF%B7%E6%B1%82%E4%BB%A5%E5%8F%8A%E8%BF%94%E5%9B%9E%E7%A4%BA%E4%BE%8B.png)
 # 2.第三方授权认证:<br>(需要设置配置文件:YiKdWebCfg/appsettings.xml)
 
 
