@@ -31,40 +31,32 @@ namespace ConsoleTestNet80
 
 
             #region 自定义webapi
-            string cnfFilePath = Path.Combine(System.AppDomain.CurrentDomain.BaseDirectory, "YiKdWebCfg", "API测试.cnf");
-            YiK3CloudClient yiK3CloudClient = new YiKdWebClient.YiK3CloudClient()
-            {
-                LoginType = LoginType.LoginBySimplePassport,
-                LoginBySimplePassportModel = new LoginBySimplePassportModel() { Url = @"http://localhost:1200/k3cloud/", CnfFilePath = cnfFilePath }
-            };
-            JsonSerializerOptions options = new JsonSerializerOptions() { WriteIndented = true, Encoder = System.Text.Encodings.Web.JavaScriptEncoder.UnsafeRelaxedJsonEscaping };
-            //object parametersdata = new { parameters = new string[] { "aaaa", "bbbb" } };
+            //string cnfFilePath = Path.Combine(System.AppDomain.CurrentDomain.BaseDirectory, "YiKdWebCfg", "API测试.cnf");
+            //YiK3CloudClient yiK3CloudClient = new YiKdWebClient.YiK3CloudClient()
+            //{
+            //    LoginType = LoginType.LoginBySimplePassport,
+            //    LoginBySimplePassportModel = new LoginBySimplePassportModel() { Url = @"http://localhost:1200/k3cloud/", CnfFilePath = cnfFilePath }
+            //};
+            //JsonSerializerOptions options = new JsonSerializerOptions() { WriteIndented = true, Encoder = System.Text.Encodings.Web.JavaScriptEncoder.UnsafeRelaxedJsonEscaping };
+
+
+            //YiKdWebClient.Model.CustomServicesStubpath customServicesStubpath = new()
+            //{
+            //    ProjetNamespace = "GlobalServiceCustom.WebApi",
+            //    ProjetClassName = "DataServiceHandler",
+            //    ProjetClassMethod = "CommonRunnerService"
+            //};
+
+            //string sql = string.Format(@"SELECT TOP 10 *from T_BD_MATERIAL_L");
+
+            //object parametersdata = new { parameters = new string[] { sql } };
             //string parametersdatajson = System.Text.Json.JsonSerializer.Serialize(parametersdata, options);
 
-            //string resultJson1 = yiK3CloudClient.CustomBusinessService(parametersdatajson, "GlobalServiceCustom.WebApi.DataServiceHandler.CommonRunnerService,GlobalServiceCustom.WebApi.common.kdsvc");
-            //Console.WriteLine(resultJson1);
 
-            //string resultJson2 = yiK3CloudClient.CustomBusinessServiceByParameters(parametersdatajson, "GlobalServiceCustom.WebApi.DataServiceHandler.CommonRunnerService,GlobalServiceCustom.WebApi.common.kdsvc");
-            //Console.WriteLine(resultJson2);
 
-            YiKdWebClient.Model.CustomServicesStubpath customServicesStubpath = new()
-            {
-                ProjetNamespace = "GlobalServiceCustom.WebApi",
-                ProjetClassName = "DataServiceHandler",
-                ProjetClassMethod = "CommonRunnerService"
-            };
-
-            string sql = string.Format(@"SELECT TOP 10 *from T_BD_MATERIAL_L");
-
-            object parametersdata = new { parameters = new string[] { sql } };
-            string parametersdatajson = System.Text.Json.JsonSerializer.Serialize(parametersdata, options);
-
-            //string resultJson3 = yiK3CloudClient.CustomBusinessService(parametersdatajson, customServicesStubpath);
-            //Console.WriteLine(resultJson3);
-
-            string resultJson4 = yiK3CloudClient.CustomBusinessServiceByParameters(parametersdatajson, customServicesStubpath);
-            Console.WriteLine(resultJson4);
-            Console.ReadKey();
+            //string resultJson4 = yiK3CloudClient.CustomBusinessServiceByParameters(parametersdatajson, customServicesStubpath);
+            //Console.WriteLine(resultJson4);
+            //Console.ReadKey();
             #endregion
 
 
@@ -126,14 +118,21 @@ namespace ConsoleTestNet80
             #region 第三方授权验证
 
 
-            //string Formid = "SEC_User";
-            //string Json = @"{""IsUserModelInit"":""true"",""Number"":""Administrator"",""IsSortBySeq"":""false""}";
-            //YiK3CloudClient yiK3CloudClient = new YiKdWebClient.YiK3CloudClient();
-            //var resultJson = yiK3CloudClient.View(Formid, Json);
-            //Console.WriteLine(resultJson);
+            string Formid = "SEC_User";
+            string Json = @"{""IsUserModelInit"":""true"",""Number"":""Administrator"",""IsSortBySeq"":""false""}";
+            YiK3CloudClient yiK3CloudClient = new YiKdWebClient.YiK3CloudClient();
+            var resultJson = yiK3CloudClient.View(Formid, Json);
+            Console.WriteLine(resultJson);
 
-            // var resultJson = yiK3CloudClient.GetDataCenterList();
-            //// var res = yiK3CloudClient.ExecuteOperation("view",Formid, Json);
+            /*登陆地址*/
+            Console.WriteLine("真实的登陆地址: ");
+            Console.WriteLine(yiK3CloudClient.ReturnLoginWebModel.RequestUrl);
+
+            Console.WriteLine("真实的登陆报文: ");
+            Console.WriteLine(yiK3CloudClient.ReturnLoginWebModel.RealRequestBody);
+            Console.ReadKey();
+            //var resultJson = yiK3CloudClient.GetDataCenterList();
+            // var res = yiK3CloudClient.ExecuteOperation("view",Formid, Json);
 
             #endregion
 
@@ -259,7 +258,7 @@ namespace ConsoleTestNet80
             //Console.WriteLine("客户端入口链接:");
             //Console.WriteLine(sSOHelper.SSOLoginUrlObject.wpfUrl);
 
-            Console.ReadKey();
+            //   Console.ReadKey();
 
             //登出ap0参数
             //Console.WriteLine("登出ap0参数:");
