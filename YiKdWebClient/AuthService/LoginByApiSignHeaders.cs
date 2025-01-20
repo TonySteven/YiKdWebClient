@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace YiKdWebClient.AuthService
 {
     /// <summary>
-    /// API签名模式认证
+    /// API请求头签名模式认证
     /// </summary>
     public static class LoginByApiSignHeaders
     {

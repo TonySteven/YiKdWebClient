@@ -50,7 +50,7 @@ yiK3CloudClient.LoginBySimplePassportModel = new LoginBySimplePassportModel() { 
 var resultJson = yiK3CloudClient.View(Formid, Json);
 ```
 
-# 4.API签名认证(需要设置配置文件:YiKdWebCfg/appsettings.xml)
+# 4.API请求头签名(需要设置配置文件:YiKdWebCfg/appsettings.xml)
 
 ~~~
 string Formid = "SEC_User";
