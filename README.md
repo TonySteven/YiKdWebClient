@@ -3,6 +3,14 @@
 实现金蝶云星空第三方授权登录 使用纯HTTP协议实现
 移除了对官方SDK的依赖 
 移除了对Newtonsoft.Json的依赖
+
+# 框架引入方式:
+## nuget地址:
+https://www.nuget.org/packages/YiKdWebClient
+
+## nuget包的使用方法
+![输入图片说明](nuget%E4%BD%BF%E7%94%A8.png)
+
 # 配置文件路径
 配置的相对路径如下  YiKdWebCfg/appsettings.xml ，用于依赖于第三方登录授权验证和API签名验证，也可以自己实例化YiK3CloudClient中的AppSettingsModel类
 
@@ -179,11 +187,7 @@ net9.0;net8.0;net7.0;net6.0;net5.0;net481;net48;net472;net471;net47;net462;netst
 # 本框架项目的基础依赖项介绍，基于如下原生类库编写，不包含第三方插件(如下插件不需要额外引入)
 System.Net.Http;<br>System.Text.Json;<br>System.Security.Cryptography.Cng;
 
-# nuget地址:
-https://www.nuget.org/packages/YiKdWebClient
 
-# nuget包的使用方法
-![输入图片说明](nuget%E4%BD%BF%E7%94%A8.png)
 
 
 
