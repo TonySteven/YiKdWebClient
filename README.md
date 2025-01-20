@@ -258,8 +258,36 @@ sSOHelper.GetSsoUrlsV4();
  #endregion
 ```
 # 自定义webapi
-调用YiK3CloudClient中的CustomBusinessService方法 如下图
-![输入图片说明](%E8%87%AA%E5%AE%9A%E4%B9%89webapi.png)
+
+```
+YiK3CloudClient yiK3CloudClient = new YiKdWebClient.YiK3CloudClient();
+string jsonString = @" { ""parameters"": [ ""SELECT TOP 10 * FROM T_BD_MATERIAL_L"" ] }";
+YiKdWebClient.Model.CustomServicesStubpath customServicesStubpath = new()
+{
+  ProjetNamespace = "GlobalServiceCustom.WebApi",/*dll的命名空间*/
+  ProjetClassName = "DataServiceHandler",/*对应的类名*/
+  ProjetClassMethod = "CommonRunnerService"/*对应的方法名*/
+};
+string resultJson = yiK3CloudClient.CustomBusinessServiceByParameters(jsonString, customServicesStubpath);
+
+
+/*如下信息为可以使用postman调试的报文和地址*/
+Console.WriteLine("真实的登录地址: ");
+Console.WriteLine(yiK3CloudClient.ReturnLoginWebModel.RequestUrl);
+Console.WriteLine("真实的登录报文: ");
+Console.WriteLine(yiK3CloudClient.ReturnLoginWebModel.RealRequestBody);
+//真实的操作请求地址
+string RequestUrl = yiK3CloudClient.ReturnOperationWebModel.RequestUrl;
+Console.WriteLine("真实的操作请求地址: ");
+Console.WriteLine(RequestUrl);
+//真实的操作请求报文
+string RealRequestBody = yiK3CloudClient.ReturnOperationWebModel.RealRequestBody;
+Console.WriteLine("真实的操作请求报文: ");
+Console.WriteLine(RealRequestBody);
+Console.WriteLine("真实的操作请求返回结果: ");
+Console.WriteLine(resultJson);
+Console.ReadKey();
+```
 
 # 辅助工具函数(附件)
 ## 文件分块上传(直接返回最终结果)

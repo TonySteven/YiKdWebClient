@@ -21,7 +21,7 @@ namespace ConsoleTestNet80
         {
 
 
-         
+
 
             #region 签名信息认证
 
@@ -74,26 +74,46 @@ namespace ConsoleTestNet80
             //    LoginType = LoginType.LoginBySimplePassport,
             //    LoginBySimplePassportModel = new LoginBySimplePassportModel() { Url = @"http://localhost:1200/k3cloud/", CnfFilePath = cnfFilePath }
             //};
-            //JsonSerializerOptions options = new JsonSerializerOptions() { WriteIndented = true, Encoder = System.Text.Encodings.Web.JavaScriptEncoder.UnsafeRelaxedJsonEscaping };
 
+            YiK3CloudClient yiK3CloudClient = new YiKdWebClient.YiK3CloudClient();
+           // JsonSerializerOptions options = new JsonSerializerOptions() { WriteIndented = true, Encoder = System.Text.Encodings.Web.JavaScriptEncoder.UnsafeRelaxedJsonEscaping };
 
-            //YiKdWebClient.Model.CustomServicesStubpath customServicesStubpath = new()
-            //{
-            //    ProjetNamespace = "GlobalServiceCustom.WebApi",
-            //    ProjetClassName = "DataServiceHandler",
-            //    ProjetClassMethod = "CommonRunnerService"
-            //};
+            YiKdWebClient.Model.CustomServicesStubpath customServicesStubpath = new()
+            {
+                ProjetNamespace = "GlobalServiceCustom.WebApi",/*dll的命名空间*/
+                ProjetClassName = "DataServiceHandler",/*对应的类名*/
+                ProjetClassMethod = "CommonRunnerService"/*对应的方法名*/
+            };
 
-            //string sql = string.Format(@"SELECT TOP 10 *from T_BD_MATERIAL_L");
+            string sql = string.Format(@"SELECT TOP 10 *from T_BD_MATERIAL_L");
 
-            //object parametersdata = new { parameters = new string[] { sql } };
-            //string parametersdatajson = System.Text.Json.JsonSerializer.Serialize(parametersdata, options);
+            object parametersdata = new { parameters = new string[] { sql } };
+            string parametersdatajson = System.Text.Json.JsonSerializer.Serialize(parametersdata, new JsonSerializerOptions() { WriteIndented = true, Encoder = System.Text.Encodings.Web.JavaScriptEncoder.UnsafeRelaxedJsonEscaping });
 
+            string jsonString = @" { ""parameters"": [ ""SELECT TOP 10 * FROM T_BD_MATERIAL_L"" ] }";
 
+            string resultJson = yiK3CloudClient.CustomBusinessServiceByParameters(jsonString, customServicesStubpath);
+           // Console.WriteLine(resultJson);
 
-            //string resultJson4 = yiK3CloudClient.CustomBusinessServiceByParameters(parametersdatajson, customServicesStubpath);
-            //Console.WriteLine(resultJson4);
-            //Console.ReadKey();
+            /*如下信息为可以使用postman调试的报文和地址*/
+            Console.WriteLine("真实的登录地址: ");
+            Console.WriteLine(yiK3CloudClient.ReturnLoginWebModel.RequestUrl);
+
+            Console.WriteLine("真实的登录报文: ");
+            Console.WriteLine(yiK3CloudClient.ReturnLoginWebModel.RealRequestBody);
+
+            //真实的操作请求地址
+            string RequestUrl = yiK3CloudClient.ReturnOperationWebModel.RequestUrl;
+            Console.WriteLine("真实的操作请求地址: ");
+            Console.WriteLine(RequestUrl);
+            //真实的操作请求报文
+            string RealRequestBody = yiK3CloudClient.ReturnOperationWebModel.RealRequestBody;
+
+            Console.WriteLine("真实的操作请求报文: ");
+            Console.WriteLine(RealRequestBody);
+            Console.WriteLine("真实的操作请求返回结果: ");
+            Console.WriteLine(resultJson);
+            Console.ReadKey();
             #endregion
 
 
