@@ -290,6 +290,8 @@ Console.WriteLine("真实的操作请求返回结果: ");
 Console.WriteLine(resultJson);
 Console.ReadKey();
 ```
+返回结果的示例:<br>
+![输入图片说明](%E8%87%AA%E5%AE%9A%E4%B9%89webapi%E7%BB%93%E6%9E%9C.png)
 
 # 辅助工具函数(附件)
 ## 文件分块上传(直接返回最终结果)
