@@ -10,8 +10,23 @@ namespace YiKdWebClient.Model
 {/// <summary>
 /// 验证的类型
 /// </summary>
-    public  enum  LoginType
+    public enum LoginType
     {
+        /// <summary>
+        ///使用签名信息登录接口（目前推荐方式）注意：PT-146911 8.0.0.202205 之前的版本不支持SHA256加密，需要使用SHA1加密算法
+        ///原文链接：https://vip.kingdee.com/article/650369502730859776?specialId=650386937144032256&productLineId=1&isKnowledge=2&lang=zh-CN
+        /// </summary>
+        [EnumMember(Value = "LoginBySignSHA256")]
+        [Description("LoginBySignSHA256")]
+        LoginBySignSHA256,
+
+        /// <summary>
+        ///使用签名信息登录接口（目前推荐方式）注意：PT-146911 8.0.0.202205 之前的版本不支持SHA256加密，需要使用SHA1加密算法
+        ///原文链接：https://vip.kingdee.com/article/650369502730859776?specialId=650386937144032256&productLineId=1&isKnowledge=2&lang=zh-CN
+        /// </summary>
+        [EnumMember(Value = "LoginBySignSHA1")]
+        [Description("LoginBySignSHA1")]
+        LoginBySignSHA1,
         /// <summary>
         ///第三方登录授权
         /// </summary>
@@ -36,8 +51,8 @@ namespace YiKdWebClient.Model
         ///集成密钥验证
         /// </summary>
         [EnumMember(Value = "LoginBySimplePassport")]
-       [Description("LoginBySimplePassport")]
-       LoginBySimplePassport,
+        [Description("LoginBySimplePassport")]
+        LoginBySimplePassport,
 
         /// <summary>
         ///EnDeCode用户密码验证

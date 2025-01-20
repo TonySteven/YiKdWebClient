@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography;
@@ -156,6 +157,77 @@ namespace YiKdWebClient
 
             return stringBuilder.ToString();
         }
+
+        /// <summary>
+        /// 数组SHA1
+        /// </summary>
+        /// <param name="arr"></param>
+        /// <returns></returns>
+        public static string GetSHA1(string[] arr)
+
+        {
+
+            Array.Sort(arr, StringComparer.Ordinal);
+
+            string s = string.Join("", arr);
+
+            SHA1 sHA = SHA1.Create();
+
+            byte[] array = sHA.ComputeHash(Encoding.UTF8.GetBytes(s));
+
+            StringBuilder stringBuilder = new StringBuilder();
+
+            byte[] array2 = array;
+
+            foreach (byte b in array2)
+
+            {
+
+                stringBuilder.AppendFormat("{0:x2}", b);
+
+            }
+
+
+
+            return stringBuilder.ToString();
+
+        }
+
+        /// <summary>
+        /// 数组SHA256加密
+        /// </summary>
+        /// <param name="arr"></param>
+        /// <returns></returns>
+        public static string GetSHA256(string[] arr)
+
+        {
+           
+           
+            if (arr != null|| arr.Length>0)
+            {
+
+                Array.Sort(arr, StringComparer.Ordinal);
+
+                byte[] bytes = Encoding.UTF8.GetBytes(string.Join(string.Empty, arr));
+
+                using (SHA256 sHA = SHA256.Create())
+
+                {
+
+                    byte[] data = sHA.ComputeHash(bytes);
+
+                    return ToHexString(data);
+                   
+
+                }
+
+            }
+
+            return string.Empty;
+
+        }
+
+     
 
 
     }

@@ -101,7 +101,10 @@ namespace YiKdWebClient
             {
                 apiurl = this.validateLoginSettingsModel.Url + ServicesStubpath;
             }
-
+            if (this.LoginType.Equals(Model.LoginType.LoginBySignSHA256)|| this.LoginType.Equals(Model.LoginType.LoginBySignSHA1))
+            {
+                apiurl = this.AppSettingsModel.XKDApiServerUrl + ServicesStubpath;
+            }
             string resjson = string.Empty;
 
 
@@ -292,6 +295,17 @@ namespace YiKdWebClient
                 ReturnLoginWebModel.RealRequestBody = jsonString;
                 requestWebModel = validateUserEnDeCode.Login(this.validateLoginSettingsModel.Url, jsonString, true);
 
+            }
+
+            if (this.LoginType.Equals(Model.LoginType.LoginBySignSHA256) || this.LoginType.Equals(Model.LoginType.LoginBySignSHA1))
+            {
+                AuthService.LoginBySign loginBySign = new AuthService.LoginBySign();
+                loginBySign.LoginType = this.LoginType;
+                loginBySign.Timeout = this.Timeout;
+                loginBySign.RequestHeaders = this.RequestHeaders;
+                string jsonString = loginBySign.GetLoginJson(AppSettingsModel, UnsafeRelaxedJsonEscaping);
+                ReturnLoginWebModel.RealRequestBody = jsonString;
+                requestWebModel = loginBySign.Login(AppSettingsModel.XKDApiServerUrl, jsonString, true);
             }
 
             Cookie = requestWebModel.Cookie;

@@ -37,6 +37,7 @@
 
   <!-- 如果当前框架是Framework，则引用System.Web -->
   <ItemGroup>
+    
     <Reference Include="System.Web" Condition="'$(TargetFramework)' == 'net481'" />
     <Reference Include="System.Web" Condition="'$(TargetFramework)' == 'net48'" />
     <Reference Include="System.Web" Condition="'$(TargetFramework)' == 'net472'" />
