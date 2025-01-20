@@ -8,7 +8,7 @@
 
 
 ## nuget包的使用方法
-使用vs自带的nuget管理器安装YiKdWebClient,如下图:<br>
+使用vs自带的nuget管理器安装最新版的 YiKdWebClient ,如下图:<br>
 ![输入图片说明](nuget%E4%BD%BF%E7%94%A8.png)
 
 ## nuget发布地址(可以手动下载安装/引入):
