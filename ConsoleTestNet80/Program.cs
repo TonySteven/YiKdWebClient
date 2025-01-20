@@ -118,48 +118,19 @@ namespace ConsoleTestNet80
             #region 第三方授权验证
 
 
-            string Formid = "SEC_User";
-            string Json = @"{""IsUserModelInit"":""true"",""Number"":""Administrator"",""IsSortBySeq"":""false""}";
-            YiK3CloudClient yiK3CloudClient = new YiKdWebClient.YiK3CloudClient();
-            var resultJson = yiK3CloudClient.View(Formid, Json);
-           
-
-            /*登陆地址*/
-            Console.WriteLine("真实的登录地址: ");
-            Console.WriteLine(yiK3CloudClient.ReturnLoginWebModel.RequestUrl);
-
-            Console.WriteLine("真实的登录报文: ");
-            Console.WriteLine(yiK3CloudClient.ReturnLoginWebModel.RealRequestBody);
-
-            //真实的请求地址
-            string RequestUrl = yiK3CloudClient.ReturnOperationWebModel.RequestUrl;
-            Console.WriteLine("真实的请求地址: ");
-            Console.WriteLine(RequestUrl);
-            //真实的请求报文
-            string RealRequestBody = yiK3CloudClient.ReturnOperationWebModel.RealRequestBody;
-
-            Console.WriteLine("真实的请求报文: ");
-            Console.WriteLine(RealRequestBody);
-            Console.WriteLine("真实的请求返回结果: ");
-            Console.WriteLine(resultJson);
-            Console.ReadKey();
-            //var resultJson = yiK3CloudClient.GetDataCenterList();
-            // var res = yiK3CloudClient.ExecuteOperation("view",Formid, Json);
-
-            #endregion
-
-
-
-            #region API签名认证
             //string Formid = "SEC_User";
             //string Json = @"{""IsUserModelInit"":""true"",""Number"":""Administrator"",""IsSortBySeq"":""false""}";
             //YiK3CloudClient yiK3CloudClient = new YiKdWebClient.YiK3CloudClient();
-            //yiK3CloudClient.LoginType = LoginType.LoginByApiSignHeaders;
-            //var resultJson = yiK3CloudClient.ExecuteOperation("View",Formid, Json);
-            ////签名请求头的字符串，可以直接导入postman，Apipost
-            //string RequestHeadersString = yiK3CloudClient.RequestHeadersString;
-            //Console.WriteLine("签名请求头的字符串，可以直接导入postman，Apipost:");
-            //Console.WriteLine(RequestHeadersString);
+            //var resultJson = yiK3CloudClient.View(Formid, Json);
+
+
+            ///*登陆地址*/
+            //Console.WriteLine("真实的登录地址: ");
+            //Console.WriteLine(yiK3CloudClient.ReturnLoginWebModel.RequestUrl);
+
+            //Console.WriteLine("真实的登录报文: ");
+            //Console.WriteLine(yiK3CloudClient.ReturnLoginWebModel.RealRequestBody);
+
             ////真实的请求地址
             //string RequestUrl = yiK3CloudClient.ReturnOperationWebModel.RequestUrl;
             //Console.WriteLine("真实的请求地址: ");
@@ -169,10 +140,41 @@ namespace ConsoleTestNet80
 
             //Console.WriteLine("真实的请求报文: ");
             //Console.WriteLine(RealRequestBody);
-
-            //Console.WriteLine("请求结果: ");
+            //Console.WriteLine("真实的请求返回结果: ");
             //Console.WriteLine(resultJson);
+            //Console.ReadKey();
+            ////var resultJson = yiK3CloudClient.GetDataCenterList();
+            //// var res = yiK3CloudClient.ExecuteOperation("view",Formid, Json);
 
+            #endregion
+
+
+
+            #region API签名认证
+            string Formid = "SEC_User";
+            string Json = @"{""IsUserModelInit"":""true"",""Number"":""Administrator"",""IsSortBySeq"":""false""}";
+            YiK3CloudClient yiK3CloudClient = new YiKdWebClient.YiK3CloudClient();
+            yiK3CloudClient.LoginType = LoginType.LoginByApiSignHeaders;
+           // var resultJson = yiK3CloudClient.ExecuteOperation("View", Formid, Json);
+
+            var resultJson = yiK3CloudClient.View(Formid, Json);
+            //签名请求头的字符串，可以直接导入postman，Apipost
+            string RequestHeadersString = yiK3CloudClient.RequestHeadersString;
+            Console.WriteLine("签名请求头的字符串，可以直接导入postman，Apipost:");
+            Console.WriteLine(RequestHeadersString);
+            //真实的请求地址
+            string RequestUrl = yiK3CloudClient.ReturnOperationWebModel.RequestUrl;
+            Console.WriteLine("真实的请求地址: ");
+            Console.WriteLine(RequestUrl);
+            //真实的请求报文
+            string RealRequestBody = yiK3CloudClient.ReturnOperationWebModel.RealRequestBody;
+
+            Console.WriteLine("真实的请求报文: ");
+            Console.WriteLine(RealRequestBody);
+
+            Console.WriteLine("请求结果: ");
+            Console.WriteLine(resultJson);
+             Console.ReadKey();
             #endregion
 
             #region 旧版用户名密码验证
