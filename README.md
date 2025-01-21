@@ -178,7 +178,7 @@ Console.WriteLine(resultJson);
 运行结果如下:
 ![输入图片说明](API%E7%AD%BE%E5%90%8D%E6%A8%A1%E5%BC%8F%E8%BF%90%E8%A1%8C%E6%95%88%E6%9E%9C.png)
 
-# JSON 格式
+# JSON格式说明
 传入方法的JSON格式，与金蝶官方文档要求的格式完全一致. 注:(官方文档的JSON格式，并不是最终http请求的格式)
 
 
