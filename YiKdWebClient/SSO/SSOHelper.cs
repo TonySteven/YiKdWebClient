@@ -87,7 +87,7 @@ namespace YiKdWebClient.SSO
         /// <summary>
         /// 初始化本对象的基本参数
         /// </summary>
-        /// <param name="appSettingsModel"></param>
+      
         private void InitLoginArgs()
         {
             this.simplePassportLoginArg = new SimplePassportLoginArg();
@@ -105,8 +105,13 @@ namespace YiKdWebClient.SSO
         /// <returns></returns>
         public SSOLoginUrlObject GetSsoUrlsV4(string usserName = "", string url = "")
         {
+            
             string ServerUrl = string.Empty;
             if (string.IsNullOrWhiteSpace(url)) { ServerUrl = this.url; }
+            else 
+            {
+                ServerUrl=CommonFunctionHelper.GetServerUrl(url);
+            }
             SSOLoginUrlObject ssoUrls = new SSOLoginUrlObject();
             timestamp = CommonFunctionHelper.GetTimestamp();
 
@@ -185,6 +190,10 @@ namespace YiKdWebClient.SSO
         {
             string ServerUrl = string.Empty;
             if (string.IsNullOrWhiteSpace(url)) { ServerUrl = this.url; }
+            else
+            {
+                ServerUrl = CommonFunctionHelper.GetServerUrl(url);
+            }
             SSOLoginUrlObject ssoUrls = new SSOLoginUrlObject();
             timestamp = CommonFunctionHelper.GetTimestamp();
 
@@ -265,6 +274,10 @@ namespace YiKdWebClient.SSO
         {
             string ServerUrl = string.Empty;
             if (string.IsNullOrWhiteSpace(url)) { ServerUrl = this.url; }
+            else
+            {
+                ServerUrl = CommonFunctionHelper.GetServerUrl(url);
+            }
             SSOLoginUrlObject ssoUrls = new SSOLoginUrlObject();
             timestamp = CommonFunctionHelper.GetTimestamp();
 
@@ -347,6 +360,10 @@ namespace YiKdWebClient.SSO
         {
             string ServerUrl = string.Empty;
             if (string.IsNullOrWhiteSpace(url)) { ServerUrl = this.url; }
+            else
+            {
+                ServerUrl = CommonFunctionHelper.GetServerUrl(url);
+            }
             SSOLoginUrlObject ssoUrls = new SSOLoginUrlObject();
             timestamp = CommonFunctionHelper.GetTimestamp();
 

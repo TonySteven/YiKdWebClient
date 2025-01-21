@@ -236,42 +236,40 @@ string resultJson = yiK3CloudClient.View(Formid, Json);
 # 4.单点登录功能
 
 ## 单点登录V4调用示例代码:
+此方法(需要设置配置文件:YiKdWebCfg/appsettings.xml),或者在sSOHelper.appSettingsModel中参数动态指定
+
 ```
-#region 单点登录V4
-SSOHelper sSOHelper = new SSOHelper() { Url= @"http://127.0.0.1:9980/K3Cloud" };
-//sSOHelper.appSettingsModel.XKDApiUserName = "demo"; /*指定用户，若不指定则取配置文件默认的集成用户*/
-sSOHelper.GetSsoUrlsV4();
-#endregion
+SSOHelper sSOHelper = new SSOHelper(){};
+sSOHelper.GetSsoUrlsV4("Administrator");/*若指定了配置文件，仅需要在此指定用户即可，若不指定则自动获取配置文件中的集成用户*/
+/*****如下为获取到的相关单点登录相关数据***********************************/
+//数据中心ID
+Console.WriteLine("数据中心ID：" + " " + sSOHelper.simplePassportLoginArg.dbid);
+//应用ID
+Console.WriteLine("应用ID：" + " " + sSOHelper.simplePassportLoginArg.appid);
+//用户名称
+Console.WriteLine("用户名称：" + " " + sSOHelper.simplePassportLoginArg.username);
+//时间戳
+Console.WriteLine("时间戳：" + " " + sSOHelper.timestamp);
+//签名
+Console.WriteLine("签名：" + " " + sSOHelper.simplePassportLoginArg.signeddata);
+//请求参数（json格式）
+Console.WriteLine("请求参数（json格式）：" + " " + sSOHelper.argJosn);
+//参数格式化（Base64）
+Console.WriteLine("参数格式化（Base64）：" + " " + sSOHelper.argJsonBase64);
+// Silverlight入口链接
+Console.WriteLine("Silverlight入口链接:");
+Console.WriteLine(sSOHelper.SSOLoginUrlObject.silverlightUrl);
+// html5入口链接
+Console.WriteLine("html5入口链接:");
+Console.WriteLine(sSOHelper.SSOLoginUrlObject.html5Url);
+//客户端入口链接
+Console.WriteLine("客户端入口链接:");
+Console.WriteLine(sSOHelper.SSOLoginUrlObject.wpfUrl);
+Console.ReadKey();
 ```
 ## 单点登录V4调用示例的返回结果:
-```
-#region 单点登录结果
- /*****如下为获取到的相关链接数据***********************************/
- //数据中心ID
- Console.WriteLine("数据中心ID："+" "+ sSOHelper.simplePassportLoginArg.dbid);
- //应用ID
- Console.WriteLine("应用ID：" + " " + sSOHelper.simplePassportLoginArg.appid);
- //用户名称
- Console.WriteLine("用户名称：" + " " + sSOHelper.simplePassportLoginArg.username);
- //时间戳
- Console.WriteLine("时间戳：" + " " + sSOHelper.timestamp);
- //签名
- Console.WriteLine("签名：" + " " + sSOHelper.simplePassportLoginArg.signeddata);
- //请求参数（json格式）
- Console.WriteLine("请求参数（json格式）：" + " " + sSOHelper.argJosn);
- //参数格式化（Base64）
- Console.WriteLine("参数格式化（Base64）：" + " " + sSOHelper.argJsonBase64);
- // Silverlight入口链接
- Console.WriteLine("Silverlight入口链接:");
- Console.WriteLine(sSOHelper.SSOLoginUrlObject.silverlightUrl);
- // html5入口链接
- Console.WriteLine("html5入口链接:");
- Console.WriteLine(sSOHelper.SSOLoginUrlObject.html5Url);
- //客户端入口链接
- Console.WriteLine("客户端入口链接:");
- Console.WriteLine(sSOHelper.SSOLoginUrlObject.wpfUrl);
- #endregion
-```
+
+
 
 # 5.其他特殊功能以及用法
 ## 自定义webapi
