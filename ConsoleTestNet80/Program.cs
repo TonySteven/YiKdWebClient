@@ -19,7 +19,7 @@ namespace ConsoleTestNet80
     {
         static void Main(string[] args)
         {
-            YiKdWebClient.CommonService.XmlConfigHelper.AppConfigPath = @"C:\Users\Administrator\Desktop\test\appsettings.xml";
+          
             string Formid = "SEC_User";
             string Json = @"{""IsUserModelInit"":""true"",""Number"":""Administrator"",""IsSortBySeq"":""false""}";
             YiK3CloudClient yiK3CloudClient = new YiKdWebClient.YiK3CloudClient();

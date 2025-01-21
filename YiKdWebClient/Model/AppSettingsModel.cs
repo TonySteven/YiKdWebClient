@@ -57,7 +57,7 @@ namespace YiKdWebClient.Model
         /// </summary>
         public string XKDApiLCID { get; set; } = string.Empty;
 
-        private string _xkdaApiServerUrl;
+        private string _xkdaApiServerUrl = string.Empty;
 
         /// <summary>
         /// 服务Url地址
