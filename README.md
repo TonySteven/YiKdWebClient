@@ -254,7 +254,9 @@ sSOHelper.GetSsoUrlsV4();
  Console.WriteLine(sSOHelper.SSOLoginUrlObject.wpfUrl);
  #endregion
 ```
-# 自定义webapi
+
+# 5.其他特殊功能以及用法
+## 自定义webapi
 报文格式和请求参数的获取参考如下官方文档:<br>
 https://vip.kingdee.com/article/97030089581136896?specialId=448928749460099072&productLineId=1&isKnowledge=2&lang=zh-CN
 
@@ -290,7 +292,6 @@ Console.ReadKey();
 返回结果的示例:<br>
 ![输入图片说明](%E8%87%AA%E5%AE%9A%E4%B9%89webapi%E7%BB%93%E6%9E%9C.png)
 
-# 辅助工具函数(附件)
 ## 文件分块上传(直接返回最终结果)
 
 ```
