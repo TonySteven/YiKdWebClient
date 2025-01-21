@@ -4,7 +4,7 @@
 移除了对Newtonsoft.Json的依赖<br>
 兼容性强;同时兼容.net;.net framework;netstandard
 
-# 框架引入方式:
+# 1.框架引入方式:
 ## nuget包的使用方法
 使用vs自带的nuget管理器安装最新版的 YiKdWebClient ,如下图:<br>
 ![输入图片说明](nuget%E4%BD%BF%E7%94%A8.png)
@@ -12,7 +12,7 @@
 ## nuget发布地址(可以手动下载安装/引入):
 https://www.nuget.org/packages/YiKdWebClient
 
-# 配置文件设置:
+# 2.配置文件设置:
 ## 配置文件路径
 配置的相对路径如下  YiKdWebCfg/appsettings.xml ，用于依赖于第三方登录授权验证和API签名验证，也可以自己实例化YiK3CloudClient中的AppSettingsModel类
 
@@ -67,7 +67,7 @@ https://www.nuget.org/packages/YiKdWebClient
 </configuration>
 ```
 
-
+# 3.使用教程以及代码示例:
 # 1.签名信息认证:<br>(需要设置配置文件:YiKdWebCfg/appsettings.xml) 
 (目前推荐方式)注意：PT-146911 8.0.0.202205 之前的版本不支持SHA256加密，需要使用SHA1加密算法
 
