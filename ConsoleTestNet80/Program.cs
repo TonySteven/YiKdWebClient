@@ -21,18 +21,17 @@ namespace ConsoleTestNet80
         {
             string Formid = "SEC_User";
             string Json = @"{""IsUserModelInit"":""true"",""Number"":""Administrator"",""IsSortBySeq"":""false""}";
-
             AppSettingsModel appSettingsModel = new AppSettingsModel();
-            appSettingsModel.XKDApiAppID = "";
-            appSettingsModel.XKDApiAppID = "";
-            appSettingsModel.XKDApiAppID = "";
-            appSettingsModel.XKDApiAppID = "";
-            appSettingsModel.XKDApiAppID = "";
+            appSettingsModel.XKDApiAcctID = "账套ID(即数据中心id)";
+            appSettingsModel.XKDApiUserName = "第三方系统登录授权的用户名称";
+            appSettingsModel.XKDApiAppID = "第三方系统登录授权的 应用ID";
+            appSettingsModel.XKDApiAppSec = "第三方系统登录授权的 应用密钥";
+            appSettingsModel.XKDApiLCID = "账套语系，默认2052";
+            appSettingsModel.XKDApiServerUrl = "Url地址";
             YiK3CloudClient yiK3CloudClient = new YiKdWebClient.YiK3CloudClient();
+            yiK3CloudClient.AppSettingsModel = appSettingsModel;
             yiK3CloudClient.LoginType = LoginType.LoginByAppSecret;
-            //yiK3CloudClient.LoginType= LoginType.LoginBySignSHA256;
             string resultJson = yiK3CloudClient.View(Formid, Json);
-
 
 
             /*如下信息为可以使用postman调试的报文和地址*/

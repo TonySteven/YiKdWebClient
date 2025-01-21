@@ -213,6 +213,23 @@ Console.WriteLine(resultJson);
 |AttachmentUpload|上传附件|
 |AttachmentDownLoad|下载附件|
 
+## 动态指定appsettings的配置
+```
+string Formid = "SEC_User";
+string Json = @"{""IsUserModelInit"":""true"",""Number"":""Administrator"",""IsSortBySeq"":""false""}";
+AppSettingsModel appSettingsModel = new AppSettingsModel();
+appSettingsModel.XKDApiAcctID = "账套ID(即数据中心id)";
+appSettingsModel.XKDApiUserName = "第三方系统登录授权的用户名称";
+appSettingsModel.XKDApiAppID = "第三方系统登录授权的 应用ID";
+appSettingsModel.XKDApiAppSec = "第三方系统登录授权的 应用密钥";
+appSettingsModel.XKDApiLCID = "账套语系，默认2052";
+appSettingsModel.XKDApiServerUrl = "Url地址";
+YiK3CloudClient yiK3CloudClient = new YiKdWebClient.YiK3CloudClient();
+yiK3CloudClient.AppSettingsModel = appSettingsModel;
+yiK3CloudClient.LoginType = LoginType.LoginByAppSecret;
+string resultJson = yiK3CloudClient.View(Formid, Json);
+```
+
 # 4.单点登录功能
 
 ## 单点登录V4调用示例代码:
