@@ -109,6 +109,7 @@ Console.ReadKey();
 string Formid = "SEC_User";
 string Json =@"{""IsUserModelInit"":""true"",""Number"":""Administrator"",""IsSortBySeq"":""false""}";
 YiK3CloudClient yiK3CloudClient = new YiKdWebClient.YiK3CloudClient();
+yiK3CloudClient.LoginType = LoginType.LoginByAppSecret;
 var resultJson  = yiK3CloudClient.View(Formid, Json);
 ```
 
