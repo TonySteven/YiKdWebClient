@@ -156,7 +156,7 @@ API请求头签名认证的最大特点是，真实的请求中，没有调用�
 (注:但是官方已经删除了这种方式对应的帖子已经算法，使用的时候需要慎重)
 
 
-# 工具调试postman，Apipost等：
+## 工具调试postman，Apipost等：
 如下为使用postman，Apipost 工具的方法
 ~~~
  //签名请求头的字符串，可以直接导入postman，Apipost
