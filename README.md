@@ -67,7 +67,7 @@ https://www.nuget.org/packages/YiKdWebClient
 </configuration>
 ```
 
-# 3.使用教程以及代码示例:
+# 3.API调用教程以及代码示例:
 ## 1.签名信息认证:<br>(需要设置配置文件:YiKdWebCfg/appsettings.xml) 
 (目前推荐方式)注意：PT-146911 8.0.0.202205 之前的版本不支持SHA256加密，需要使用SHA1加密算法
 
