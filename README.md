@@ -1,8 +1,8 @@
-# YiKdWebClient代码示例及介绍
-
-实现金蝶云星空第三方授权登录 使用纯HTTP协议实现
-移除了对官方SDK的依赖 
-移除了对Newtonsoft.Json的依赖
+# YiKdWebClient 框架介绍以及使用说明
+实现金蝶云星空第三方webapi操作,使用原生框架以及纯HTTP协议实现,避免了各种框架冲突<br>
+移除了对官方SDK的依赖<br>
+移除了对Newtonsoft.Json的依赖<br>
+兼容性强;同时兼容.net;.net framework;netstandard
 
 # 框架引入方式:
 
