@@ -182,7 +182,7 @@ Console.WriteLine(resultJson);
 传入方法的JSON格式，与金蝶官方文档要求的格式完全一致. 注:(官方文档的JSON格式，并不是最终http请求的格式)
 
 
-# 框架兼容性:
+# 框架兼容性
 当前已经支持编译的版本如下:<br>
 net9.0;net8.0;net7.0;net6.0;net5.0;net481;net48;net472;net471;net47;net462;netstandard2.1;netstandard2.0;
 
