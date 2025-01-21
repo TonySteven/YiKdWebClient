@@ -215,9 +215,9 @@ Console.WriteLine(resultJson);
 
 
 
-# 单点登录功能V4的示例代码
+# 单点登录功能
 
-# 单点登录V4调用示例代码:
+## 单点登录V4调用示例代码:
 ```
 #region 单点登录V4
 SSOHelper sSOHelper = new SSOHelper() { Url= @"http://127.0.0.1:9980/K3Cloud" };
@@ -225,7 +225,7 @@ SSOHelper sSOHelper = new SSOHelper() { Url= @"http://127.0.0.1:9980/K3Cloud" };
 sSOHelper.GetSsoUrlsV4();
 #endregion
 ```
-# 单点登录V4调用示例的返回结果:
+## 单点登录V4调用示例的返回结果:
 ```
 #region 单点登录结果
  /*****如下为获取到的相关链接数据***********************************/
