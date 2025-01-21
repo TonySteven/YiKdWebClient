@@ -22,7 +22,7 @@ namespace ConsoleTestNet80
 
             #region 单点登录V4
             SSOHelper sSOHelper = new SSOHelper(){};
-            sSOHelper.GetSsoUrlsV4("Administrator");
+            sSOHelper.GetSsoUrlsV1("Administrator");
             /*****如下为获取到的相关单点登录相关数据***********************************/
             //数据中心ID
             Console.WriteLine("数据中心ID：" + " " + sSOHelper.simplePassportLoginArg.dbid);

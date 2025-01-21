@@ -235,13 +235,17 @@ string resultJson = yiK3CloudClient.View(Formid, Json);
 
 # 4.单点登录功能
 
-## 单点登录V4
+## 单点登录
 ### 调用示例代码:
 此方法(需要设置配置文件:YiKdWebCfg/appsettings.xml),或者在sSOHelper.appSettingsModel中参数动态指定
 
 ```
 SSOHelper sSOHelper = new SSOHelper(){};
-sSOHelper.GetSsoUrlsV4("Administrator");/*若指定了配置文件，仅需要在此指定用户即可，若不指定则自动获取配置文件中的集成用户*/
+/*若指定了配置文件，仅需要在此指定用户即可，若不指定则自动获取配置文件中的集成用户*/
+sSOHelper.GetSsoUrlsV4("Administrator");/*单点登录V4*/
+//sSOHelper.GetSsoUrlsV3("Administrator");/*单点登录V3*/
+//sSOHelper.GetSsoUrlsV2("Administrator");/*单点登录V2*/
+//sSOHelper.GetSsoUrlsV1("Administrator");/*单点登录V1*/
 /*****如下为获取到的相关单点登录相关数据***********************************/
 //数据中心ID
 Console.WriteLine("数据中心ID：" + " " + sSOHelper.simplePassportLoginArg.dbid);
