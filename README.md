@@ -180,21 +180,6 @@ Console.WriteLine(resultJson);
 
 ## JSON格式说明
 传入方法的JSON格式，与金蝶官方文档要求的格式完全一致. 注:(官方文档的JSON格式，并不是最终http请求的格式)
-
-
-# 框架兼容性说明
-当前已经支持编译的版本如下:<br>
-net9.0;net8.0;net7.0;net6.0;net5.0;net481;net48;net472;net471;net47;net462;netstandard2.1;netstandard2.0;
-
-# 框架基础依赖说明:
-基于如下原生类库编写，不包含第三方插件(如下插件不需要额外引入)<br>
-System.Net.Http;<br>System.Text.Json;<br>System.Security.Cryptography.Cng;
-
-
-
-
-
-
 # 功能列表
 (功能名称与官方功能名方式相同，以此类推),具体如下:<br>
 
@@ -227,6 +212,14 @@ System.Net.Http;<br>System.Text.Json;<br>System.Security.Cryptography.Cng;
 |AttachmentUpload|上传附件|
 |AttachmentDownLoad|下载附件|
 
+
+# 框架兼容性说明
+当前已经支持编译的版本如下:<br>
+net9.0;net8.0;net7.0;net6.0;net5.0;net481;net48;net472;net471;net47;net462;netstandard2.1;netstandard2.0;
+
+# 框架基础依赖说明:
+基于如下原生类库编写，不包含第三方插件(如下插件不需要额外引入)<br>
+System.Net.Http;<br>System.Text.Json;<br>System.Security.Cryptography.Cng;
 # 项目地址
 https://gitee.com/lnsyzjw/yi-kd-web-client
 
