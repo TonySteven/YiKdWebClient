@@ -34,7 +34,7 @@ namespace YiKdWebClient.AuthService
         {
             Model.RequestWebModel requestWebModel = new Model.RequestWebModel();
 
-            url = Model.AppSettingsModel.GetServerUrl(url);
+            url = CommonFunctionHelper.GetServerUrl(url);
             string loginapiurl = url + @"Kingdee.BOS.WebApi.ServicesStub.AuthService.LoginByAppSecret.common.kdsvc";
             requestWebModel.RequestUrl = loginapiurl;
             //requestWebModel.RealRequestBody = CommonService.JsonHelperServices.getRequestBodystring(json, UnsafeRelaxedJsonEscaping);

@@ -21,6 +21,13 @@ namespace ConsoleTestNet80
         {
             string Formid = "SEC_User";
             string Json = @"{""IsUserModelInit"":""true"",""Number"":""Administrator"",""IsSortBySeq"":""false""}";
+
+            AppSettingsModel appSettingsModel = new AppSettingsModel();
+            appSettingsModel.XKDApiAppID = "";
+            appSettingsModel.XKDApiAppID = "";
+            appSettingsModel.XKDApiAppID = "";
+            appSettingsModel.XKDApiAppID = "";
+            appSettingsModel.XKDApiAppID = "";
             YiK3CloudClient yiK3CloudClient = new YiKdWebClient.YiK3CloudClient();
             yiK3CloudClient.LoginType = LoginType.LoginByAppSecret;
             //yiK3CloudClient.LoginType= LoginType.LoginBySignSHA256;

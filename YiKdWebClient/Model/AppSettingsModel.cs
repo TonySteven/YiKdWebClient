@@ -60,36 +60,17 @@ namespace YiKdWebClient.Model
             get { return _xkdaApiServerUrl; }
             set
             {
-                _xkdaApiServerUrl = GetServerUrl(value);
+                _xkdaApiServerUrl = CommonFunctionHelper.GetServerUrl(value);
             }
 
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
         public string XKDApiOrgNum{ get; set; } = string.Empty;
 
-        public static string GetServerUrl(string url)
-        {
-            if (string.IsNullOrWhiteSpace(url))
-            {
-               // return string.Empty;
-               return "https://api.kingdee.com/galaxyapi/";
-            }
-
-            try
-            {
-                if (!url.EndsWith("/"))
-                {
-                    return url + "/";
-                }
-            }
-            catch (Exception ex)
-            {
-
-                //throw;
-            }
-
-            return url;
-        }
+        
+       
 
         private string GetDicValue(Dictionary<string, string> dic,string key) { 
             string resvalue = string.Empty;
