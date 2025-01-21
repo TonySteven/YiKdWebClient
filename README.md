@@ -276,6 +276,16 @@ Console.ReadKey();
 
 
 # 5.其他特殊功能以及用法
+## 自定义配置文件路径
+```
+/*在运行之前，对如下的参数指定配置文件的路径*/
+YiKdWebClient.CommonService.XmlConfigHelper.AppConfigPath = @"C:\Users\Administrator\Desktop\test\appsettings.xml";
+string Formid = "SEC_User";
+string Json = @"{""IsUserModelInit"":""true"",""Number"":""Administrator"",""IsSortBySeq"":""false""}";
+YiK3CloudClient yiK3CloudClient = new YiKdWebClient.YiK3CloudClient();
+yiK3CloudClient.LoginType = LoginType.LoginBySignSHA256;
+string resultJson = yiK3CloudClient.View(Formid, Json);
+```
 ## 自定义webapi
 报文格式和请求参数的获取参考如下官方文档:<br>
 https://vip.kingdee.com/article/97030089581136896?specialId=448928749460099072&productLineId=1&isKnowledge=2&lang=zh-CN

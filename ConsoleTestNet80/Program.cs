@@ -23,7 +23,7 @@ namespace ConsoleTestNet80
             string Formid = "SEC_User";
             string Json = @"{""IsUserModelInit"":""true"",""Number"":""Administrator"",""IsSortBySeq"":""false""}";
             YiK3CloudClient yiK3CloudClient = new YiKdWebClient.YiK3CloudClient();
-            yiK3CloudClient.LoginType = LoginType.LoginBySignSHA1;
+            yiK3CloudClient.LoginType = LoginType.LoginBySignSHA256;
             string resultJson = yiK3CloudClient.View(Formid, Json);
 
 
