@@ -213,15 +213,7 @@ Console.WriteLine(resultJson);
 |AttachmentDownLoad|下载附件|
 
 
-# 框架兼容性说明
-当前已经支持编译的版本如下:<br>
-net9.0;net8.0;net7.0;net6.0;net5.0;net481;net48;net472;net471;net47;net462;netstandard2.1;netstandard2.0;
 
-# 框架基础依赖说明:
-基于如下原生类库编写，不包含第三方插件(如下插件不需要额外引入)<br>
-System.Net.Http;<br>System.Text.Json;<br>System.Security.Cryptography.Cng;
-# 项目地址
-https://gitee.com/lnsyzjw/yi-kd-web-client
 
 # 单点登录功能V4的示例代码
 
@@ -387,6 +379,16 @@ AttachmentUploadByFilePath函数更换为AttachmentUploadByBase64
 
 ## 官方报文结构以及原理
 https://vip.kingdee.com/article/296577252589190400?productLineId=1&isKnowledge=2&lang=zh-CN
+
+# 框架兼容性说明
+当前已经支持编译的版本如下:<br>
+net9.0;net8.0;net7.0;net6.0;net5.0;net481;net48;net472;net471;net47;net462;netstandard2.1;netstandard2.0;
+
+# 框架基础依赖说明:
+基于如下原生类库编写，不包含第三方插件(如下插件不需要额外引入)<br>
+System.Net.Http;<br>System.Text.Json;<br>System.Security.Cryptography.Cng;
+# 项目地址
+https://gitee.com/lnsyzjw/yi-kd-web-client
 
 
 
