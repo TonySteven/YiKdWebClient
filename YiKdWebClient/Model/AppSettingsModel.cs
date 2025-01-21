@@ -12,7 +12,10 @@ namespace YiKdWebClient.Model
     /// </summary>
     public class AppSettingsModel
     {
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="path"></param>
         public AppSettingsModel(string path="")
         {
             try
@@ -55,6 +58,10 @@ namespace YiKdWebClient.Model
         public string XKDApiLCID { get; set; } = string.Empty;
 
         private string _xkdaApiServerUrl;
+
+        /// <summary>
+        /// 服务Url地址
+        /// </summary>
         public string XKDApiServerUrl {
 
             get { return _xkdaApiServerUrl; }
