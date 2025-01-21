@@ -291,8 +291,8 @@ Console.ReadKey();
 ```
 返回结果的示例:<br>
 ![输入图片说明](%E8%87%AA%E5%AE%9A%E4%B9%89webapi%E7%BB%93%E6%9E%9C.png)
-
-## 文件分块上传(直接返回最终结果)
+## 文件上传:
+### 文件分块上传(直接返回最终结果)
 
 ```
 YiK3CloudClient yiK3CloudClient = new YiKdWebClient.YiK3CloudClient();
@@ -328,7 +328,7 @@ Console.WriteLine(resJson);
 ```
 
 
-## 文件分块上传(获取完整的上传过程)
+### 文件分块上传(获取完整的上传过程)
 
 ```
 YiK3CloudClient yiK3CloudClient = new YiKdWebClient.YiK3CloudClient();
@@ -375,10 +375,10 @@ Console.WriteLine(resJson);
 
 ```
 
-## base64流分块上传辅助函数
+### base64流分块上传辅助函数
 AttachmentUploadByFilePath函数更换为AttachmentUploadByBase64
 
-## 官方报文结构以及原理
+### 官方报文结构以及原理
 https://vip.kingdee.com/article/296577252589190400?productLineId=1&isKnowledge=2&lang=zh-CN
 
 # 框架兼容性说明
