@@ -196,7 +196,7 @@ System.Net.Http;<br>System.Text.Json;<br>System.Security.Cryptography.Cng;
 
 
 # 功能列表
-(功能名称与官方功能名方式相同，以此类推),具体如下<br>
+(功能名称与官方功能名方式相同，以此类推),具体如下:<br>
 
 | 接口名称 | 接口含义 |
 |------|------|
