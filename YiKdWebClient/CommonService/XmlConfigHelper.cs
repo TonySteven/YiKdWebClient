@@ -19,13 +19,13 @@ namespace YiKdWebClient.CommonService
         /// <summary>
         /// 
         /// </summary>
-        public static string AppsettingsPath = Path.Combine(Currentpath, "YiKdWebCfg", "appsettings.xml");
+        public static string AppConfigPath = Path.Combine(Currentpath, "YiKdWebCfg", "appsettings.xml");
         private static Dictionary<string, Dictionary<string, string>> GetAllServerInfo(string path = "")
         {
             Dictionary<string, Dictionary<string, string>> keyValuePairs = new Dictionary<string, Dictionary<string, string>>();
             if (string.IsNullOrWhiteSpace(path))
             {
-                path = AppsettingsPath;
+                path = AppConfigPath;
             }
 
 
@@ -72,7 +72,7 @@ namespace YiKdWebClient.CommonService
         {
             if (string.IsNullOrWhiteSpace(path))
             {
-                path = AppsettingsPath;
+                path = AppConfigPath;
             }
 
             XmlDocument xmlDoc = new XmlDocument();
@@ -100,7 +100,7 @@ namespace YiKdWebClient.CommonService
         {
             if (string.IsNullOrWhiteSpace(path))
             {
-                path = AppsettingsPath;
+                path = AppConfigPath;
             }
             Dictionary<string, string> DicappSettings = new Dictionary<string, string>();
 
