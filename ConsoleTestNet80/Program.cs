@@ -19,36 +19,13 @@ namespace ConsoleTestNet80
     {
         static void Main(string[] args)
         {
+            YiKdWebClient.CommonService.XmlConfigHelper.AppConfigPath = @"C:\Users\Administrator\Desktop\test\appsettings.xml";
+            string Formid = "SEC_User";
+            string Json = @"{""IsUserModelInit"":""true"",""Number"":""Administrator"",""IsSortBySeq"":""false""}";
+            YiK3CloudClient yiK3CloudClient = new YiKdWebClient.YiK3CloudClient();
+            yiK3CloudClient.LoginType = LoginType.LoginBySignSHA1;
+            string resultJson = yiK3CloudClient.View(Formid, Json);
 
-            #region 单点登录V4
-            SSOHelper sSOHelper = new SSOHelper(){};
-            sSOHelper.GetSsoUrlsV1("Administrator");
-            /*****如下为获取到的相关单点登录相关数据***********************************/
-            //数据中心ID
-            Console.WriteLine("数据中心ID：" + " " + sSOHelper.simplePassportLoginArg.dbid);
-            //应用ID
-            Console.WriteLine("应用ID：" + " " + sSOHelper.simplePassportLoginArg.appid);
-            //用户名称
-            Console.WriteLine("用户名称：" + " " + sSOHelper.simplePassportLoginArg.username);
-            //时间戳
-            Console.WriteLine("时间戳：" + " " + sSOHelper.timestamp);
-            //签名
-            Console.WriteLine("签名：" + " " + sSOHelper.simplePassportLoginArg.signeddata);
-            //请求参数（json格式）
-            Console.WriteLine("请求参数（json格式）：" + " " + sSOHelper.argJosn);
-            //参数格式化（Base64）
-            Console.WriteLine("参数格式化（Base64）：" + " " + sSOHelper.argJsonBase64);
-            // Silverlight入口链接
-            Console.WriteLine("Silverlight入口链接:");
-            Console.WriteLine(sSOHelper.SSOLoginUrlObject.silverlightUrl);
-            // html5入口链接
-            Console.WriteLine("html5入口链接:");
-            Console.WriteLine(sSOHelper.SSOLoginUrlObject.html5Url);
-            //客户端入口链接
-            Console.WriteLine("客户端入口链接:");
-            Console.WriteLine(sSOHelper.SSOLoginUrlObject.wpfUrl);
-            Console.ReadKey();
-            #endregion
 
             #region 签名信息认证
 
