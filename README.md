@@ -235,8 +235,7 @@ string resultJson = yiK3CloudClient.View(Formid, Json);
 
 # 4.单点登录功能
 
-## 单点登录
-### 调用示例代码:
+## 调用示例代码:
 此方法(需要设置配置文件:YiKdWebCfg/appsettings.xml),或者在sSOHelper.appSettingsModel中参数动态指定
 
 ```
@@ -272,7 +271,7 @@ Console.WriteLine("客户端入口链接:");
 Console.WriteLine(sSOHelper.SSOLoginUrlObject.wpfUrl);
 Console.ReadKey();
 ```
-### 返回结果:
+## 返回结果:
 ![输入图片说明](SSOV4%E7%BB%93%E6%9E%9C.png)
 
 
