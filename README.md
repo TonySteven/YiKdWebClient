@@ -268,7 +268,7 @@ Console.WriteLine(sSOHelper.SSOLoginUrlObject.wpfUrl);
 Console.ReadKey();
 ```
 ## 单点登录V4调用示例的返回结果:
-
+![输入图片说明](SSOV4%E7%BB%93%E6%9E%9C.png)
 
 
 # 5.其他特殊功能以及用法
