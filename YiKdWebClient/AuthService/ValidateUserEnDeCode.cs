@@ -7,11 +7,12 @@ using System.Threading.Tasks;
 
 namespace YiKdWebClient.AuthService
 {
+     /*https://vip.kingdee.com/article/183394?productLineId=1&isKnowledge=2&lang=zh-CN*/
     /// <summary>
     /// (不推荐使用)
     /// 此方法也可以过登陆验证，并且对用户名密码进行了简单加密，但是官方提供的webapi登陆验证中没有提及此方法，仅在有一些旧版本附件上传的地方看见过
     /// Kingdee.BOS.WebApi.ServicesStub.AuthService.ValidateUserEnDeCode 
-    /// https://vip.kingdee.com/article/183394?productLineId=1&isKnowledge=2&lang=zh-CN
+    ///
     /// </summary>
     public class ValidateUserEnDeCode
     {
