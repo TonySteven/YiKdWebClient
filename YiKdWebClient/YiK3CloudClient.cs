@@ -1,6 +1,7 @@
 ﻿
 using System.ComponentModel;
 using System.Net;
+using System.Net.Http;
 using System.Text.Json;
 using System.Text.RegularExpressions;
 
@@ -10,7 +11,7 @@ namespace YiKdWebClient
     /// <summary>
     /// 
     /// </summary>
-    public class YiK3CloudClient
+    public class YiK3CloudClient:IDisposable
     {
         /// <summary>
         /// 
@@ -46,7 +47,7 @@ namespace YiKdWebClient
         /// <summary>
         /// 登录验证类型
         /// </summary>
-        public Model.LoginType LoginType { get; set; } = Model.LoginType.LoginByAppSecret;
+        public Model.LoginType?  LoginType { get; set; } = Model.LoginType.LoginByAppSecret;
         /// <summary>
         /// AppSettings的设置
         /// </summary>
@@ -78,7 +79,10 @@ namespace YiKdWebClient
 
         private string ExecServicesStubByformid(string formid, string json, string ServicesStubpath, string opNumber = "",bool userawjson=false)
         {
-
+            if (LoginType==null)
+            {
+                throw new Exception("LoginType is not null");
+            }
             string apiurl = string.Empty;
             //string apiurl = this.AppSettingsModel.XKDApiServerUrl + ServicesStubpath;
 
@@ -227,6 +231,11 @@ namespace YiKdWebClient
         {
             Model.RequestWebModel requestWebModel = new Model.RequestWebModel();
 
+            if (LoginType == null)
+            {
+                throw new Exception("LoginType is not null");
+            }
+
             if (LoginType.Equals(Model.LoginType.LoginByAppSecret))
             {
                 AuthService.LoginByAppSecret loginByAppSecret = new AuthService.LoginByAppSecret();
@@ -303,7 +312,7 @@ namespace YiKdWebClient
             if (this.LoginType.Equals(Model.LoginType.LoginBySignSHA256) || this.LoginType.Equals(Model.LoginType.LoginBySignSHA1))
             {
                 AuthService.LoginBySign loginBySign = new AuthService.LoginBySign();
-                loginBySign.LoginType = this.LoginType;
+                loginBySign.LoginType = (Model.LoginType)this.LoginType;
                 loginBySign.Timeout = this.Timeout;
                 loginBySign.RequestHeaders = this.RequestHeaders;
                 string jsonString = loginBySign.GetLoginJson(AppSettingsModel, UnsafeRelaxedJsonEscaping);
@@ -946,6 +955,58 @@ namespace YiKdWebClient
             }
             return input;
         }
+
+
+        #region disposed释放
+
+        // IDisposable implementation
+        private bool disposed = false;
+        /// <summary>
+        /// 
+        /// </summary>
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="disposing"></param>
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!disposed)
+            {
+
+                if (disposing)
+                {
+                    try
+                    {
+                        // 清空所有字段
+                        this.LoginType = null;
+
+                    }
+                    catch (Exception)
+                    {
+
+                        // throw;
+                    }
+
+
+
+                }
+                // 释放非托管资源（如果有的话）
+                disposed = true;
+            }
+        }
+        /// <summary>
+        /// ~符号用于定义类的析构函数（destructor）,当垃圾回收器（garbage collector）决定释放对象时，会调用这个方法。析构函数用于执行清理操作
+        /// </summary>
+        ~YiK3CloudClient()
+        {
+            Dispose(false);
+        }
+        #endregion
 
     }
 }
