@@ -6,6 +6,7 @@ using System.Text.RegularExpressions;
 
 namespace YiKdWebClient
 {
+#pragma warning disable CS0618 // 类型或成员已过时
     /// <summary>
     /// 
     /// </summary>
@@ -91,16 +92,18 @@ namespace YiKdWebClient
             }
             if (this.LoginType.Equals(Model.LoginType.ValidateLogin))
             {
-                apiurl = this.validateLoginSettingsModel.Url + ServicesStubpath;
+                apiurl = this.validateLoginSettingsModel!.Url + ServicesStubpath;
             }
             if (this.LoginType.Equals(Model.LoginType.LoginBySimplePassport))
             {
-                apiurl = this.LoginBySimplePassportModel.Url + ServicesStubpath;
+                apiurl = this.LoginBySimplePassportModel!.Url + ServicesStubpath;
             }
+
             if (this.LoginType.Equals(Model.LoginType.ValidateUserEnDeCode))
             {
-                apiurl = this.validateLoginSettingsModel.Url + ServicesStubpath;
+                apiurl = this.validateLoginSettingsModel!.Url + ServicesStubpath;
             }
+
             if (this.LoginType.Equals(Model.LoginType.LoginBySignSHA256)|| this.LoginType.Equals(Model.LoginType.LoginBySignSHA1))
             {
                 apiurl = this.AppSettingsModel.XKDApiServerUrl + ServicesStubpath;
@@ -255,7 +258,7 @@ namespace YiKdWebClient
                 validateLogin.RequestHeaders = this.RequestHeaders;
                 string jsonString = validateLogin.GetLoginJson(validateLoginSettingsModel, UnsafeRelaxedJsonEscaping);
                 ReturnLoginWebModel.RealRequestBody = jsonString;
-                requestWebModel = validateLogin.Login(this.validateLoginSettingsModel.Url, jsonString, true);
+                requestWebModel = validateLogin.Login(this.validateLoginSettingsModel.Url!, jsonString, true);
 
             }
 
@@ -293,7 +296,7 @@ namespace YiKdWebClient
                 validateUserEnDeCode.RequestHeaders = this.RequestHeaders;
                 string jsonString = validateUserEnDeCode.GetLoginJson(validateLoginSettingsModel, UnsafeRelaxedJsonEscaping);
                 ReturnLoginWebModel.RealRequestBody = jsonString;
-                requestWebModel = validateUserEnDeCode.Login(this.validateLoginSettingsModel.Url, jsonString, true);
+                requestWebModel = validateUserEnDeCode.Login(this.validateLoginSettingsModel.Url!, jsonString, true);
 
             }
 
@@ -337,7 +340,7 @@ namespace YiKdWebClient
                 resjson = postTask.Result;
 
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
                 //  throw;
@@ -698,7 +701,6 @@ namespace YiKdWebClient
         /// <summary>
         /// 切换上下文默认组织接口
         /// </summary>
-        /// <param name="formid"></param>
         /// <param name="json"></param>
         /// <param name="AutoLogin"></param>
         /// <param name="AutoLogout"></param>
@@ -916,7 +918,7 @@ namespace YiKdWebClient
                     return url + "/";
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
                 //throw;

@@ -12,6 +12,7 @@ using System.Runtime.Serialization;
 
 namespace YiKdWebClient.ComWebHelper
 {
+    #pragma warning disable CS1591 // 缺少对公共可见类型或成员的 XML 注释
     /// <summary>
     /// 
     /// </summary>
@@ -38,7 +39,7 @@ namespace YiKdWebClient.ComWebHelper
         /// <summary>
         /// 响应的头文件
         /// </summary>
-        public HttpResponseHeaders ResponseHeaders { get; set; } = null;
+        public HttpResponseHeaders? ResponseHeaders { get; set; } = null;
         /// <summary>
         /// 请求的类型 POST GET DELETE ...
         /// </summary>
@@ -53,7 +54,7 @@ namespace YiKdWebClient.ComWebHelper
         /// <summary>
         /// 请求的Body类型为UrlEncoded(x-www-form-urlencoded)
         /// </summary>
-        public FormUrlEncodedContent Body_UrlEncoded { get; set; } = new FormUrlEncodedContent(new Dictionary<string,string>());
+        public FormUrlEncodedContent Body_UrlEncoded { get; set; } = new FormUrlEncodedContent(new Dictionary<string,string>()!);
 
         /// <summary>
         /// body中的raw

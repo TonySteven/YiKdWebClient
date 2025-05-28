@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 
 namespace YiKdWebClient.Model
 {
+#pragma warning disable CS1591 // 缺少对公共可见类型或成员的 XML 注释
     public class ValidateLoginSettingsModel
+
     {
         public ValidateLoginSettingsModel(string url="") { 
 
@@ -41,14 +43,14 @@ namespace YiKdWebClient.Model
         public int lcid { get; set; } = 2052;
 
 
-        private string _Url;
-        public string Url
+        private string? _Url;
+        public string? Url
         {
 
             get { return _Url; }
             set
             {
-                _Url = GetServerUrl(value);
+                _Url = GetServerUrl(value!);
             }
 
         }
@@ -67,7 +69,7 @@ namespace YiKdWebClient.Model
                     return url + "/";
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
                 //throw;

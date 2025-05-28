@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace YiKdWebClient.Model
 {
+#pragma warning disable CS1591
     public enum OperationType
     {
         /// <summary>
@@ -90,7 +91,7 @@ namespace YiKdWebClient.Model
         Push,
 
         /// <summary>
-        //分组保存
+        ///分组保存
         /// </summary>
         [EnumMember(Value = "GroupSave")]
         [Description("GroupSave")]
@@ -98,35 +99,35 @@ namespace YiKdWebClient.Model
 
 
         /// <summary>
-        //弹性域保存
+        ///弹性域保存
         /// </summary>
         [EnumMember(Value = "FlexSave")]
         [Description("FlexSave")]
         FlexSave,
 
         /// <summary>
-        //发送消息接口
+        ///发送消息接口
         /// </summary>
         [EnumMember(Value = "SendMsg")]
         [Description("SendMsg")]
         SendMsg,
 
         /// <summary>
-        //登出
+        ///登出
         /// </summary>
         [EnumMember(Value = "Logout")]
         [Description("Logout")]
         Logout,
 
         /// <summary>
-        //通用操作
+        ///通用操作
         /// </summary>
         [EnumMember(Value = "ExecuteOperation")]
         [Description("ExecuteOperation")]
         ExecuteOperation,
 
         /// <summary>
-        //切换上下文默认组织
+        ///切换上下文默认组织
         /// </summary>
         [EnumMember(Value = "SwitchOrg")]
         [Description("SwitchOrg")]
@@ -134,7 +135,7 @@ namespace YiKdWebClient.Model
 
 
         /// <summary>
-        //工作流审批
+        ///工作流审批
         /// </summary>
         [EnumMember(Value = "WorkflowAudit")]
         [Description("WorkflowAudit")]
@@ -142,7 +143,7 @@ namespace YiKdWebClient.Model
 
 
         /// <summary>
-        //简单账表查询
+        ///简单账表查询
         /// </summary>
         [EnumMember(Value = "DynamicFormService")]
         [Description("DynamicFormService")]

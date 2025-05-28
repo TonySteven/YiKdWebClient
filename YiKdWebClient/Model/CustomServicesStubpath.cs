@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace YiKdWebClient.Model
 {
+#pragma warning disable CS1570 // XML 注释出现 XML 格式错误 --“引用未定义的实体“productLineId”。”
     /// <summary>
     /// 自定义webapi路由地址模型
     /// </summary>
@@ -14,7 +15,6 @@ namespace YiKdWebClient.Model
         /// <summary>
         /// dll项目工程的命名空间(必须要以.WebApi结尾，否则系统可能拦截或者不识别)
         /// https://vip.kingdee.com/article/602100140303705088?lang=zh-CN&productLineId=1
-        ///
         /// </summary>
         public string ProjetNamespace {  get; set; }=string.Empty;
 

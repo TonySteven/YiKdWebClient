@@ -37,7 +37,7 @@ namespace YiKdWebClient.CommonService
                 xmlDoc.Load(path);
 
                 //获取根节点
-                XmlNode root = xmlDoc.DocumentElement;
+                XmlNode root = xmlDoc.DocumentElement!;
 
                 //遍历子节点并输出节点名称和节点值
                 foreach (XmlNode node in root.ChildNodes)
@@ -82,7 +82,7 @@ namespace YiKdWebClient.CommonService
                 //指定XML文件的路径并加载
                 xmlDoc.Load(path);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
               //  throw;
@@ -106,9 +106,9 @@ namespace YiKdWebClient.CommonService
 
             XmlDocument xmlDoc = YiKdWebClient.CommonService.XmlConfigHelper.GetAllCfg();
             //获取根节点
-            XmlNode root = xmlDoc.DocumentElement;
+            XmlNode root = xmlDoc.DocumentElement!;
 
-            XmlNode appSettings = root.FirstChild;
+            XmlNode appSettings = root.FirstChild!;
 
 
             XmlNodeList appSettingsNodes = appSettings.ChildNodes;
@@ -120,9 +120,9 @@ namespace YiKdWebClient.CommonService
 
                 if (itemappSettings.NodeType.Equals(XmlNodeType.Element))
                 {
-                    XmlAttributeCollection xmlAttributeCollection = itemappSettings.Attributes;
+                    XmlAttributeCollection xmlAttributeCollection = itemappSettings!.Attributes!;
 
-                    foreach (XmlAttribute itemxmlAttribute in xmlAttributeCollection)
+                    foreach (XmlAttribute itemxmlAttribute in xmlAttributeCollection!)
                     {
                         if (itemxmlAttribute.Name.Equals("key", StringComparison.OrdinalIgnoreCase)) { key = itemxmlAttribute.InnerText; }
                         if (itemxmlAttribute.Name.Equals("value", StringComparison.OrdinalIgnoreCase)) { value = itemxmlAttribute.InnerText; }

@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace YiKdWebClient.Model
 {
+#pragma warning disable CS1591 // 缺少对公共可见类型或成员的 XML 注释
     public class LoginBySimplePassportModel
     {
         public LoginBySimplePassportModel(string url="") { Url = url; }
@@ -43,7 +44,7 @@ namespace YiKdWebClient.Model
                     return url + "/";
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
                 //throw;

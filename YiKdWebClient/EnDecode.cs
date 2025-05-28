@@ -8,7 +8,8 @@ using System.Threading.Tasks;
 using System.Web;
 
 namespace YiKdWebClient
-{
+{   
+    #pragma warning disable CS1591 // 缺少对公共可见类型或成员的 XML 注释
     public static class EnDecode
     {
         // Token: 0x060000B2 RID: 178 RVA: 0x00003500 File Offset: 0x00001700
@@ -28,7 +29,7 @@ namespace YiKdWebClient
             {
                 byte[] bytes = Encoding.ASCII.GetBytes(s);
                 byte[] bytes2 = Encoding.ASCII.GetBytes(s2);
-                byte[] inArray = null;
+                byte[]? inArray = null;
                 int length = 0;
 
 #pragma warning disable SYSLIB0021
@@ -81,7 +82,7 @@ namespace YiKdWebClient
             {
                 byte[] key = Encoding.ASCII.GetBytes(s);
                 byte[] iv = Encoding.ASCII.GetBytes(s2);
-                byte[] inArray = null;
+                byte[]? inArray = null;
                 int length = 0;
 
                 using (DES des = DES.Create())

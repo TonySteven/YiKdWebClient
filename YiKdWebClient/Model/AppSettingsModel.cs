@@ -30,7 +30,7 @@ namespace YiKdWebClient.Model
                 XKDApiServerUrl = GetDicValue(dic, "X-KDApi-ServerUrl");
                 XKDApiOrgNum = GetDicValue(dic, "X-KDApi-OrgNum");
             }
-            catch (Exception ex)
+            catch (Exception)
 
             {
 

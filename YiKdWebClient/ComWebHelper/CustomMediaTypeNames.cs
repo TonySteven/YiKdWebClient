@@ -7,11 +7,13 @@ using System.Threading.Tasks;
 namespace YiKdWebClient.ComWebHelper
 {
 
-
+#pragma warning disable CS1591 // 缺少对公共可见类型或成员的 XML 注释
     //
     // 摘要:
     //     Specifies the media type information for an email message attachment.
+
     public static class CustomMediaTypeNames
+
     {
         //
         // 摘要:

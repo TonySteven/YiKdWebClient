@@ -28,7 +28,7 @@ namespace YiKdWebClient.CommonService
         /// <summary>
         /// 
         /// </summary>
-        public HttpResponseHeaders ResponseHeaders = null;
+        public HttpResponseHeaders? ResponseHeaders = null;
 
         /// <summary>
         /// 

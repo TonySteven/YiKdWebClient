@@ -16,30 +16,32 @@ namespace YiKdWebClient.SSO
     /// </summary>
     public class SSOHelper
     {
-        
+
         /// <summary>
         /// 单点登录辅助类
         /// </summary>      
+
         public SSOHelper() { InitLoginArgs(); }
+
         /// <summary>
         /// Unix时间戳,定义为从格林威治时间1970年01月01日00时00分00秒起
         /// </summary>
-        public long timestamp { get; set; }
+        public long? timestamp { get; set; }
 
         /// <summary>
         /// 请求参数（json格式）
         /// </summary>
-        public string argJosn { get; set; } = string.Empty;
+        public string? argJosn { get; set; } = string.Empty;
         /// <summary>
         /// 参数格式化（Base64）
         /// </summary>
-        public string argJsonBase64 { get; set; } = string.Empty;
+        public string? argJsonBase64 { get; set; } = string.Empty;
 
 
         /// <summary>
         /// 允许登录次数，0 允许重复登录 ，1 只允许登录一次
         /// </summary>
-        public string permitcount { get; set; } = string.Empty;
+        public string? permitcount { get; set; } = string.Empty;
 
         /// <summary>
         /// 获取对编码内容不太严格的内置 JavaScript 编码器实例 
@@ -58,11 +60,11 @@ namespace YiKdWebClient.SSO
         /// <summary>
         /// 系统的地址:例如【http://xxx.xxx.xxx.xxx/k3cloud/】以/结尾
         /// </summary>  
-        private string url;
+        private string? url;
         /// <summary>
         /// 系统的地址:例如【http://xxx.xxx.xxx.xxx/k3cloud/】以/结尾
         /// </summary>
-        public string Url
+        public string? Url
         {
             // 在 set 访问器中添加自定义赋值逻辑
             get
@@ -71,7 +73,7 @@ namespace YiKdWebClient.SSO
             }
             set
             {
-                url = CommonFunctionHelper.GetServerUrl(value);
+                url = CommonFunctionHelper.GetServerUrl(value!);
             }
         }
         /// <summary>
@@ -107,7 +109,7 @@ namespace YiKdWebClient.SSO
         {
             
             string ServerUrl = string.Empty;
-            if (string.IsNullOrWhiteSpace(url)) { ServerUrl = this.url; }
+            if (string.IsNullOrWhiteSpace(url)) { ServerUrl = this.url!; }
             else 
             {
                 ServerUrl=CommonFunctionHelper.GetServerUrl(url);
@@ -126,10 +128,10 @@ namespace YiKdWebClient.SSO
 
             string appSecret = this.appSettingsModel.XKDApiAppSec;//第三方系统应用秘钥
 
-            string[] arr = new string[] { dbId, usserName, appId, appSecret, timestamp.ToString() };
+            string[] arr = new string[] { dbId, usserName, appId, appSecret, timestamp.ToString()! };
             if (!string.IsNullOrWhiteSpace(permitcount))
             {
-                arr = new string[] { dbId, usserName, appId, appSecret, timestamp.ToString(), permitcount };
+                arr = new string[] { dbId, usserName, appId, appSecret, timestamp.ToString()!, permitcount! };
 
                 this.simplePassportLoginArg.otherargs = string.Format("|{{\'permitcount\':'{0}'}}", permitcount);
             }
@@ -172,7 +174,7 @@ namespace YiKdWebClient.SSO
             string html5Url = this.Url + "html5/index.aspx?ud=" + argJsonBase64;// html5入口链接
             ssoUrls.html5Url = html5Url;
 
-            Uri uri = new Uri(this.Url);
+            Uri uri = new Uri(this.Url!);
 
             string wpfUrl = string.Format(@"K3cloud://{1}/k3cloud/Clientbin/K3cloudclient/K3cloudclient.manifest?Lcid=2052&ExeType=WPFRUNTIME&LoginUrl={0}&ud=", this.Url, uri.Host + ":" + uri.Port) + argJsonBase64;
             ssoUrls.wpfUrl = wpfUrl;
@@ -189,7 +191,7 @@ namespace YiKdWebClient.SSO
         public SSOLoginUrlObject GetSsoUrlsV3(string usserName = "", string url = "")
         {
             string ServerUrl = string.Empty;
-            if (string.IsNullOrWhiteSpace(url)) { ServerUrl = this.url; }
+            if (string.IsNullOrWhiteSpace(url)) { ServerUrl = this.url!; }
             else
             {
                 ServerUrl = CommonFunctionHelper.GetServerUrl(url);
@@ -208,10 +210,10 @@ namespace YiKdWebClient.SSO
 
             string appSecret = this.appSettingsModel.XKDApiAppSec;//第三方系统应用秘钥
 
-            string[] arr = new string[] { dbId, usserName, appId, appSecret, timestamp.ToString() };
+            string[] arr = new string[] { dbId, usserName, appId, appSecret, timestamp.ToString()! };
             if (!string.IsNullOrWhiteSpace(permitcount))
             {
-                arr = new string[] { dbId, usserName, appId, appSecret, timestamp.ToString(), permitcount };
+                arr = new string[] { dbId, usserName, appId, appSecret, timestamp.ToString()!, permitcount! };
 
                 this.simplePassportLoginArg.otherargs = string.Format("|{{\'permitcount\':'{0}'}}", permitcount);
             }
@@ -255,7 +257,7 @@ namespace YiKdWebClient.SSO
             string html5Url = this.Url + "html5/index.aspx?ud=" + argJsonBase64;// html5入口链接
             ssoUrls.html5Url = html5Url;
 
-            Uri uri = new Uri(this.Url);
+            Uri uri = new Uri(this.Url!);
 
             string wpfUrl = string.Format(@"K3cloud://{1}/k3cloud/Clientbin/K3cloudclient/K3cloudclient.manifest?Lcid=2052&ExeType=WPFRUNTIME&LoginUrl={0}&ud=", this.Url, uri.Host + ":" + uri.Port) + argJsonBase64;
             ssoUrls.wpfUrl = wpfUrl;
@@ -273,7 +275,7 @@ namespace YiKdWebClient.SSO
         public SSOLoginUrlObject GetSsoUrlsV2(string usserName = "", string url = "")
         {
             string ServerUrl = string.Empty;
-            if (string.IsNullOrWhiteSpace(url)) { ServerUrl = this.url; }
+            if (string.IsNullOrWhiteSpace(url)) { ServerUrl = this.url!; }
             else
             {
                 ServerUrl = CommonFunctionHelper.GetServerUrl(url);
@@ -292,7 +294,7 @@ namespace YiKdWebClient.SSO
 
             string appSecret = this.appSettingsModel.XKDApiAppSec;//第三方系统应用秘钥
 
-            string[] arr = new string[] { dbId, usserName, appId, appSecret, timestamp.ToString() };
+            string[] arr = new string[] { dbId, usserName, appId, appSecret, timestamp.ToString()! };
             //if (!string.IsNullOrWhiteSpace(permitcount))
             //{
             //    arr = new string[] { dbId, usserName, appId, appSecret, timestamp.ToString(), permitcount };
@@ -340,7 +342,7 @@ namespace YiKdWebClient.SSO
             string html5Url = this.Url + "html5/index.aspx?ud=" + argJsonBase64;// html5入口链接
             ssoUrls.html5Url = html5Url;
 
-            Uri uri = new Uri(this.Url);
+            Uri uri = new Uri(this.Url!);
 
             string wpfUrl = string.Format(@"K3cloud://{1}/k3cloud/Clientbin/K3cloudclient/K3cloudclient.manifest?Lcid=2052&ExeType=WPFRUNTIME&LoginUrl={0}&ud=", this.Url, uri.Host + ":" + uri.Port) + argJsonBase64;
             ssoUrls.wpfUrl = wpfUrl;
@@ -359,7 +361,7 @@ namespace YiKdWebClient.SSO
         public SSOLoginUrlObject GetSsoUrlsV1(string usserName = "", string url = "")
         {
             string ServerUrl = string.Empty;
-            if (string.IsNullOrWhiteSpace(url)) { ServerUrl = this.url; }
+            if (string.IsNullOrWhiteSpace(url)) { ServerUrl = this.url!; }
             else
             {
                 ServerUrl = CommonFunctionHelper.GetServerUrl(url);
@@ -378,7 +380,7 @@ namespace YiKdWebClient.SSO
 
             string appSecret = this.appSettingsModel.XKDApiAppSec;//第三方系统应用秘钥
 
-            string[] arr = new string[] { dbId, usserName, appId, appSecret, timestamp.ToString() };
+            string[] arr = new string[] { dbId, usserName, appId, appSecret, timestamp.ToString()! };
             //if (!string.IsNullOrWhiteSpace(permitcount))
             //{
             //    arr = new string[] { dbId, usserName, appId, appSecret, timestamp.ToString(), permitcount };
@@ -414,7 +416,7 @@ namespace YiKdWebClient.SSO
             string html5Url = this.Url + "html5/index.aspx?ud=" + argJsonBase64;// html5入口链接
             ssoUrls.html5Url = html5Url;
 
-            Uri uri = new Uri(this.Url);
+            Uri uri = new Uri(this.Url!);
 
             string wpfUrl = string.Format(@"K3cloud://{1}/k3cloud/Clientbin/K3cloudclient/K3cloudclient.manifest?Lcid=2052&ExeType=WPFRUNTIME&LoginUrl={0}&ud=", this.Url, uri.Host + ":" + uri.Port) + argJsonBase64;
             ssoUrls.wpfUrl = wpfUrl;
@@ -434,7 +436,7 @@ namespace YiKdWebClient.SSO
         public SSOLogoutObject GetSSOLogoutap0StrV4(string usserName = "", string url = "")
         {
             string ServerUrl = string.Empty;
-            if (string.IsNullOrWhiteSpace(url)) { ServerUrl = this.url; }
+            if (string.IsNullOrWhiteSpace(url)) { ServerUrl = this.url!; }
             if (string.IsNullOrWhiteSpace(usserName)) { usserName = this.appSettingsModel.XKDApiUserName;/*用户名称*/ }
             SSOLogoutObject sSOLogoutObject = new SSOLogoutObject();
             sSOLogoutObject.RequestLogoutUrl = ServerUrl + "Kingdee.BOS.ServiceFacade.ServicesStub.User.UserService.LogoutByOtherSystem.common.kdsvc";
@@ -444,7 +446,7 @@ namespace YiKdWebClient.SSO
 
             string appSecret = this.appSettingsModel.XKDApiAppSec;//第三方系统应用秘钥
 
-            string[] arr = new string[] { dbId, usserName, appId, appSecret, timestamp.ToString() };
+            string[] arr = new string[] { dbId, usserName, appId, appSecret, timestamp.ToString()! };
 
             Array.Sort(arr, StringComparer.Ordinal);
 
@@ -488,7 +490,7 @@ namespace YiKdWebClient.SSO
         public SSOLogoutObject GetSSOLogoutap0StrV3(string usserName = "", string url = "")
         {
             string ServerUrl = string.Empty;
-            if (string.IsNullOrWhiteSpace(url)) { ServerUrl = this.url; }
+            if (string.IsNullOrWhiteSpace(url)) { ServerUrl = this.url!; }
             if (string.IsNullOrWhiteSpace(usserName)) { usserName = this.appSettingsModel.XKDApiUserName;/*用户名称*/ }
             SSOLogoutObject sSOLogoutObject = new SSOLogoutObject();
             sSOLogoutObject.RequestLogoutUrl = ServerUrl + "Kingdee.BOS.ServiceFacade.ServicesStub.User.UserService.LogoutByOtherSystem.common.kdsvc";
@@ -498,7 +500,7 @@ namespace YiKdWebClient.SSO
 
             string appSecret = this.appSettingsModel.XKDApiAppSec;//第三方系统应用秘钥
 
-            string[] arr = new string[] { dbId, usserName, appId, appSecret, timestamp.ToString() };
+            string[] arr = new string[] { dbId, usserName, appId, appSecret, timestamp.ToString()! };
 
             // Array.Sort(arr, StringComparer.Ordinal);
 
@@ -542,7 +544,7 @@ namespace YiKdWebClient.SSO
         public SSOLogoutObject GetSSOLogoutap0StrV2V1(string usserName = "", string url = "")
         {
             string ServerUrl = string.Empty;
-            if (string.IsNullOrWhiteSpace(url)) { ServerUrl = this.url; }
+            if (string.IsNullOrWhiteSpace(url)) { ServerUrl = this.url!; }
             if (string.IsNullOrWhiteSpace(usserName)) { usserName = this.appSettingsModel.XKDApiUserName;/*用户名称*/ }
             SSOLogoutObject sSOLogoutObject = new SSOLogoutObject();
             sSOLogoutObject.RequestLogoutUrl = ServerUrl + "Kingdee.BOS.ServiceFacade.ServicesStub.User.UserService.LogoutByOtherSystem.common.kdsvc";
@@ -552,7 +554,7 @@ namespace YiKdWebClient.SSO
 
             string appSecret = this.appSettingsModel.XKDApiAppSec;//第三方系统应用秘钥
 
-            string[] arr = new string[] { dbId, usserName, appId, appSecret, timestamp.ToString() };
+            string[] arr = new string[] { dbId, usserName, appId, appSecret, timestamp.ToString()! };
 
             //  Array.Sort(arr, StringComparer.Ordinal);
 
@@ -604,7 +606,7 @@ namespace YiKdWebClient.SSO
 
                 Dictionary<string, string> UrlEncodedkeyValuePairs = new Dictionary<string, string>();
                 UrlEncodedkeyValuePairs.Add("ap0", sSOLogoutObject.ap0);
-                webHelper.Body_UrlEncoded = new FormUrlEncodedContent(UrlEncodedkeyValuePairs);
+                webHelper.Body_UrlEncoded = new FormUrlEncodedContent(UrlEncodedkeyValuePairs!);
                 webHelper.bodyType = BodyType.urlencoded;
 
 

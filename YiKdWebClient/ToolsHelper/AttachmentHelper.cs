@@ -98,10 +98,10 @@ namespace YiKdWebClient.ToolsHelper
         /// <param name="yiK3CloudClient"></param>
         /// <param name="UploadModelTemplate"></param>
         /// <param name="chunkSize"></param>
-        /// <param name="upprogress"></param>
+        /// <param name="progressaction"></param>
         /// <returns></returns>
         /// <exception cref="ArgumentException"></exception>
-        public static string AttachmentUploadByFilePath(string filePath, YiK3CloudClient yiK3CloudClient, UploadModel UploadModelTemplate, long chunkSize = 1024 * 1024, Action<FileChunk, YiK3CloudClient> progressaction = null)
+        public static string AttachmentUploadByFilePath(string filePath, YiK3CloudClient yiK3CloudClient, UploadModel UploadModelTemplate, long chunkSize = 1024 * 1024, Action<FileChunk, YiK3CloudClient>? progressaction = null)
         {
 
 
@@ -136,11 +136,11 @@ namespace YiKdWebClient.ToolsHelper
                 }
 
 
-                JsonNode jsonNode = JsonNode.Parse(resjson);
+                JsonNode jsonNode = JsonNode.Parse(resjson)!;
                 string isSuccess = string.Empty;
                 try
                 {
-                    isSuccess = Convert.ToString(jsonNode["Result"]["ResponseStatus"]["IsSuccess"]);
+                    isSuccess = Convert.ToString(jsonNode["Result"]!["ResponseStatus"]!["IsSuccess"])!;
 
 
                 }
@@ -153,7 +153,7 @@ namespace YiKdWebClient.ToolsHelper
                 if ("true".Equals(isSuccess, StringComparison.OrdinalIgnoreCase))
                 {
                     //string fileId = Convert.ToString(jsonNode["Result"]["FileId"]);
-                    data.FileId = Convert.ToString(jsonNode["Result"]["FileId"]);
+                    data.FileId = Convert.ToString(jsonNode!["Result"]!["FileId"])!;
                 }
                 else
                 {
@@ -190,7 +190,7 @@ namespace YiKdWebClient.ToolsHelper
         /// <param name="progressaction"></param>
         /// <returns></returns>
         /// <exception cref="ArgumentException"></exception>
-        public static string AttachmentUploadByBase64(string base64Data, string fileName, YiK3CloudClient yiK3CloudClient, UploadModel UploadModelTemplate, long chunkSize = 1024 * 1024, Action<FileChunk, YiK3CloudClient> progressaction = null)
+        public static string AttachmentUploadByBase64(string base64Data, string fileName, YiK3CloudClient yiK3CloudClient, UploadModel UploadModelTemplate, long chunkSize = 1024 * 1024, Action<FileChunk, YiK3CloudClient>? progressaction = null)
         {
 
 
@@ -225,11 +225,11 @@ namespace YiKdWebClient.ToolsHelper
                 }
 
 
-                JsonNode jsonNode = JsonNode.Parse(resjson);
+                JsonNode jsonNode = JsonNode.Parse(resjson)!;
                 string isSuccess = string.Empty;
                 try
                 {
-                    isSuccess = Convert.ToString(jsonNode["Result"]["ResponseStatus"]["IsSuccess"]);
+                    isSuccess = Convert.ToString(jsonNode["Result"]!["ResponseStatus"]!["IsSuccess"])!;
 
 
                 }
@@ -242,7 +242,7 @@ namespace YiKdWebClient.ToolsHelper
                 if ("true".Equals(isSuccess, StringComparison.OrdinalIgnoreCase))
                 {
                     //string fileId = Convert.ToString(jsonNode["Result"]["FileId"]);
-                    data.FileId = Convert.ToString(jsonNode["Result"]["FileId"]);
+                    data.FileId = Convert.ToString(jsonNode!["Result"]!["FileId"])!;
                 }
                 else
                 {

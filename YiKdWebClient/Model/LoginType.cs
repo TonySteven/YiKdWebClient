@@ -7,9 +7,11 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace YiKdWebClient.Model
-{/// <summary>
-/// 验证的类型
-/// </summary>
+{
+#pragma warning disable CS1570 // XML 注释出现 XML 格式错误 --“引用未定义的实体“productLineId”。”
+    /// <summary>
+    /// 验证的类型
+    /// </summary>
     public enum LoginType
     {
         /// <summary>
