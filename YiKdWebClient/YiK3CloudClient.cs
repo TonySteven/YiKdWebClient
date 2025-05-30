@@ -555,14 +555,13 @@ namespace YiKdWebClient
         /// <summary>
         /// 表单数据查询接口
         /// </summary>
-        /// <param name="formid"></param>
         /// <param name="json"></param>
         /// <param name="AutoLogin"></param>
         /// <param name="AutoLogout"></param>
         /// <returns></returns>
-        public string ExecuteBillQuery(string formid, string json, bool AutoLogin = true, bool AutoLogout = true)
+        public string ExecuteBillQuery(string json, bool AutoLogin = true, bool AutoLogout = true)
         {
-            return ExecApiDynamicFormService(formid, json, @"Kingdee.BOS.WebApi.ServicesStub.DynamicFormService.ExecuteBillQuery.common.kdsvc", AutoLogin, AutoLogout);
+            return ExecApiDynamicFormService("", json, @"Kingdee.BOS.WebApi.ServicesStub.DynamicFormService.ExecuteBillQuery.common.kdsvc", AutoLogin, AutoLogout);
 
         }
         /// <summary>
