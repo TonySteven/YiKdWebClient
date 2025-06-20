@@ -11,6 +11,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "解决方案项", "解决�
 	ProjectSection(SolutionItems) = preProject
 		note.txt = note.txt
 		README.md = README.md
+		星空WebAPI.postman_collection.json.zip = 星空WebAPI.postman_collection.json.zip
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GlobalServiceCustom.WebApi", "GlobalServiceCustom.WebApi\GlobalServiceCustom.WebApi.csproj", "{E4C7900B-9995-4583-A99A-ECD4059A8F53}"

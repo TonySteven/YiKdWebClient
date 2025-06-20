@@ -418,8 +418,15 @@ net9.0;net8.0;net7.0;net6.0;net5.0;net481;net48;net472;net471;net47;net462;netst
 # 框架基础依赖说明
 基于如下原生类库编写，不包含第三方插件(如下插件不需要额外引入)<br>
 System.Net.Http;<br>System.Text.Json;<br>System.Security.Cryptography.Cng;
-# 项目地址
+# 项目地址:
+## gitee:
 https://gitee.com/lnsyzjw/yi-kd-web-client
+## github:
+https://github.com/1609676823/YiKdWebClient
+# 官方原始的报文和地址结构说明
+https://vip.kingdee.com/knowledge/528587883691785472?productLineId=1&isKnowledge=2&lang=zh-CN
+## 原始报文和url地址下载
+[点击下载原始报文和url地址](%E6%98%9F%E7%A9%BAWebAPI.postman_collection.json.zip)
 
 
 
