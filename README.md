@@ -6,7 +6,7 @@
 # 官方原始的报文和地址结构说明
 https://vip.kingdee.com/knowledge/528587883691785472?productLineId=1&isKnowledge=2&lang=zh-CN
 
-# 原始报文和url地址下载
+# postman原始报文和url地址下载
 [点此下载](%E6%98%9F%E7%A9%BAWebAPI.postman_collection.json.zip)
 # 1.框架引入方式:
 ## nuget包的使用方法
