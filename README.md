@@ -429,6 +429,7 @@ https://gitee.com/lnsyzjw/yi-kd-web-client
 https://github.com/1609676823/YiKdWebClient
 # 官方的webapi接口说明书
 https://vip.kingdee.com/knowledge/407944297590364160?productLineId=1&isKnowledge=2&lang=zh-CN
+<br>[点此下载](%E9%87%91%E8%9D%B6%E4%BA%91%E6%98%9F%E7%A9%BAWebAPI%E6%8E%A5%E5%8F%A3%E8%AF%B4%E6%98%8E%E4%B9%A6_V6.0.docx)
 
 
 
