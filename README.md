@@ -427,6 +427,9 @@ System.Net.Http;<br>System.Text.Json;<br>System.Security.Cryptography.Cng;
 https://gitee.com/lnsyzjw/yi-kd-web-client
 ## github:
 https://github.com/1609676823/YiKdWebClient
+# 官方的webapi接口说明书
+https://vip.kingdee.com/knowledge/407944297590364160?productLineId=1&isKnowledge=2&lang=zh-CN
+
 
 
 
