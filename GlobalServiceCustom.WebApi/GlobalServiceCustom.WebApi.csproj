@@ -37,6 +37,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\..\Program Files (x86)\Kingdee\K3Cloud\WebSite\Bin\Kingdee.BOS.dll</HintPath>
     </Reference>
+      <Reference Include="Kingdee.BOS.App">
+          <HintPath>..\..\..\..\..\Program Files (x86)\Kingdee\K3Cloud\WebSite\Bin\Kingdee.BOS.App.dll</HintPath>
+      </Reference>
     <Reference Include="Kingdee.BOS.ServiceFacade.KDServiceFx, Version=9.0.294.2, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\..\Program Files (x86)\Kingdee\K3Cloud\WebSite\Bin\Kingdee.BOS.ServiceFacade.KDServiceFx.dll</HintPath>
@@ -89,8 +92,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+      <Compile Include="CustomWebApiDemoWebApiService.cs"/>
     <Compile Include="DataServiceHandler.cs" />
+      <Compile Include="DbService.cs"/>
     <Compile Include="Properties\AssemblyInfo.cs" />
+      <Compile Include="QueryReceiptFileByBillNo.cs"/>
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
