@@ -51,35 +51,45 @@ namespace GlobalServiceCustom.WebApi
             var ctx = KDContext.Session.AppContext;
             if (ctx == null)
             {
-                // 会话超时，需重新登录
                 throw new Exception("ctx = null");
             }
 
-            // 2. SQL 语句中明确列出所需字段，避免使用 SELECT *
-            var sql = @"SELECT *
+            // 2. 明确列出所需字段
+            var sql = @"SELECT FID, FBillNo, FData, FName 
                 FROM T_WB_ReceiptFile 
                 WHERE FBillNo = @FBillNo";
 
-            // 3. 定义参数
             var sqlParams = new SqlParam("@FBillNo", KDDbType.String, billNo);
 
-            // 4. 查询并映射到匿名对象
+            // 3. 查询并映射到实体
             var data = DBUtils.ExecuteEnumerable(ctx, sql, CommandType.Text, sqlParams)
-                .Select(row => new
+                .Select(row => new ReceiptFileDto
                 {
-                    FBillNo = row["FBillNo"], // 单据编号
-                    FData = row["FData"], // 新增字段：base64文件流
-                    FName = row["FName"] // 新增字段：文件名称
+                    Fid = row["FID"]?.ToString(),
+                    FBillNo = row["FBillNo"]?.ToString(),
+                    FName = row["FName"]?.ToString(),
+                    FileBase64 = row["FData"] is byte[] bytes
+                        ? Convert.ToBase64String(bytes)
+                        : row["FData"]?.ToString() // 兼容字符串类型
                 })
-                .FirstOrDefault(); // 获取第一条数据
+                .FirstOrDefault();
 
-            // 5. 如果没有查询到数据，返回提示
+            // 4. 处理未查询到的情况
             if (data == null)
             {
                 return new { Message = "未找到相关数据" };
             }
 
             return data;
+        }
+
+
+        private class ReceiptFileDto
+        {
+            public string Fid { get; set; } // 主键
+            public string FBillNo { get; set; } // 单据编号
+            public string FName { get; set; } // 文件名称
+            public string FileBase64 { get; set; } // Base64 文件流
         }
     }
 }
