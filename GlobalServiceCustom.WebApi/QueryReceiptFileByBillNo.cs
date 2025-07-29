@@ -47,6 +47,7 @@ namespace GlobalServiceCustom.WebApi
         /// <returns>查询结果</returns>
         private object GetReceiptFileByBillNo(string billNo)
         {
+            // 1. 获取当前会话上下文
             var ctx = KDContext.Session.AppContext;
             if (ctx == null)
             {
@@ -54,19 +55,25 @@ namespace GlobalServiceCustom.WebApi
                 throw new Exception("ctx = null");
             }
 
-            var sql = "SELECT * FROM T_WB_ReceiptFile WHERE FBillNo = @FBillNo";
+            // 2. SQL 语句中明确列出所需字段，避免使用 SELECT *
+            var sql = @"SELECT *
+                FROM T_WB_ReceiptFile 
+                WHERE FBillNo = @FBillNo";
+
+            // 3. 定义参数
             var sqlParams = new SqlParam("@FBillNo", KDDbType.String, billNo);
 
-            // 使用 ExecuteEnumerable 代替 ExecuteDataSet
+            // 4. 查询并映射到匿名对象
             var data = DBUtils.ExecuteEnumerable(ctx, sql, CommandType.Text, sqlParams)
                 .Select(row => new
                 {
-                    FBillNo = row["FBillNo"],
-                    // 根据实际需求返回其他字段
+                    FBillNo = row["FBillNo"], // 单据编号
+                    FData = row["FData"], // 新增字段：base64文件流
+                    FName = row["FName"] // 新增字段：文件名称
                 })
                 .FirstOrDefault(); // 获取第一条数据
 
-            // 如果没有查询到数据，返回自定义消息
+            // 5. 如果没有查询到数据，返回提示
             if (data == null)
             {
                 return new { Message = "未找到相关数据" };
