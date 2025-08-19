@@ -1,6 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Globalization;
+using Kingdee.BOS;
+using Kingdee.BOS.App.Data;
+using Kingdee.BOS.ServiceFacade.KDServiceFx;
+using Kingdee.BOS.WebApi.ServicesStub;
+using Newtonsoft.Json;
 
 namespace GlobalServiceCustom.WebApi
 {
@@ -86,7 +92,7 @@ ORDER BY r.FDate DESC;";
             var ps = new[]
             {
                 new SqlParam("@StartDate", KDDbType.DateTime, startDate),
-                new SqlParam("@MaxRows",   KDDbType.Int32,    maxRows)
+                new SqlParam("@MaxRows", KDDbType.Int32, maxRows)
             };
 
             try
@@ -182,6 +188,7 @@ ORDER BY r.FDate DESC;";
                 ex = ex.InnerException;
                 depth++;
             }
+
             return string.Join(" -> ", msgs);
         }
 
@@ -199,7 +206,8 @@ ORDER BY r.FDate DESC;";
             /// <summary>
             /// 最大返回条数（默认 1000，上限 5000）
             /// </summary>
-            [JsonProperty("maxRows")] public int MaxRows { get; set; }
+            [JsonProperty("maxRows")]
+            public int MaxRows { get; set; }
         }
 
         private class ReceiptInfoDto

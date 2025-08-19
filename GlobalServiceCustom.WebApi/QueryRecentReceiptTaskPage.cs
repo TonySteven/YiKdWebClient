@@ -1,12 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Globalization;
+using Kingdee.BOS;
+using Kingdee.BOS.App.Data;
+using Kingdee.BOS.ServiceFacade.KDServiceFx;
+using Kingdee.BOS.WebApi.ServicesStub;
+using Newtonsoft.Json;
 
 namespace GlobalServiceCustom.WebApi
 {
     /// <summary>
     /// WebAPI: 查询近 N 天电子回单（分页）
-    /// 入参 JSON: { "days": 7, "pageIndex": 1, "pageSize": 50 }
+    /// 入参示例: {"days":7,"pageIndex":1,"pageSize":50}
+    /// 也兼容 {"parameters":["{\"days\":7,\"pageIndex\":1,\"pageSize\":50}"]}
     /// </summary>
     public class QueryRecentReceiptTaskPage : AbstractWebApiBusinessService
     {
@@ -21,97 +28,90 @@ namespace GlobalServiceCustom.WebApi
         {
         }
 
-        /// <summary>
-        /// WebAPI 入口
-        /// </summary>
-        /// <param name="json">{"days":7,"pageIndex":1,"pageSize":50}</param>
+        // -------------------- 入口 --------------------
         public object ExecuteService(string json)
         {
             try
             {
-                // 1) 解析入参
+                // 1) 解析入参（兼容 parameters 包装）
                 var input = SafeDeserialize<RequestParam>(json) ?? new RequestParam();
 
-                // 2) 归一化入参（兜底+边界）
+                // 2) 归一化入参
                 int days = input.Days > 0 ? input.Days : DEFAULT_DAYS;
                 int pageIndex = input.PageIndex > 0 ? input.PageIndex : DEFAULT_PAGE_INDEX;
                 int pageSize = input.PageSize > 0 ? input.PageSize : DEFAULT_PAGE_SIZE;
-
                 if (pageSize > MAX_PAGE_SIZE) pageSize = MAX_PAGE_SIZE;
                 if (pageSize < MIN_PAGE_SIZE) pageSize = MIN_PAGE_SIZE;
 
-                // 3) 时间边界（是否包含当天可按需切换：含当天可用 Now.Date.AddDays(-(days-1))）
-                // 含当天：var startDate = DateTime.Now.Date.AddDays(-(days - 1));
-                // 不含当天（近 N*24h）： 
+                // 3) 时间窗口（近 N*24h）
                 var startDate = DateTime.Now.AddDays(-days);
 
-                // 4) 获取上下文
+                // 4) 上下文
                 var ctx = EnsureAppContext();
-                // 5) 查询
-                int totalCount = GetTotalCount(ctx, startDate);
-                var data = GetRecentReceipts(ctx, startDate, pageIndex, pageSize);
 
-                // 6) 返回
+                // 5) 探测是否支持 OFFSET/FETCH（SQL Server 2012+）
+                bool supportsOffsetFetch = SupportsOffsetFetch(ctx);
+
+                // 6) 查询总数 & 分页数据
+                int totalCount = GetTotalCount(ctx, startDate);
+                var data = GetPage(ctx, startDate, pageIndex, pageSize, supportsOffsetFetch);
+
+                // 7) 返回
                 return ResponseDto.Success(days, pageIndex, pageSize, totalCount, data);
             }
             catch (Exception ex)
             {
-                // 生产可去掉 Detail 以避免泄露实现细节
-                return ResponseDto.Fail($"Query failed: {ex.Message}", ex.StackTrace);
+                return ResponseDto.Fail("Query failed", GetDeepErrorMessage(ex));
             }
         }
 
         // -------------------- 数据访问 --------------------
 
-        /// <summary>
-        /// 统计总记录数（使用 @StartDate，避免 -@Days）
-        /// </summary>
+        /// <summary>统计总记录数（仅做必要过滤；COUNT_BIG 更稳）</summary>
         private int GetTotalCount(Context ctx, DateTime startDate)
         {
-            const string countSql = @"
-SELECT COUNT(1)
-FROM T_WB_RECEIPT r
-JOIN T_AP_PAYBILL p ON r.FSrcBillNo = p.FBillNo
+            const string sql = @"
+SELECT COUNT_BIG(1)
+FROM T_WB_RECEIPT r WITH (NOLOCK)
+JOIN T_AP_PAYBILL p WITH (NOLOCK) ON r.FSrcBillNo = p.FBillNo
 WHERE r.FDocumentStatus = 'C'
   AND r.FDate >= @StartDate
   AND p.FBusinessType IN (2, 5);";
 
-            var param = new SqlParam("@StartDate", KDDbType.DateTime, startDate);
+            var p = new SqlParam("@StartDate", KDDbType.DateTime, startDate);
 
             try
             {
-                object scalar = DBUtils.ExecuteScalar(ctx, countSql, param);
-                return Convert.ToInt32(scalar);
+                var o = DBUtils.ExecuteScalar(ctx, sql, p);
+                // COUNT_BIG -> long；再安全转 int（数据极大时可改返回 long）
+                return Convert.ToInt32(Convert.ToInt64(o));
             }
             catch (Exception e)
             {
-                throw new Exception("Execute count sql failed.", e);
+                throw new Exception("Execute count sql failed", e);
             }
         }
 
-        /// <summary>
-        /// 查询分页数据（SQL Server: OFFSET/FETCH；如不支持请改用下方注释的 CTE+ROW_NUMBER 写法）
-        /// </summary>
-        private List<ReceiptInfoDto> GetRecentReceipts(Context ctx, DateTime startDate, int pageIndex, int pageSize)
+        /// <summary>分页查询（自动适配 OFFSET/FETCH 或 ROW_NUMBER）</summary>
+        private List<ReceiptInfoDto> GetPage(Context ctx, DateTime startDate, int pageIndex, int pageSize,
+            bool useOffsetFetch)
         {
-            int offset = (pageIndex - 1) * pageSize;
-
-            // 重要说明：
-            // - 该 SQL 使用 SQL Server 的 OFFSET/FETCH 语法；
-            // - 如果是其他数据库或旧版本不支持，请使用下方注释的 CTE + ROW_NUMBER 版本。
-            const string sql = @"
+            if (useOffsetFetch)
+            {
+                int offset = (pageIndex - 1) * pageSize;
+                const string sql = @"
 SELECT
     r.FDATE                AS ReceiptDate,
     r.FBILLNO              AS ReceiptNo,
     r.FSRCBILLNO           AS SourceBillNo,
     p.F_TWUB_CreatorId_qtr AS PayBillCreatorId,
     u.FName                AS PayBillCreatorName,
-    u.Femail               AS PayBillCreatorEmail,
+    u.FEmail               AS PayBillCreatorEmail,
     r.FDocumentStatus      AS DocumentStatus
-FROM T_WB_RECEIPT r
-JOIN T_AP_PAYBILL p ON r.FSrcBillNo = p.FBillNo
-LEFT JOIN T_SEC_USER u
-    -- ⚠️ 建议按用户唯一标识关联（如 FUSERID）；当前以 FName 匹配风险较高，按你的库结构自行调整
+FROM T_WB_RECEIPT r WITH (NOLOCK)
+JOIN T_AP_PAYBILL p WITH (NOLOCK) ON r.FSrcBillNo = p.FBillNo
+LEFT JOIN T_SEC_USER u WITH (NOLOCK)
+    -- 建议按唯一主键关联（如 FUSERID）；此处为示例，请按实际库结构替换
     ON CAST(p.F_TWUB_CreatorId_qtr AS NVARCHAR(50)) = u.FName
 WHERE r.FDocumentStatus = 'C'
   AND r.FDate >= @StartDate
@@ -119,28 +119,75 @@ WHERE r.FDocumentStatus = 'C'
 ORDER BY r.FDate DESC
 OFFSET @Offset ROWS FETCH NEXT @PageSize ROWS ONLY;";
 
-            var sqlParams = new[]
+                var ps = new[]
+                {
+                    new SqlParam("@StartDate", KDDbType.DateTime, startDate),
+                    new SqlParam("@Offset", KDDbType.Int32, offset),
+                    new SqlParam("@PageSize", KDDbType.Int32, pageSize)
+                };
+                return ReadRows(ctx, sql, ps);
+            }
+            else
             {
-                new SqlParam("@StartDate", KDDbType.DateTime, startDate),
-                new SqlParam("@Offset", KDDbType.Int32, offset),
-                new SqlParam("@PageSize", KDDbType.Int32, pageSize)
-            };
+                // 兼容旧库
+                int begin = (pageIndex - 1) * pageSize + 1;
+                int end = begin + pageSize - 1;
 
+                const string sql = @"
+;WITH CTE AS (
+    SELECT
+        ROW_NUMBER() OVER (ORDER BY r.FDATE DESC) AS rn,
+        r.FDATE                AS ReceiptDate,
+        r.FBILLNO              AS ReceiptNo,
+        r.FSRCBILLNO           AS SourceBillNo,
+        p.F_TWUB_CreatorId_qtr AS PayBillCreatorId,
+        u.FName                AS PayBillCreatorName,
+        u.FEmail               AS PayBillCreatorEmail,
+        r.FDocumentStatus      AS DocumentStatus
+    FROM T_WB_RECEIPT r WITH (NOLOCK)
+    JOIN T_AP_PAYBILL p WITH (NOLOCK) ON r.FSrcBillNo = p.FBillNo
+    LEFT JOIN T_SEC_USER u WITH (NOLOCK)
+        ON CAST(p.F_TWUB_CreatorId_qtr AS NVARCHAR(50)) = u.FName
+    WHERE r.FDocumentStatus = 'C'
+      AND r.FDate >= @StartDate
+      AND p.FBusinessType IN (2, 5)
+)
+SELECT
+    ReceiptDate, ReceiptNo, SourceBillNo, PayBillCreatorId,
+    PayBillCreatorName, PayBillCreatorEmail, DocumentStatus
+FROM CTE
+WHERE rn BETWEEN @Begin AND @End
+ORDER BY rn;";
+
+                var ps = new[]
+                {
+                    new SqlParam("@StartDate", KDDbType.DateTime, startDate),
+                    new SqlParam("@Begin", KDDbType.Int32, begin),
+                    new SqlParam("@End", KDDbType.Int32, end)
+                };
+                return ReadRows(ctx, sql, ps);
+            }
+        }
+
+        /// <summary>统一读取并做字段安全转换</summary>
+        private List<ReceiptInfoDto> ReadRows(Context ctx, string sql, SqlParam[] sqlParams)
+        {
             try
             {
                 var rows = DBUtils.ExecuteEnumerable(ctx, sql, CommandType.Text, sqlParams);
-                var list = new List<ReceiptInfoDto>();
+                var list = new List<ReceiptInfoDto>(capacity: 64);
 
                 foreach (var row in rows)
                 {
-                    // FDATE 常见为 DateTime，这里统一转成 ISO8601 字符串（不带时区）
+                    // 日期统一格式化
                     string receiptDateStr = null;
-                    if (row["ReceiptDate"] != null && row["ReceiptDate"] != DBNull.Value)
+                    var raw = row["ReceiptDate"];
+                    if (raw != null && raw != DBNull.Value)
                     {
-                        if (row["ReceiptDate"] is DateTime dt)
+                        if (raw is DateTime dt)
                             receiptDateStr = dt.ToString("yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture);
                         else
-                            receiptDateStr = row["ReceiptDate"].ToString();
+                            receiptDateStr = raw.ToString();
                     }
 
                     list.Add(new ReceiptInfoDto
@@ -159,75 +206,45 @@ OFFSET @Offset ROWS FETCH NEXT @PageSize ROWS ONLY;";
             }
             catch (Exception e)
             {
-                throw new Exception("Execute page sql failed.", e);
+                throw new Exception("Execute page sql failed", e);
             }
-
-            /*
-            // ---------- 兼容旧库的 CTE + ROW_NUMBER 版本（如 OFFSET/FETCH 不可用时） ----------
-            const string sqlRowNumber = @"
-;WITH CTE AS (
-    SELECT
-        ROW_NUMBER() OVER (ORDER BY r.FDATE DESC) AS rn,
-        r.FDATE                AS ReceiptDate,
-        r.FBILLNO              AS ReceiptNo,
-        r.FSRCBILLNO           AS SourceBillNo,
-        p.F_TWUB_CreatorId_qtr AS PayBillCreatorId,
-        u.FName                AS PayBillCreatorName,
-        u.Femail               AS PayBillCreatorEmail,
-        r.FDocumentStatus      AS DocumentStatus
-    FROM T_WB_RECEIPT r
-    JOIN T_AP_PAYBILL p ON r.FSrcBillNo = p.FBillNo
-    LEFT JOIN T_SEC_USER u
-        ON CAST(p.F_TWUB_CreatorId_qtr AS NVARCHAR(50)) = u.FName
-    WHERE r.FDocumentStatus = 'C'
-      AND r.FDate >= @StartDate
-      AND p.FBusinessType IN (2, 5)
-)
-SELECT
-    ReceiptDate, ReceiptNo, SourceBillNo, PayBillCreatorId,
-    PayBillCreatorName, PayBillCreatorEmail, DocumentStatus
-FROM CTE
-WHERE rn BETWEEN @Begin AND @End
-ORDER BY rn;";
-            var begin = offset + 1;
-            var end = offset + pageSize;
-            var sqlParams2 = new[]
-            {
-                new SqlParam("@StartDate", KDDbType.DateTime, startDate),
-                new SqlParam("@Begin",     KDDbType.Int32,    begin),
-                new SqlParam("@End",       KDDbType.Int32,    end),
-            };
-            */
         }
 
-        // -------------------- 工具方法 --------------------
+        // -------------------- 探测/工具 --------------------
 
-        /// <summary>
-        /// 兼容 K3 网关传入的 {parameters: ["json"]} 与直接 JSON 字符串
-        /// </summary>
-        private static T SafeDeserialize<T>(string json)
-            where T : class
+        /// <summary>探测是否支持 OFFSET/FETCH（SQL Server 2012+）</summary>
+        private bool SupportsOffsetFetch(Context ctx)
         {
-            if (string.IsNullOrWhiteSpace(json))
-                return null;
+            const string probe = "SELECT 1 AS x ORDER BY x OFFSET 0 ROWS FETCH NEXT 1 ROWS ONLY;";
+            try
+            {
+                DBUtils.ExecuteScalar(ctx, probe, CommandType.Text);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        /// <summary>兼容 K3 网关：{parameters:["json"]} 或直接 JSON</summary>
+        private static T SafeDeserialize<T>(string json) where T : class
+        {
+            if (string.IsNullOrWhiteSpace(json)) return null;
 
             try
             {
-                // 兼容网关把参数包进 parameters 数组的格式
-                // 例：{"parameters":["{\"days\":3,\"pageIndex\":1,\"pageSize\":10}"]}
                 var wrapper = JsonConvert.DeserializeObject<ParametersWrapper>(json);
                 if (wrapper?.Parameters != null && wrapper.Parameters.Length > 0)
                 {
                     var inner = wrapper.Parameters[0];
                     if (!string.IsNullOrWhiteSpace(inner))
-                    {
                         return JsonConvert.DeserializeObject<T>(inner);
-                    }
                 }
             }
             catch
             {
-                // 不是 parameters 包装格式，走下一步
+                /* 非包装格式，走下一步 */
             }
 
             try
@@ -243,13 +260,24 @@ ORDER BY rn;";
         private Context EnsureAppContext()
         {
             var ctx = KDContext.Session.AppContext;
-            if (ctx == null)
-                throw new Exception("AppContext is null（未获取到金蝶应用上下文）");
+            if (ctx == null) throw new Exception("AppContext is null（未获取到金蝶应用上下文）");
             return ctx;
         }
 
+        private static string GetDeepErrorMessage(Exception ex)
+        {
+            var msgs = new List<string>();
+            int i = 0;
+            while (ex != null && i++ < 10)
+            {
+                msgs.Add($"[{ex.GetType().FullName}] {ex.Message}");
+                ex = ex.InnerException;
+            }
 
-        // -------------------- DTO 定义 --------------------
+            return string.Join(" -> ", msgs);
+        }
+
+        // -------------------- DTO --------------------
 
         private class ParametersWrapper
         {
@@ -259,9 +287,7 @@ ORDER BY rn;";
         private class RequestParam
         {
             [JsonProperty("days")] public int Days { get; set; }
-
             [JsonProperty("pageIndex")] public int PageIndex { get; set; }
-
             [JsonProperty("pageSize")] public int PageSize { get; set; }
         }
 
