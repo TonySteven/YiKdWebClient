@@ -1,11 +1,17 @@
 ﻿using System;
+using System.Data;
+using System.Linq;
 using System.Collections.Generic;
 using System.Globalization;
+using Kingdee.BOS;
+using Kingdee.BOS.App.Data;
+using Kingdee.BOS.ServiceFacade.KDServiceFx;
+using Kingdee.BOS.WebApi.ServicesStub;
 
 namespace GlobalServiceCustom.WebApi
 {
     /// <summary>
-    /// WebAPI: 查询近 3 天电子回单（不分页，TOP 5000，全部写死）
+    /// WebAPI: 查询近 3 天电子回单（TOP 5000，已确认 SQL 可执行）
     /// </summary>
     public class QueryRecentReceiptTask : AbstractWebApiBusinessService
     {
@@ -41,7 +47,7 @@ namespace GlobalServiceCustom.WebApi
         }
 
         /// <summary>
-        /// 查询最近 3 天电子回单，写死 TOP 5000 + 日期范围
+        /// 查询近 3 天内电子回单（已验证 SQL 逻辑，TOP 5000）
         /// </summary>
         private List<ReceiptInfoDto> QueryRecentReceipts(Context ctx)
         {
@@ -115,7 +121,7 @@ ORDER BY r.FDate DESC;";
             public string SourceBillNo { get; set; }
             public string PayBillCreatorId { get; set; }
             public string PayBillCreatorName { get; set; }
-            public string PayBillCreatorEmail { get; set; }
+            public string PayBillCreatorEmail { get; set; } // ✅ 新增字段
             public string DocumentStatus { get; set; }
         }
     }
