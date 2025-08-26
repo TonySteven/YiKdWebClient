@@ -1,7 +1,6 @@
 ﻿using System;
-using System.Data;
-using System.Linq;
 using System.Collections.Generic;
+using System.Data;
 using System.Globalization;
 using Kingdee.BOS;
 using Kingdee.BOS.App.Data;
@@ -15,7 +14,9 @@ namespace GlobalServiceCustom.WebApi
     /// </summary>
     public class QueryRecentReceiptTask : AbstractWebApiBusinessService
     {
-        public QueryRecentReceiptTask(KDServiceContext context) : base(context) { }
+        public QueryRecentReceiptTask(KDServiceContext context) : base(context)
+        {
+        }
 
         /// <summary>
         /// WebAPI 入口（无参数）
@@ -108,6 +109,7 @@ ORDER BY r.FDate DESC;";
                 msgs.Add($"[{ex.GetType().FullName}] {ex.Message}");
                 ex = ex.InnerException;
             }
+
             return string.Join(" -> ", msgs);
         }
 
