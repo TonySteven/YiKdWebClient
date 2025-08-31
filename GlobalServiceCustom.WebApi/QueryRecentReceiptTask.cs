@@ -52,22 +52,22 @@ namespace GlobalServiceCustom.WebApi
         /// </summary>
         private List<ReceiptInfoDto> QueryRecentReceipts(Context ctx)
         {
-            string sql = @"
-SELECT TOP 5000
-    r.FDATE                AS ReceiptDate,
-    r.FBILLNO              AS ReceiptNo,
-    r.FSRCBILLNO           AS SourceBillNo,
-    p.F_TWUB_CreatorId_qtr AS PayBillCreatorId,
-    u.FName                AS PayBillCreatorName,
-    u.FEmail               AS PayBillCreatorEmail,
-    r.FDocumentStatus      AS DocumentStatus
+            string sql = @"SELECT TOP 5000
+    r.FDATE                  AS ReceiptDate,           -- 回单日期
+    r.FBILLNO                AS ReceiptNo,             -- 回单编号
+    r.FSRCBILLNO             AS SourceBillNo,          -- 来源付款单编号
+    p.F_TWUB_CreatorId_qtr   AS PayBillCreatorId,      -- 付款单创建人标识（字符串字段）
+    u.FName                  AS PayBillCreatorName,    -- 创建人姓名（关联 user 表）
+    u.FEmail                 AS PayBillCreatorEmail,   -- 创建人邮箱
+    r.FDocumentStatus        AS DocumentStatus         -- 回单状态
 FROM T_WB_RECEIPT r WITH (NOLOCK)
-JOIN T_AP_PAYBILL p WITH (NOLOCK) ON r.FSrcBillNo = p.FBillNo
+JOIN T_AP_PAYBILL p WITH (NOLOCK)
+    ON r.FSrcBillNo = p.FBillNo
 LEFT JOIN T_SEC_USER u WITH (NOLOCK)
-    ON CAST(p.F_TWUB_CreatorId_qtr AS NVARCHAR(50)) = u.FName
+    ON p.F_TWUB_CreatorId_qtr = u.FName   -- ⚠ 建议将来改为用 FID 级别关联
 WHERE r.FDocumentStatus = 'C'
-  AND r.FDate >= DATEADD(DAY, -3, GETDATE())
-  AND p.FBusinessType IN (2, 5)
+  AND r.FDate >= DATEADD(DAY, -3, GETDATE())  -- 近 3 天内
+  AND p.FBusinessType IN (2, 5)               -- 限制业务类型为：采购/报销
 ORDER BY r.FDate DESC;";
 
             var rows = DBUtils.ExecuteEnumerable(ctx, sql, CommandType.Text);
