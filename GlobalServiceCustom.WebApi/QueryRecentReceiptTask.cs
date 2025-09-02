@@ -52,7 +52,7 @@ namespace GlobalServiceCustom.WebApi
         /// </summary>
         private List<ReceiptInfoDto> QueryRecentReceipts(Context ctx)
         {
-            string sql = @"SELECT TOP 5000
+            string sql = @"SELECT TOP 100 PERCENT
     r.FDATE                  AS ReceiptDate,
     r.FBILLNO                AS ReceiptNo,
     r.FSRCBILLNO             AS SourceBillNo,
@@ -64,11 +64,11 @@ FROM T_WB_RECEIPT r WITH (NOLOCK)
 JOIN T_AP_PAYBILL p WITH (NOLOCK)
     ON r.FSrcBillNo = p.FBillNo
 LEFT JOIN T_SEC_USER u WITH (NOLOCK)
-    ON p.F_TWUB_CreatorId_qtr = u.FName
+    ON CAST(p.F_TWUB_CreatorId_qtr AS NVARCHAR(50)) = u.fuserid
 WHERE r.FDocumentStatus = 'C'
   AND r.FDate >= DATEADD(DAY, -3, GETDATE())
   AND p.FBusinessType IN (2, 5)
-ORDER BY r.FDate DESC;";
+ORDER BY r.FDate DESC";
 
             var rows = DBUtils.ExecuteEnumerable(ctx, sql, CommandType.Text);
             var list = new List<ReceiptInfoDto>();
