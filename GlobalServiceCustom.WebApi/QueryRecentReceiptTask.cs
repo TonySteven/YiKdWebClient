@@ -64,7 +64,7 @@ FROM T_WB_RECEIPT r WITH (NOLOCK)
 JOIN T_AP_PAYBILL p WITH (NOLOCK)
     ON r.FSrcBillNo = p.FBillNo
 LEFT JOIN T_SEC_USER u WITH (NOLOCK)
-    ON CAST(p.F_TWUB_CreatorId_qtr AS NVARCHAR(50)) = u.fuserid
+    ON p.F_TWUB_CreatorId_qtr = u.fuserid
 WHERE r.FDocumentStatus = 'C'
   AND r.FDate >= DATEADD(DAY, -3, GETDATE())
   AND p.FBusinessType IN (2, 5)
